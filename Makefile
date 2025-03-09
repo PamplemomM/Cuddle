@@ -9,6 +9,8 @@ NAME	=	libcuddle.a
 
 SRCS	=	src/*.c
 
+SRCTEST	=	tests/*.c src/lib/*.c
+
 OBJS	=	$(SRCS:.c=.o)
 
 $(NAME)	:	$(OBJS)
@@ -21,5 +23,9 @@ clean	:
 
 fclean	:	clean
 			rm -f $(NAME)
+
+tests_run:
+	gcc -o unit_tests $(SRCTEST) -Iinclude -lcriterion --coverage
+	./unit_tests
 
 re		:	fclean all

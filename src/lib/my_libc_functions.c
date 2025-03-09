@@ -33,7 +33,7 @@ char *my_strdup(char const *src)
     return str;
 }
 
-int my_putstr(char const *str)
+static int my_putstr(char const *str)
 {
     int i = 0;
 

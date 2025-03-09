@@ -13,6 +13,8 @@
     #include <unistd.h>
     #include <stdio.h>
 
+    #include "dataframe.h"
+
     // maths :
     #define SQ(a) ((a) * (a))
     #define PI 3.141592653589793238462
@@ -23,5 +25,22 @@
     //defines :
     #define SUCCESS 0
     #define ERROR 84
+
+// ------------ LIB FUNCTIONS ------------
+
+// --- my_libc_functions.c ---
+int my_strlen(char const *str);
+char *my_strdup(char const *src);
+int my_putstr(char const *str);
+int my_strcmp(char const *s1, char const *s2);
+int mini_printf(const char *format, ...);
+
+// --- my_str_to_word_array ---
+char **my_str_to_word_array(char *str);
+void free_word_array(char **wa);
+int my_print_wa(char **wa);
+
+// --- my_strtok.c ---
+char *my_strtok(char *str, char const *delim);
 
 #endif /* CUDDLE_H */

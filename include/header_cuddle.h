@@ -43,4 +43,11 @@ int my_print_wa(char **wa);
 // --- my_strtok.c ---
 char *my_strtok(char *str, char const *delim);
 
+
+// ------------ IS FUNCTIONS ------------
+
+// --- my_isnumbool.c
+int my_isnum(char const str);
+int my_isbool(char const *str);
+
 #endif /* CUDDLE_H */

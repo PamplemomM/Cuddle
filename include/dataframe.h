@@ -17,7 +17,7 @@ typedef struct dataframe_s {
 } dataframe_t;
 
 typedef enum {
-    BOOL
+    BOOL,
     INT,
     UINT,
     FLOAT,

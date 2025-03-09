@@ -7,11 +7,13 @@ Cuddle is the recreation of the popular Pandas Library.
 
 ## **Usage**
   
-To Compile the Library, use `make re` in a bash terminal.  
+To Compile the Library, type in a bash terminal :
+```bash
+make re
+```
 Include your lib using `-L -lcuddle` with your compilation command.
 
 Example usage:
-
 
 ```bash
 gcc -o my_first_program main.c -L -lcuddle

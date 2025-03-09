@@ -28,7 +28,7 @@ typedef enum {
 // ------------ DATAFRAME FUNCTIONS ------------
 
 // --- read_write_csv.c ---
-dataframe_t *df_read_csv (char const *filename, char const *separator);
+dataframe_t *df_read_csv(char const *filename, char const *separator);
 int df_write_csv(dataframe_t *dataframe, char const *filename);
 
 // --- head_tail_csv.c ---

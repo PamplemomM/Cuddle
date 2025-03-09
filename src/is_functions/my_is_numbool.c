@@ -13,5 +13,6 @@ int my_isnum(char const str)
 
 int my_isbool(char const *str)
 {
-    return (my_strcmp(str, "TRUE") == 0 || my_strcmp(str, "true") == 0) ? 1 : 0;
+    return (my_strcmp(str, "TRUE") == 0 || 
+        my_strcmp(str, "true") == 0) ? 1 : 0;
 }

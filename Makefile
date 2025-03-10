@@ -18,10 +18,14 @@ $(NAME)	:	$(OBJS)
 
 all		:	$(NAME)
 
+run		:	
+			gcc -o cuddle src/*.c src/lib/*.c do_not_push.c
+
 clean	:
 		rm -f $(OBJS)
 
 fclean	:	clean
+			rm -f cuddle
 			rm -f $(NAME)
 
 tests_run:

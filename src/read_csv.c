@@ -6,15 +6,7 @@
 */
 #include "../include/header_cuddle.h"
 
-int count_columns(char *file, char const *separator)
-{
-    return SUCCESS;
-}
 
-int count_rows(char *file)
-{
-    return SUCCESS;
-}
 
 dataframe_t *df_read_csv(const char *filename, const char *separator)
 {
@@ -25,7 +17,7 @@ dataframe_t *df_read_csv(const char *filename, const char *separator)
         return NULL;
     if (separator == NULL)
         separator = ",";
-    data->nb_columns = count_columns();
-    data->nb_rows = count_rows();
+    data->nb_columns = count_columns(file, separator);
+    data->nb_rows = count_rows(file);
     return data;
 }

@@ -18,6 +18,17 @@ int count_columns(char *file, char const *separator)
     return cpt;
 }
 
+int count_rows(char *file)
+{
+    int cpt = 0;
+
+    for (int i = 0; file[i] != '\0'; i++) {
+        if (file[i] == '\n')
+            cpt++;
+    }
+    return cpt;
+}
+
 dataframe_t *df_read_csv(const char *filename, const char *separator)
 {
     dataframe_t *data = malloc(sizeof(dataframe_t) * 1);

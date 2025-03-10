@@ -6,15 +6,11 @@
 */
 #include "../../include/header_cuddle.h"
 
-static int replace_me_those_spaces(char *str)
+static int replace_me_those_spaces(char *str, char bad, char good)
 {
     for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] == '\\' && str[i + 1] == 't') {
-            str[i] = ' ';
-            str[i + 1] = ' ';
-        }
-        if (str[i] == '\t')
-            str[i] = ' ';
+        if (str[i] == bad)
+            str[i] = good;
     }
     return SUCCESS;
 }
@@ -76,17 +72,20 @@ static int init_inside(char **res, char *str, int *i, int *j)
     return SUCCESS;
 }
 
-char **my_str_to_word_array(char *str)
+char **my_str_to_word_array(char *str, char *delim)
 {
     int j = 0;
     int size = count_words(str);
+    char *dup = NULL;
     char **res = malloc(sizeof(char *) * (size + 1));
 
     if (res == NULL)
         return NULL;
-    replace_me_those_spaces(str);
+    dup = my_strdup(str);
+    for (int value = 0; delim[value] != '\0'; value++)
+        replace_me_those_spaces(str, delim[value], delim[0]);
     for (int i = 0; str[i] != '\0'; i = condition(str, i)) {
-        if (str[i] != ' ')
+        if (str[i] != delim[0])
             init_inside(res, str, &i, &j);
     }
     res[j] = NULL;

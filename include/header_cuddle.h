@@ -40,7 +40,7 @@ int mini_printf(const char *format, ...);
 int my_strncmp(char const *s1, char const *s2, int n);
 
 // --- my_str_to_word_array ---
-char **my_str_to_word_array(char *str);
+char **my_str_to_word_array(char *str, char *delim);
 void free_word_array(char **wa);
 int my_print_wa(char **wa);
 
@@ -59,5 +59,7 @@ char *open_file(char *filepath);
 // --- my_isnumbool.c
 int my_isnum(char const str);
 int my_isbool(char const *str);
+int my_istrue(char const *str)
+
 
 #endif /* CUDDLE_H */

@@ -32,6 +32,16 @@ int count_rows(char *file)
 int read_csv_next(dataframe_t *data, char *file, char const *separator)
 {
     char **lines = my_str_to_word_array(file, "\n");
+    char ***full_data;
+
+    if (lines == NULL)
+        return ERROR;
+    full_data = malloc(sizeof(char **) * (data->nb_rows + 1));
+    for (int i = 0; i <= data->nb_rows; i++) {
+        full_data[i] = my_str_to_word_array(lines[i], separator);
+        if (full_data[i] == NULL)
+            return ERROR;
+    }
     return SUCCESS;
 }
 
@@ -46,6 +56,7 @@ dataframe_t *df_read_csv(const char *filename, const char *separator)
         separator = ",";
     data->nb_columns = count_columns(file, separator);
     data->nb_rows = count_rows(file);
-    read_csv_next(data, file, separator);
+    if (read_csv_next(data, file, separator) == ERROR)
+        return NULL;
     return data;
 }

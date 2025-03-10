@@ -28,9 +28,9 @@ typedef struct dataframe_s {
 } dataframe_t;
 
 typedef struct dataframe_shape_s {
-    int nb_rows ;
-    int nb_columns ;
-} dataframe_shape_t ;
+    int nb_rows;
+    int nb_columns;
+} dataframe_shape_t;
 
 // ------------ DATAFRAME FUNCTIONS ------------
 
@@ -61,7 +61,8 @@ bool sort_func(void *value1, void *value2);
 
 // --- aggregation_csv.c ---
 dataframe_t *df_groupby(dataframe_t *dataframe, const char *aggregate_by,
-    const char **to_aggregate, void*(*agg_func)(void **values, int nb_values));
+    const char **to_aggregate,
+    void *(*agg_func)(void **values, int nb_values));
 void *agg_func(void **values, int nb_values);
 
 // --- filter_csv.c ---

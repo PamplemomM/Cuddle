@@ -29,6 +29,15 @@ int count_rows(char *file)
     return cpt;
 }
 
+void set_column_names(dataframe_t *data, char **first)
+{
+    data->colomn_name = malloc(sizeof(char *) * data->nb_columns);
+    
+    for (int i = 0; i < data->nb_columns; i++) {
+        data->colomn_name[i] = my_strdup(first[i]);
+    }
+}
+
 int read_csv_next(dataframe_t *data, char *file, char const *separator)
 {
     char **lines = my_str_to_word_array(file, "\n");
@@ -42,6 +51,7 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
         if (full_data[i] == NULL)
             return ERROR;
     }
+    set_column_names(data, full_data[0]);
     return SUCCESS;
 }
 

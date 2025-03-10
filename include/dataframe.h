@@ -22,9 +22,9 @@ typedef enum {
 typedef struct dataframe_s {
     int nb_rows;
     int nb_columns;
-    char **colomn_name;
-    column_type_t type;
-    void ***data; // Tom, c'est un tableau 2d de pointeurs void * pour stocker differents types
+    char **colomn_name; // name of all the colomns (names, age, city...)
+    column_type_t type; // This is the types of the values, still don't understand how to use it
+    void ***data; // Tom, this is a 2d tab of pointers void *, it is used to stick different values
 } dataframe_t;
 
 typedef struct dataframe_shape_s {

@@ -7,7 +7,7 @@
 
 NAME	=	libcuddle.a
 
-SRCS	=	src/*.c
+SRCS	=	$(shell find src/ -type f -name '*.c')
 
 SRCTEST	=	tests/*.c src/lib/*.c
 

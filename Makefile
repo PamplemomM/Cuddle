@@ -18,7 +18,7 @@ $(NAME)	:	$(OBJS)
 
 all		:	$(NAME)
 
-run		:	
+run		:
 			gcc -o cuddle src/*.c src/lib/*.c do_not_push.c
 
 clean	:

@@ -15,7 +15,6 @@ static void *apply_func(void *value)
     return str;
 }
 
-
 dataframe_t *df_to_type(dataframe_t *dataframe, const char *column,
     column_type_t downcast)
 {

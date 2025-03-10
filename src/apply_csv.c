@@ -14,7 +14,6 @@ static void *apply_func(void *value)
     return new_value;
 }
 
-
 dataframe_t *df_apply(dataframe_t *dataframe, const char *column,
     void *(*apply_func)(void *value))
 {

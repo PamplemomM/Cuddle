@@ -8,9 +8,7 @@
 
 dataframe_shape_t df_shape(dataframe_t *dataframe)
 {
-    dataframe_shape_t value = {dataframe->nb_rows, dataframe->nb_columns};
-
-    return value;
+    return (dataframe_shape_t){dataframe->nb_rows, dataframe->nb_columns};
 }
 
 void df_info(dataframe_t *dataframe)

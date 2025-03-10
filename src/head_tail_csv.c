@@ -10,6 +10,7 @@
 // ---- FUNCTION IS NOT FINISHED ----
 // **********************************
 // You can touch it if you want
+
 dataframe_t *df_head(dataframe_t *dataframe, int nb_rows)
 {
     int rows = 0;
@@ -20,7 +21,6 @@ dataframe_t *df_head(dataframe_t *dataframe, int nb_rows)
     }
     if (nb_rows >= dataframe->nb_rows)
         rows = dataframe->nb_rows;
-    
     result = malloc(sizeof(dataframe_t) * 1);
     return result;
 }

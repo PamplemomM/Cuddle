@@ -6,6 +6,11 @@
 */
 #include "../include/header_cuddle.h"
 
+// ****************************************************
+// ---- THE FUNCTION  IN THIS FILE IS NOT FINISHED ----
+// ****************************************************
+// Please, don't touch it
+
 int count_columns(char *file, char const *separator)
 {
     int cpt = 0;

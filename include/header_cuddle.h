@@ -13,6 +13,7 @@
     #include <unistd.h>
     #include <stdio.h>
     #include <stdbool.h>
+    #include <fcntl.h>
 
     #include "dataframe.h"
 
@@ -42,6 +43,9 @@ int my_print_wa(char **wa);
 
 // --- my_strtok.c ---
 char *my_strtok(char *str, char const *delim);
+
+// --- read_line.c ---
+char *read_line(int fd, int size);
 
 
 // ------------ IS FUNCTIONS ------------

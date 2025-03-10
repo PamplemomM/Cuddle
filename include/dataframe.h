@@ -24,7 +24,7 @@ typedef struct dataframe_s {
     int nb_columns;
     char **colomn_name;
     column_type_t type;
-    void ***data;
+    void ***data; // Tom, c'est un tableau 2d de pointeurs void * pour stocker differents types
 } dataframe_t;
 
 typedef struct dataframe_shape_s {
@@ -34,8 +34,10 @@ typedef struct dataframe_shape_s {
 
 // ------------ DATAFRAME FUNCTIONS ------------
 
-// --- read_write_csv.c ---
+// --- read_csv.c ---
 dataframe_t *df_read_csv(char const *filename, char const *separator);
+
+// --- write_csv.c ---
 int df_write_csv(dataframe_t *dataframe, char const *filename);
 
 // --- head_tail_csv.c ---

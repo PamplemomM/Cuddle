@@ -44,8 +44,11 @@ int my_print_wa(char **wa);
 // --- my_strtok.c ---
 char *my_strtok(char *str, char const *delim);
 
-// --- read_line.c ---
+// --- read_filelib.c ---
 char *read_line(int fd, int size);
+char *dup_result(char *result, char *line, int len);
+char *read_file(int fd);
+char *open_file(char *filepath);
 
 
 // ------------ IS FUNCTIONS ------------

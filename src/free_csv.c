@@ -6,7 +6,6 @@
 */
 #include "../include/header_cuddle.h"
 
-
 void df_free(dataframe_t *dataframe)
 {
     return;

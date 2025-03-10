@@ -84,12 +84,13 @@ char **my_str_to_word_array(char *str, char *delim)
         return NULL;
     dup = my_strdup(str);
     for (int value = 0; delim[value] != '\0'; value++)
-        replace_me_those_spaces(str, delim[value], delim[0]);
-    for (int i = 0; str[i] != '\0'; i = condition(str, i, delim[0])) {
-        if (str[i] != delim[0])
-            j = init_inside(res, str, &i, delim[0]);
+        replace_me_those_spaces(dup, delim[value], delim[0]);
+    for (int i = 0; dup[i] != '\0'; i = condition(dup, i, delim[0])) {
+        if (dup[i] != delim[0])
+            j = init_inside(res, dup, &i, delim[0]);
     }
     res[j] = NULL;
+    free(dup);
     return res;
 }
 

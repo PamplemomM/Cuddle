@@ -11,7 +11,28 @@ int my_isnum(char const str)
     return (str >= 48 && str <= 57) ? 1 : 0;
 }
 
+static char *my_strlowcase(char *str)
+{
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= 65 && str[i] <= 90) {
+            str[i] = str[i] + 32;
+        }
+    }
+    return str;
+}
+
 int my_isbool(char const *str)
+{
+    char *lower = NULL;
+
+    if (str == NULL)
+        return false;
+    lower = my_strlowercase(str);
+    return (my_strcmp(str, "true") == 0 ||
+        my_strcmp(str, "false") == 0) ? 1 : 0;
+}
+
+int my_istrue(char const *str)
 {
     return (my_strcmp(str, "TRUE") == 0 ||
         my_strcmp(str, "true") == 0) ? 1 : 0;

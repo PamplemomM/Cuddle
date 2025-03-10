@@ -32,7 +32,8 @@ Test(my_print_wa, full_covr, .init = cr_redirect_stdout)
 
 Test(my_free_wa, full_covr, .init = cr_redirect_stdout)
 {
-    char **test = my_str_to_word_array("Yolo yolo yolo", " ");
+    char *str = my_strdup("Yolo yolo yolo");
+    char **test = my_str_to_word_array(str, " \n");
 
     free_word_array(test);
     free_word_array(NULL);

@@ -70,12 +70,12 @@ void *agg_func(void **values, int nb_values);
 // --- filter_csv.c ---
 dataframe_t *df_apply(dataframe_t *dataframe, const char *column,
     void *(*apply_func)(void *value));
-void *apply_func(void *value);
+// void *apply_func(void *value);
 
 // --- to_type_csv.c ---
 dataframe_t *df_to_type(dataframe_t *dataframe, const char *column,
     column_type_t downcast);
-void *apply_func(void *value);
+// void *apply_func(void *value);
 
 // --- get_values_csv.c ---
 void *df_get_value(dataframe_t *dataframe, int row, const char *column);

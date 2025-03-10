@@ -16,7 +16,7 @@
 Test(my_str_to_word_array, full_covr, .init = cr_redirect_stdout)
 {
     char *str = my_strdup("hello  \t  comment \\t \t\t ca va");
-    char **test = my_str_to_word_array(str);
+    char **test = my_str_to_word_array(str, " \t");
 
     mini_printf("%s %s\n", test[0], test[1]);
     cr_assert_stdout_eq_str("hello comment\n");
@@ -32,7 +32,7 @@ Test(my_print_wa, full_covr, .init = cr_redirect_stdout)
 
 Test(my_free_wa, full_covr, .init = cr_redirect_stdout)
 {
-    char **test = my_str_to_word_array("Yolo yolo yolo");
+    char **test = my_str_to_word_array("Yolo yolo yolo", " ");
 
     free_word_array(test);
     free_word_array(NULL);

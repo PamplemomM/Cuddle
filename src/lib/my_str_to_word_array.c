@@ -15,67 +15,68 @@ static int replace_me_those_spaces(char *str, char bad, char good)
     return SUCCESS;
 }
 
-static int found_len(char *str, int i)
+static int found_len(char *str, int i, char delim)
 {
     int result = 0;
 
-    while (str[i] != ' ' && str[i] != '\0') {
+    while (str[i] != delim && str[i] != '\0') {
         result++;
         i++;
     }
     return result;
 }
 
-static int looping(char *str, int *i)
+static int looping(char *str, int *i, char delim)
 {
-    while (str[*i] == ' ') {
+    while (str[*i] == delim) {
         (*i)++;
     }
     return 1;
 }
 
-static int count_words(char *str)
+static int count_words(char *str, char delim)
 {
     int count = 1;
 
     for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] == ' ') {
-            count += looping(str, &i);
+        if (str[i] == delim) {
+            count += looping(str, &i, delim);
         }
     }
     return count;
 }
 
-static int condition(char *str, int i)
+static int condition(char *str, int i, char delim)
 {
-    while (str[i] == ' ') {
-            i++;
+    while (str[i] == delim) {
+        i++;
     }
     return i;
 }
 
-static int init_inside(char **res, char *str, int *i, int *j)
+static int init_inside(char **res, char *str, int *i, char delim)
 {
-    int word_len = found_len(str, *i);
+    static int j = 0;
+    int word_len = found_len(str, *i, delim);
     int k = 0;
 
-    res[*j] = malloc(sizeof(char) * (word_len + 1));
-    if (res[*j] == NULL)
+    res[j] = malloc(sizeof(char) * (word_len + 1));
+    if (res[j] == NULL)
         return ERROR;
-    while (str[*i] != '\0' && str[*i] != ' ') {
-        res[*j][k] = str[*i];
+    while (str[*i] != '\0' && str[*i] != delim) {
+        res[j][k] = str[*i];
         (*i)++;
         k++;
     }
-    res[*j][k] = '\0';
-    (*j)++;
-    return SUCCESS;
+    res[j][k] = '\0';
+    j++;
+    return j;
 }
 
 char **my_str_to_word_array(char *str, char *delim)
 {
     int j = 0;
-    int size = count_words(str);
+    int size = count_words(str, delim[0]);
     char *dup = NULL;
     char **res = malloc(sizeof(char *) * (size + 1));
 
@@ -84,9 +85,9 @@ char **my_str_to_word_array(char *str, char *delim)
     dup = my_strdup(str);
     for (int value = 0; delim[value] != '\0'; value++)
         replace_me_those_spaces(str, delim[value], delim[0]);
-    for (int i = 0; str[i] != '\0'; i = condition(str, i)) {
+    for (int i = 0; str[i] != '\0'; i = condition(str, i, delim[0])) {
         if (str[i] != delim[0])
-            init_inside(res, str, &i, &j);
+            j = init_inside(res, str, &i, delim[0]);
     }
     res[j] = NULL;
     return res;

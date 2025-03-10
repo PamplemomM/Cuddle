@@ -65,7 +65,7 @@ char *read_file(int fd)
     return result;
 }
 
-char *open_file(char *filepath)
+char *open_file(char const *filepath)
 {
     int fd = open(filepath, O_RDONLY);
     char *result = NULL;

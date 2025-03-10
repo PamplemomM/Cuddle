@@ -6,7 +6,17 @@
 */
 #include "../include/header_cuddle.h"
 
+int count_columns(char *file, char const *separator)
+{
+    int cpt = 0;
+    char *value = my_strtok(file, separator);
 
+    while (value != NULL) {
+        cpt++;
+        value = my_strtok(NULL, separator);
+    }
+    return cpt;
+}
 
 dataframe_t *df_read_csv(const char *filename, const char *separator)
 {

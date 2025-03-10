@@ -15,11 +15,11 @@
 
 Test(my_str_to_word_array, full_covr, .init = cr_redirect_stdout)
 {
-    char *str = my_strdup("hello    comment  \t\t ca va");
+    char *str = my_strdup("hello  \t  comment \\t \t\t ca va");
     char **test = my_str_to_word_array(str);
 
-    mini_printf("%s\n", test[0]);
-    cr_assert_stdout_eq_str("hello\n");
+    mini_printf("%s %s\n", test[0], test[1]);
+    cr_assert_stdout_eq_str("hello comment\n");
 }
 
 Test(my_print_wa, full_covr, .init = cr_redirect_stdout)
@@ -35,6 +35,7 @@ Test(my_free_wa, full_covr, .init = cr_redirect_stdout)
     char **test = my_str_to_word_array("Yolo yolo yolo");
 
     free_word_array(test);
+    free_word_array(NULL);
 }
 
 //**********************************
@@ -59,6 +60,12 @@ Test(mini_printf_num, full_covr, .init = cr_redirect_stdout)
 {
     mini_printf("%d %d\n", 2, -25);
     cr_assert_stdout_eq_str("2 -25\n");
+}
+
+Test(mini_printf_overflow, full_covr, .init = cr_redirect_stdout)
+{
+    mini_printf("%d\n", -2147483647 - 1);
+    cr_assert_stdout_eq_str("-2147483648\n");
 }
 
 //**********************************
@@ -88,4 +95,30 @@ Test(my_strcmp, full_covr)
     cr_assert_eq(my_strcmp(str, str), 0);
     cr_assert_eq(my_strcmp(str, src), 1);
     cr_assert_eq(my_strcmp(src, str), -1);
+}
+
+//**********************************
+// ----- MY_STRTOK FUNCTION -----
+//**********************************
+
+Test(my_strtok, full_covr, .init = cr_redirect_stdout)
+{
+    char *dup = my_strdup("Tom, really good, mate");
+    char *first = my_strtok(dup, ", ");
+    char *second = my_strtok(NULL, ",");
+
+    mini_printf("%s %s\n", first, second);
+    cr_assert_stdout_eq_str("Tom  really good\n");
+}
+
+Test(my_strtok_error, full_covr, .init = cr_redirect_stdout)
+{
+    char *dup = my_strdup("Tom, really good, mate");
+    char *first = my_strtok(NULL, ",");
+    char *second = my_strtok(dup, "bad delim");
+    char *third = my_strtok(dup, "s");
+    char *four = my_strtok(dup, dup);
+
+    mini_printf("%s\n", "dup");
+    cr_assert_stdout_eq_str("dup\n");
 }

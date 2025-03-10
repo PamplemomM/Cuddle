@@ -6,15 +6,14 @@
 */
 #include "../../include/header_cuddle.h"
 
-static int is_delimiter(char c, char const*delim)
+static int is_delimiter(char c, char const *delim)
 {
     char *d = (char *)delim;
 
-    for (d; *d != '\0'; d++) {
-        if (c == *d) {
+    for (int i = 0; d[i] != '\0'; i++) {
+        if (c == d[i]) {
             return 1;
         }
-        d = (char *)delim;
     }
     return SUCCESS;
 }

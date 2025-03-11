@@ -32,5 +32,3 @@ Test(my_strncmp, full_covr)
     cr_assert_eq(my_strncmp(str, src, 6), 1);
     cr_assert_eq(my_strncmp(src, str, 6), -1);
 }
-
-char *my_strcpy(char *dest, char const *src);

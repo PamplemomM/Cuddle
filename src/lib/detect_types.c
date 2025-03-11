@@ -12,5 +12,7 @@ column_type_t detect_type(char *str)
 
     if (my_isbool(str) == 1)
         result = BOOL;
+    if (my_isnum(str) == 1)
+        result = (my_getnbr(str) < 0) ? INT : UINT;
     return result;
 }

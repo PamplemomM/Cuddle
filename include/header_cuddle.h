@@ -37,13 +37,14 @@ column_type_t detect_type(char *str);
 void *my_free(char const *format, ...);
 
 // --- my_libc_functions.c ---
-int my_strlen(char const *str);
-char *my_strdup(char const *src);
-int my_strcmp(char const *s1, char const *s2);
+int my_getnbr(char const *str);
 int mini_printf(const char *format, ...);
 
 // --- my_string_lib.c ---
+int my_strlen(char const *str);
+char *my_strdup(char const *src);
 char *my_strcpy(char *dest, char const *src);
+int my_strcmp(char const *s1, char const *s2);
 int my_strncmp(char const *s1, char const *s2, int n);
 
 // --- my_str_to_word_array ---

@@ -86,29 +86,13 @@ Test(mini_printf_overflow, full_covr, .init = cr_redirect_stdout)
 // --------- LIB FUNCTIONS ---------
 //**********************************
 
-Test(my_strlen, full_covr)
+Test(my_getnbr, full_covr)
 {
-    char str[7] = "cbbcbb\0";
+    char str[7] = "c-1bbc\0";
+    char src[7] = "caac45\0";
 
-    cr_assert_eq(my_strlen(str), 6);
-}
-
-Test(my_strdup, full_covr, .init = cr_redirect_stdout)
-{
-    char *dup = my_strdup("Hello");
-
-    mini_printf("%s\n", dup);
-    cr_assert_stdout_eq_str("Hello\n");
-}
-
-Test(my_strcmp, full_covr)
-{
-    char str[7] = "cbbcbb\0";
-    char src[7] = "caacaa\0";
-
-    cr_assert_eq(my_strcmp(str, str), 0);
-    cr_assert_eq(my_strcmp(str, src), 1);
-    cr_assert_eq(my_strcmp(src, str), -1);
+    cr_assert_eq(my_getnbr(str), -1);
+    cr_assert_eq(my_getnbr(src), 45);
 }
 
 //*********************************

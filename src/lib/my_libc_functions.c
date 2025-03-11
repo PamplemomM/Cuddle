@@ -7,31 +7,6 @@
 #include "../../include/header_cuddle.h"
 #include <stdarg.h>
 
-int my_strlen(char const *str)
-{
-    int i = 0;
-
-    while (str[i] != '\0')
-        i++;
-    return i;
-}
-
-char *my_strdup(char const *src)
-{
-    int i = 0;
-    char *str;
-
-    str = malloc(sizeof(char) * (my_strlen(src) + 1));
-    if (str == NULL)
-        return NULL;
-    while (src[i] != '\0') {
-        str[i] = src[i];
-        i++;
-    }
-    str[i] = '\0';
-    return str;
-}
-
 static int my_putstr(char const *str)
 {
     int i = 0;
@@ -41,16 +16,25 @@ static int my_putstr(char const *str)
     return i;
 }
 
-int my_strcmp(char const *s1, char const *s2)
+int my_getnbr(char const *str)
 {
     int i = 0;
+    int res = 0;
+    int is_neg = 1;
 
-    while (s1[i] != '\0' && s2[i] != '\0') {
-        if (s1[i] != s2[i])
-            return s1[i] - s2[i];
+    if (str == NULL)
+        return 0;
+    while (str[i] != '\0' && !(str[i] >= '0' && str[i] <= '9')) {
+        if (str[i] == '-') {
+            is_neg *= -1;
+        }
         i++;
     }
-    return s1[i] - s2[i];
+    while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9') {
+        res = res * 10 + (str[i] - '0');
+        i++;
+    }
+    return res * is_neg;
 }
 
 static void my_putchar(char c)

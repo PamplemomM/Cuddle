@@ -11,9 +11,8 @@ static int is_delimiter(char c, char const *delim)
     char *d = (char *)delim;
 
     for (int i = 0; d[i] != '\0'; i++) {
-        if (c == d[i]) {
+        if (c == d[i])
             return 1;
-        }
     }
     return SUCCESS;
 }
@@ -23,9 +22,8 @@ static char *skip_delimiters(char *str, char const *delim)
     char *ptr = str;
 
     while (*ptr != '\0') {
-        if (is_delimiter(*ptr, delim) == 0) {
+        if (is_delimiter(*ptr, delim) == 0)
             break;
-        }
         ptr++;
     }
     return (*ptr == '\0') ? NULL : ptr;

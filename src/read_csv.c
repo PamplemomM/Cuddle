@@ -36,9 +36,9 @@ int count_rows(char *file)
 
 void set_column_names(dataframe_t *data, char **first)
 {
-    data->colomn_name = malloc(sizeof(char *) * data->nb_columns);
+    data->column_name = malloc(sizeof(char *) * data->nb_columns);
     for (int i = 0; i < data->nb_columns; i++) {
-        data->colomn_name[i] = my_strdup(first[i]);
+        data->column_name[i] = my_strdup(first[i]);
     }
 }
 

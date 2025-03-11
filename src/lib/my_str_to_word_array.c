@@ -30,9 +30,8 @@ static int found_len(char *str, int i, char delim)
 
 static int looping(char *str, int *i, char delim)
 {
-    while (str[*i] == delim) {
+    while (str[*i] == delim)
         (*i)++;
-    }
     return 1;
 }
 
@@ -41,18 +40,16 @@ static int count_words(char *str, char delim)
     int count = 1;
 
     for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] == delim) {
+        if (str[i] == delim)
             count += looping(str, &i, delim);
-        }
     }
     return count;
 }
 
 static int condition(char *str, int i, char delim)
 {
-    while (str[i] == delim) {
+    while (str[i] == delim)
         i++;
-    }
     return i;
 }
 
@@ -103,21 +100,18 @@ char **my_str_to_word_array(char *str, char *delim)
 
 void free_word_array(char **wa)
 {
-    if (wa == NULL) {
+    if (wa == NULL)
         return;
-    }
-    for (int i = 0; wa[i] != NULL; i++) {
+    for (int i = 0; wa[i] != NULL; i++)
         free(wa[i]);
-    }
     free(wa);
 }
 
 int my_print_wa(char **wa)
 {
     for (int i = 0; wa[i] != NULL; i++) {
-        for (int j = 0; wa[i][j] != '\0'; j++) {
+        for (int j = 0; wa[i][j] != '\0'; j++)
             write(1, &wa[i][j], 1);
-        }
         write(1, "\n", 1);
     }
     return SUCCESS;

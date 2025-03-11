@@ -11,9 +11,8 @@ int my_strlen(char const *str)
 {
     int i = 0;
 
-    while (str[i] != '\0') {
+    while (str[i] != '\0')
         i++;
-    }
     return i;
 }
 
@@ -37,9 +36,8 @@ static int my_putstr(char const *str)
 {
     int i = 0;
 
-    for (int i = 0; str[i] != '\0'; i++) {
+    for (int i = 0; str[i] != '\0'; i++)
         write(1, &str[i], 1);
-    }
     return i;
 }
 
@@ -66,9 +64,8 @@ static void my_put_nbr(int nb)
         my_putstr("-");
         nb = nb * (-1);
     }
-    if (nb == -2147483648) {
+    if (nb == -2147483648)
         my_putstr("2147483648");
-    }
     if (nb <= 9 && nb >= 0) {
         my_putchar(nb + 48);
     } else if (nb > 9) {
@@ -79,18 +76,14 @@ static void my_put_nbr(int nb)
 
 static int condition_flag(const char *s, int i, va_list arg)
 {
-    if (s[i + 1] == 's') {
+    if (s[i + 1] == 's')
         my_putstr(va_arg(arg, char *));
-    }
-    if (s[i + 1] == 'd' || s[i + 1] == 'i') {
+    if (s[i + 1] == 'd' || s[i + 1] == 'i')
         my_put_nbr(va_arg(arg, int));
-    }
-    if (s[i + 1] == 'c') {
+    if (s[i + 1] == 'c')
         my_putchar(va_arg(arg, int));
-    }
-    if (s[i + 1] == '%') {
+    if (s[i + 1] == '%')
         my_putchar('%');
-    }
     return i;
 }
 

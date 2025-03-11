@@ -45,20 +45,28 @@ static int set_column_names(dataframe_t *data, char **first)
     return SUCCESS;
 }
 
-int allcocate_void_tab(dataframe_t *data, char ***filedata)
+void ***allcocate_void_tab(dataframe_t *data, char ***filedata)
 {
     void ***new_data = malloc(sizeof(void **) * (data->nb_rows + 1));
 
     if (new_data == NULL)
-        return ERROR;
+        return NULL;
     for (int i = 0; i < data->nb_rows; i++) {
         new_data[i] = malloc(sizeof(void *) * (data->nb_columns + 1));
         if (new_data[i] == NULL) {
             my_free("%av", new_data);
-            return ERROR;
+            return NULL;
         }
     }
     new_data[data->nb_rows] = NULL;
+    return new_data;
+}
+
+int set_void_tab(dataframe_t *data, char ***file)
+{
+    data->data = allcocate_void_tab(data, file);
+    if (data->data == NULL)
+        return ERROR;
     return SUCCESS;
 }
 

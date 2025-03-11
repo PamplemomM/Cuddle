@@ -48,15 +48,15 @@ static dataframe_t *dupbetween(dataframe_t *dataframe, int start, int end)
         free(result);
         return NULL;
     }
-    // result->data = ???;
-    // if (result->data == NULL) {
-    //     free(result->column_types);
-    //     free_word_array(result->column_names);
-    //     free(result);
-    //     return NULL;
-    // }
     return result;
 }
+// result->data = ???;
+// if (result->data == NULL) {
+//     free(result->column_types);
+//     free_word_array(result->column_names);
+//     free(result);
+//     return NULL;
+// }
 
 dataframe_t *df_head(dataframe_t *dataframe, int nb_rows)
 {

@@ -122,3 +122,25 @@ int my_print_wa(char **wa)
     }
     return SUCCESS;
 }
+
+char **my_array_dup(char **wa)
+{
+    int len;
+    char **res;
+
+    if (wa == NULL)
+        return NULL;
+    while (wa[len] != NULL)
+        len++;
+    res = malloc(sizeof(char *) * (len + 1));
+    if (res == NULL)
+        return NULL;
+    for (int i = 0; wa[i] != NULL; i++) {
+        res[i] = my_strdup(res[i]);
+        if (res[i] == NULL) {
+            free_word_array(res);
+            return NULL;
+        }
+    }
+    return res;
+}

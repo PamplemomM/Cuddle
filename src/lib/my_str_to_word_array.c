@@ -19,6 +19,8 @@ static int found_len(char *str, int i, char delim)
 {
     int result = 0;
 
+    if (str == NULL)
+        return 0;
     while (str[i] != delim && str[i] != '\0') {
         result++;
         i++;
@@ -60,6 +62,10 @@ static int init_inside(char **res, char *str, int *i, char delim)
     int word_len = found_len(str, *i, delim);
     int k = 0;
 
+    if (str == NULL) {
+        j = 0;
+        return 0;
+    }
     res[j] = malloc(sizeof(char) * (word_len + 1));
     if (res[j] == NULL)
         return ERROR;
@@ -82,6 +88,7 @@ char **my_str_to_word_array(char *str, char *delim)
 
     if (res == NULL)
         return NULL;
+    init_inside(NULL, NULL, NULL, '\0');
     dup = my_strdup(str);
     for (int value = 0; delim[value] != '\0'; value++)
         replace_me_those_spaces(dup, delim[value], delim[0]);

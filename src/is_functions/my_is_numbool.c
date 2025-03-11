@@ -30,16 +30,6 @@ int my_isfloat(char const *str)
     return (cpt == 1) ? 1 : 0;
 }
 
-static char *my_strlowercase(char *str)
-{
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] >= 65 && str[i] <= 90) {
-            str[i] = str[i] + 32;
-        }
-    }
-    return str;
-}
-
 int my_isbool(char const *str)
 {
     char *lower = NULL;

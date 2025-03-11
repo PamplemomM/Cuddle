@@ -39,6 +39,7 @@ void *my_free(char const *format, ...);
 // --- my_libc_functions.c ---
 int my_getnbr(char const *str);
 int mini_printf(const char *format, ...);
+char *my_strlowercase(char *str);
 
 // --- my_string_lib.c ---
 int my_strlen(char const *str);

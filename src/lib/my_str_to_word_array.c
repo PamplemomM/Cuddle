@@ -137,7 +137,7 @@ char **my_array_dup(char **wa)
     if (res == NULL)
         return NULL;
     for (int i = 0; wa[i] != NULL; i++) {
-        res[i] = my_strdup(res[i]);
+        res[i] = my_strdup(wa[i]);
         if (res[i] == NULL) {
             free_word_array(res);
             return NULL;

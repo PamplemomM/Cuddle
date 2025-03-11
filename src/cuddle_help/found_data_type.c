@@ -58,11 +58,11 @@ static void *my_void_strdup(char const *value)
 
 void *found_data_type(char *value, column_type_t type)
 {
-    static void *(*converters[])(char const *) = {convert_to_bool, convert_to_int,
+    static void *(*array[])(char const *) = {convert_to_bool, convert_to_int,
         convert_to_uint, convert_to_float, my_void_strdup, NULL};
 
     if (type >= BOOL && type <= STRING)
-        return converters[type](value);
+        return array[type](value);
     else
         return my_strdup(value);
 }

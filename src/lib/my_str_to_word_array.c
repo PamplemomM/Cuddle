@@ -125,7 +125,7 @@ int my_print_wa(char **wa)
 
 char **my_array_dup(char **wa)
 {
-    int len;
+    int len = 0;
     char **res;
 
     if (wa == NULL)
@@ -142,5 +142,6 @@ char **my_array_dup(char **wa)
             return NULL;
         }
     }
+    res[len] = NULL;
     return res;
 }

@@ -41,6 +41,8 @@ static int set_column_names(dataframe_t *data, char **first)
         return ERROR;
     for (int i = 0; i < data->nb_columns; i++) {
         data->column_names[i] = my_strdup(first[i]);
+        if (data->column_names[i] == NULL)
+            return ERROR;
     }
     return SUCCESS;
 }
@@ -62,14 +64,34 @@ void ***allcocate_void_tab(dataframe_t *data, char ***filedata)
     return new_data;
 }
 
+static void *found_data_type(char *value, column_type_t type)
+{
+    int *interger;
+    float *comma_num;
+    char *str;
+
+    switch (type) {
+        case INT:
+            interger = malloc(sizeof(int));
+            if (interger) *interger = atoi(value);
+            return interger;
+        case FLOAT:
+            comma_num = malloc(sizeof(float));
+            if (comma_num) *comma_num = atof(value);
+            return comma_num;
+        default:
+            return my_strdup(value);
+    }
+}
+
 int set_void_tab(dataframe_t *data, char ***file)
 {
-    data->data = allcocate_void_tab(data, file);
+    data->data = allocate_void_tab(data);
     if (data->data == NULL)
         return ERROR;
     for (int i = 0; i < data->nb_rows; i++) {
         for (int j = 0; j < data->nb_columns; j++) {
-            data->data[i][j] = file[i][j];
+            data->data[i][j] = found_data_type(file[i + 1][j], data->column_types[j]);
         }
     }
     return SUCCESS;

@@ -15,13 +15,15 @@ SRCTEST	+=	$(shell find tests/ -type f -name '*.c')
 
 OBJS	=	$(SRCS:.c=.o)
 
+CFLAGS = -Wall -Wextra -Wshadow
+
 $(NAME)	:	$(OBJS)
 			ar rc $(NAME) $(OBJS)
 
 all		:	$(NAME)
 
 run		:
-			gcc -o cuddle src/*.c src/lib/*.c do_not_push.c
+			gcc -o cuddle -g3 $(SRCS) do_not_push.c
 
 clean	:
 		rm -f $(OBJS)

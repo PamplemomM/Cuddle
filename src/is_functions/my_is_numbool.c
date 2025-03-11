@@ -9,7 +9,7 @@
 int my_isnum(char const *str)
 {
     for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] < 48 || str[i] > 57)
+        if ((str[i] < 48 || str[i] > 57) && str[i] != 45)
             return 0;
     }
     return 1;
@@ -19,9 +19,9 @@ int my_isfloat(char const *str)
 {
     int cpt = 0;
 
-    if (str[0] < 48 || str[0] > 57)
+    if ((str[0] < 48 || str[0] > 57) && str[0] != 45)
         return 0;
-    for (int i = 0; str[i] != '\0'; i++) {
+    for (int i = 1; str[i] != '\0'; i++) {
         if (str[i] == 46)
             cpt++;
         if ((str[i] < 48 || str[i] > 57) && str[i] != 46)

@@ -30,6 +30,9 @@
 
 // ------------ LIB FUNCTIONS ------------
 
+// --- my_free.c ---
+void *my_free(char const *format, ...);
+
 // --- my_libc_functions.c ---
 int my_strlen(char const *str);
 char *my_strdup(char const *src);

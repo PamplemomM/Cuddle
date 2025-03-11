@@ -16,10 +16,9 @@ void df_info(dataframe_t *dataframe)
     char *str[7] = {"bool", "int", "uint", "float", "string",
         "undefined", NULL};
 
-    mini_printf("%d columns:\n", dataframe->nb_rows);
-    for (int i = 0; i < dataframe->nb_rows; i++) {
-        mini_printf("%s : %s", dataframe->column_names[i],
+    mini_printf("%d columns:\n", dataframe->nb_columns);
+    for (int i = 0; i < dataframe->nb_columns; i++) {
+        mini_printf("- %s : %s\n", dataframe->column_names[i],
             str[dataframe->column_types[i]]);
     }
-    return;
 }

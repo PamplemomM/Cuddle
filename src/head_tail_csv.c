@@ -27,5 +27,14 @@ dataframe_t *df_head(dataframe_t *dataframe, int nb_rows)
 
 dataframe_t *df_tail(dataframe_t *dataframe, int nb_rows)
 {
-    return NULL;
+    dataframe_t *result;
+
+    if (dataframe == NULL || nb_rows <= 0)
+        return NULL;
+    nb_rows = MIN(dataframe->nb_rows, nb_rows);
+    result = malloc(sizeof(dataframe_t));
+    if (result == NULL)
+        return NULL;
+    result->nb_rows = nb_rows;
+    return result;
 }

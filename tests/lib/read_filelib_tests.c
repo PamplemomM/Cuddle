@@ -7,7 +7,7 @@
 
 #include "criterion/criterion.h"
 #include "criterion/redirect.h"
-#include "../include/header_cuddle.h"
+#include "../../include/header_cuddle.h"
 
 //**********************************
 // ------- READFILE FUNCTION -------

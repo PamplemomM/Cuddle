@@ -67,6 +67,11 @@ int set_void_tab(dataframe_t *data, char ***file)
     data->data = allcocate_void_tab(data, file);
     if (data->data == NULL)
         return ERROR;
+    for (int i = 0; i < data->nb_rows; i++) {
+        for (int j = 0; j < data->nb_columns; j++) {
+            data->data[i][j] = file[i][j];
+        }
+    }
     return SUCCESS;
 }
 
@@ -97,7 +102,7 @@ dataframe_t *df_read_csv(const char *filename, const char *separator)
     if (separator == NULL)
         separator = ",";
     data->nb_columns = count_columns(file, separator);
-    data->nb_rows = count_rows(file);
+    data->nb_rows = count_rows(file) - 1;
     if (read_csv_next(data, file, separator) == ERROR)
         return NULL;
     return data;

@@ -11,7 +11,7 @@
 // ****************************************************
 // Please, don't touch it
 
-int count_columns(char *file, char const *separator)
+static int count_columns(char *file, char const *separator)
 {
     int cpt = 0;
     char *value = my_strtok(file, separator);
@@ -23,7 +23,7 @@ int count_columns(char *file, char const *separator)
     return cpt;
 }
 
-int count_rows(char *file)
+static int count_rows(char *file)
 {
     int cpt = 0;
 
@@ -34,12 +34,31 @@ int count_rows(char *file)
     return cpt;
 }
 
-void set_column_names(dataframe_t *data, char **first)
+static int set_column_names(dataframe_t *data, char **first)
 {
     data->column_names = malloc(sizeof(char *) * data->nb_columns);
+    if (data->column_names == NULL)
+        return ERROR;
     for (int i = 0; i < data->nb_columns; i++) {
         data->column_names[i] = my_strdup(first[i]);
     }
+    return SUCCESS;
+}
+
+int allcocate_void_tab(dataframe_t *data, char ***filedata)
+{
+    void ***new_data = malloc(sizeof(void **) * data->nb_columns);
+
+    if (new_data == NULL)
+        return ERROR;
+    for (int i = 0; i < data->nb_rows; i++) {
+        new_data[i] = malloc(sizeof(void *) * data->nb_columns);
+        if (new_data[i] == NULL) {
+            free(new_data);
+            return ERROR;
+        }
+    }
+    return SUCCESS;
 }
 
 int read_csv_next(dataframe_t *data, char *file, char const *separator)

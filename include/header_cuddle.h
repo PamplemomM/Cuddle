@@ -66,7 +66,8 @@ char *open_file(char const *filepath);
 // ------------ IS FUNCTIONS ------------
 
 // --- my_isnumbool.c
-int my_isnum(char const str);
+int my_isnum(char const *str);
+int my_isfloat(char const *str);
 int my_isbool(char const *str);
 int my_istrue(char const *str);
 

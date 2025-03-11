@@ -15,8 +15,14 @@
 
 Test(my_isnum, full_covr, .init = cr_redirect_stdout)
 {
-    mini_printf("%d %d\n", my_isnum('1'), my_isnum('a'));
+    mini_printf("%d %d\n", my_isnum("1"), my_isnum("a"));
     cr_assert_stdout_eq_str("1 0\n");
+}
+
+Test(my_is_float, full_covr, .init = cr_redirect_stdout)
+{
+    mini_printf("%d %d %d %d\n", my_isfloat("1.0"), my_isfloat("a"), my_isfloat(".909"), my_isfloat("3456.98765"));
+    cr_assert_stdout_eq_str("1 0 0 1\n");
 }
 
 Test(my_isbool, full_covr, .init = cr_redirect_stdout)

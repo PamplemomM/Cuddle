@@ -89,6 +89,9 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
             return ERROR;
     }
     set_column_names(data, full_data[0]);
+    for (int i = 0; i < data->nb_rows; i++) {
+        data->column_types[i] = detect_type(full_data[1][i]);
+    }
     return SUCCESS;
 }
 

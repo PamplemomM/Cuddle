@@ -6,9 +6,28 @@
 */
 #include "../../include/header_cuddle.h"
 
-int my_isnum(char const str)
+int my_isnum(char const *str)
 {
-    return (str >= 48 && str <= 57) ? 1 : 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] < 48 || str[i] > 57)
+            return 0;
+    }
+    return 1;
+}
+
+int my_isfloat(char const *str)
+{
+    int cpt = 0;
+
+    if (str[0] < 48 || str[0] > 57)
+        return 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == 46)
+            cpt++;
+        if ((str[i] < 48 || str[i] > 57) && str[i] != 46)
+            return 0;
+    }
+    return (cpt == 1) ? 1 : 0;
 }
 
 static char *my_strlowercase(char *str)

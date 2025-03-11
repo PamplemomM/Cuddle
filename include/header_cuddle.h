@@ -64,13 +64,16 @@ char *read_file(int fd);
 char *open_file(char const *filepath);
 
 
-// ------------ IS FUNCTIONS ------------
+// ------- CUDDLE FUNCTION HELPING -------
 
 // --- my_isnumbool.c
 int my_isnum(char const *str);
 int my_isfloat(char const *str);
 int my_isbool(char const *str);
 int my_istrue(char const *str);
+
+// --- found_data_type.c ---
+void *found_data_type(char *value, column_type_t type);
 
 
 #endif /* CUDDLE_H */

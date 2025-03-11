@@ -64,26 +64,6 @@ void ***allcocate_void_tab(dataframe_t *data, char ***filedata)
     return new_data;
 }
 
-static void *found_data_type(char *value, column_type_t type)
-{
-    int *interger;
-    float *comma_num;
-    char *str;
-
-    switch (type) {
-        case INT:
-            interger = malloc(sizeof(int));
-            if (interger) *interger = atoi(value);
-            return interger;
-        case FLOAT:
-            comma_num = malloc(sizeof(float));
-            if (comma_num) *comma_num = atof(value);
-            return comma_num;
-        default:
-            return my_strdup(value);
-    }
-}
-
 int set_void_tab(dataframe_t *data, char ***file)
 {
     data->data = allocate_void_tab(data);

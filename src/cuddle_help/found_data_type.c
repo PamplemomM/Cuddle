@@ -6,7 +6,7 @@
 */
 #include "../../include/header_cuddle.h"
 
-static void *convert_to_int(char *value)
+static void *convert_to_int(char const *value)
 {
     int *result = malloc(sizeof(int));
 
@@ -16,7 +16,7 @@ static void *convert_to_int(char *value)
     return result;
 }
 
-static void *convert_to_float(char *value)
+static void *convert_to_float(char const *value)
 {
     float *result = malloc(sizeof(float));
 
@@ -26,7 +26,7 @@ static void *convert_to_float(char *value)
     return result;
 }
 
-static void *convert_to_bool(char *value)
+static void *convert_to_bool(char const *value)
 {
     bool *result = malloc(sizeof(bool));
 
@@ -36,7 +36,7 @@ static void *convert_to_bool(char *value)
     return result;
 }
 
-static void *convert_to_uint(char *value)
+static void *convert_to_uint(char const *value)
 {
     unsigned int *result = malloc(sizeof(unsigned int));
 
@@ -46,10 +46,20 @@ static void *convert_to_uint(char *value)
     return result;
 }
 
+static void *my_void_strdup(char const *value)
+{
+    char **result = malloc(sizeof(char *));
+
+    if (result == NULL)
+        return NULL;
+    *result = (char *)my_strcpy(*result, value);
+    return result;
+}
+
 void *found_data_type(char *value, column_type_t type)
 {
-    static void *(*converters[])(char *) = {convert_to_bool, convert_to_int,
-        convert_to_uint, convert_to_float, my_strdup, NULL};
+    static void *(*converters[])(char const *) = {convert_to_bool, convert_to_int,
+        convert_to_uint, convert_to_float, my_void_strdup, NULL};
 
     if (type >= BOOL && type <= STRING)
         return converters[type](value);

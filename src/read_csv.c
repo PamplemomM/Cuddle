@@ -47,17 +47,18 @@ static int set_column_names(dataframe_t *data, char **first)
 
 int allcocate_void_tab(dataframe_t *data, char ***filedata)
 {
-    void ***new_data = malloc(sizeof(void **) * data->nb_columns);
+    void ***new_data = malloc(sizeof(void **) * (data->nb_rows + 1));
 
     if (new_data == NULL)
         return ERROR;
     for (int i = 0; i < data->nb_rows; i++) {
-        new_data[i] = malloc(sizeof(void *) * data->nb_columns);
+        new_data[i] = malloc(sizeof(void *) * (data->nb_columns + 1));
         if (new_data[i] == NULL) {
-            free(new_data);
+            my_free("%av", new_data);
             return ERROR;
         }
     }
+    new_data[data->nb_rows] = NULL;
     return SUCCESS;
 }
 
@@ -70,7 +71,7 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
         return ERROR;
     full_data = malloc(sizeof(char **) * (data->nb_rows + 1));
     for (int i = 0; i <= data->nb_rows; i++) {
-        full_data[i] = my_str_to_word_array(lines[i], separator);
+        full_data[i] = my_str_to_word_array(lines[i], (char *)separator);
         if (full_data[i] == NULL)
             return ERROR;
     }

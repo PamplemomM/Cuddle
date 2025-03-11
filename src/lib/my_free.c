@@ -23,6 +23,14 @@ static int free_float_array(float **array)
     return SUCCESS;
 }
 
+static int free_void_array(void ***array)
+{
+    for (int i = 0; array[i] != NULL; i++)
+        free(array[i]);
+    free(array);
+    return SUCCESS;
+}
+
 static int condition_flag(char const *s, int i, va_list arg)
 {
     if (s[i + 1] == 's') {
@@ -36,6 +44,8 @@ static int condition_flag(char const *s, int i, va_list arg)
             free_int_array(va_arg(arg, int **));
         if (s[i + 2] == 'f')
             free_float_array(va_arg(arg, float **));
+        if (s[i + 2] == 'v')
+            free_void_array(va_arg(arg, void ***));
     }
     return i + 2;
 }

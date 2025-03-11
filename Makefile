@@ -9,7 +9,9 @@ NAME	=	libcuddle.a
 
 SRCS	=	$(shell find src/ -type f -name '*.c')
 
-SRCTEST	=	tests/*.c src/lib/*.c src/is_functions/*.c
+SRCTEST	=	$(shell find src/lib -type f -name '*.c')
+SRCTEST	+=	$(shell find src/is_functions -type f -name '*.c')
+SRCTEST	+=	$(shell find tests/ -type f -name '*.c')
 
 OBJS	=	$(SRCS:.c=.o)
 

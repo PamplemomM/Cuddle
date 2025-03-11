@@ -12,21 +12,18 @@
 // You can touch it if you want
 // I'm Touching you in the night.
 
-static column_type_t *my_column_types_dup(column_type_t *column_types)
+static column_type_t *my_column_types_dup(column_type_t *column_types, int len)
 {
-    int len = 0;
     column_type_t *res;
 
     if (column_types == NULL)
         return NULL;
-    while (column_types[len] != NULL)
-        len++;
     res = malloc(sizeof(column_type_t) * (len + 1));
     if (res == NULL)
         return NULL;
     for (int i = 0; i < len; i++)
         res[i] = column_types[i];
-    res[len] = NULL;
+    res[len] = -1;
     return res;
 }
 
@@ -44,7 +41,8 @@ static dataframe_t *dupbetween(dataframe_t *dataframe, int start, int end)
         free(result);
         return NULL;
     }
-    result->column_types = my_column_types_dup(dataframe->column_types);
+    result->column_types = my_column_types_dup(dataframe->column_types,
+        dataframe->nb_columns);
     if (result->column_types == NULL) {
         free_word_array(result->column_names);
         free(result);

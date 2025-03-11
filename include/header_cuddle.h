@@ -30,6 +30,9 @@
 
 // ------------ LIB FUNCTIONS ------------
 
+// --- detect_types.c ---
+column_type_t detect_type(char *str);
+
 // --- my_free.c ---
 void *my_free(char const *format, ...);
 

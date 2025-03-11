@@ -11,7 +11,7 @@
 
 // **********************************
 // ----- MY_STR_TO_WORD_ARRAY.c -----
-//**********************************
+//***********************************
 
 Test(my_str_to_word_array, full_covr, .init = cr_redirect_stdout)
 {
@@ -32,15 +32,28 @@ Test(my_print_wa, full_covr, .init = cr_redirect_stdout)
 
 Test(my_free_wa, full_covr, .init = cr_redirect_stdout)
 {
-    char *str = my_strdup("Yolo yolo yolo");
-    char **test = my_str_to_word_array(str, " \n");
+    char *dup = my_strdup("Tom, really good, mate");
+    char **array = my_str_to_word_array(dup, ", ");
 
-    free_word_array(test);
+    my_print_wa(array);
+    cr_assert_stdout_eq_str("Tom\nreally\ngood\nmate\n");
+    free_word_array(array);
     free_word_array(NULL);
 }
 
+Test(my_array_dup, full_covr, .init = cr_redirect_stdout)
+{
+    char *str = my_strdup("hello  \t  comment \\t \t\t ca va");
+    char **test = my_str_to_word_array(str, " \t");
+    char **dup = my_array_dup(test);
+    char **error = my_array_dup(NULL);
+
+    mini_printf("%s %s\n", dup[0], dup[1]);
+    cr_assert_stdout_eq_str("hello comment\n");
+}
+
 //**********************************
-// ----- MINI_PRINTF -----
+// ------ MINI_PRINTF FUNCTION------
 //**********************************
 
 Test(mini_printf_str, full_covr, .init = cr_redirect_stdout)
@@ -70,7 +83,7 @@ Test(mini_printf_overflow, full_covr, .init = cr_redirect_stdout)
 }
 
 //**********************************
-// ----- LIB FUNCTIONS -----
+// --------- LIB FUNCTIONS ---------
 //**********************************
 
 Test(my_strlen, full_covr)
@@ -98,9 +111,9 @@ Test(my_strcmp, full_covr)
     cr_assert_eq(my_strcmp(src, str), -1);
 }
 
-//**********************************
-// ----- MY_STRTOK FUNCTION -----
-//**********************************
+//*********************************
+// ------ MY_STRTOK FUNCTION ------
+//*********************************
 
 Test(my_strtok, full_covr, .init = cr_redirect_stdout)
 {

@@ -7,7 +7,7 @@
 #include "../../include/header_cuddle.h"
 #include <stdarg.h>
 
-static int free_int_array(void **array)
+static int free_int_array(int **array)
 {
     for (int i = 0; array[i] != NULL; i++)
         free(array[i]);
@@ -47,7 +47,7 @@ void *my_free(char const *format, ...)
     va_start(arg, format);
     for (int i = 0; format[i] != '\0'; i++) {
         if (format[i] == '%')
-            i = condition_flag(format, &i, arg);
+            i = condition_flag(format, i, arg);
     }
     va_end(arg);
     return NULL;

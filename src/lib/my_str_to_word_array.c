@@ -35,14 +35,21 @@ static int looping(char *str, int *i, char delim)
     return 1;
 }
 
-static int count_words(char *str, char delim)
+static int count_words(char *str, char *delim)
 {
     int count = 1;
+    char *dup = NULL;
 
+    if (str == NULL)
+        return 0;
+    dup = my_strdup(str);
+    for (int value = 0; delim[value] != '\0'; value++)
+        replace_me_those_spaces(dup, delim[value], delim[0]);
     for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] == delim)
-            count += looping(str, &i, delim);
+        if (str[i] == delim[0])
+            count += looping(str, &i, delim[0]);
     }
+    free(dup);
     return count;
 }
 
@@ -79,13 +86,13 @@ static int init_inside(char **res, char *str, int *i, char delim)
 char **my_str_to_word_array(char *str, char *delim)
 {
     int j = 0;
-    int size = count_words(str, delim[0]);
+    int size = count_words(str, delim);
     char *dup = NULL;
     char **res = malloc(sizeof(char *) * (size + 1));
 
     if (res == NULL)
         return NULL;
-    init_inside(NULL, NULL, NULL, '\0');
+    init_inside(NULL, NULL, &j, '\0');
     dup = my_strdup(str);
     for (int value = 0; delim[value] != '\0'; value++)
         replace_me_those_spaces(dup, delim[value], delim[0]);

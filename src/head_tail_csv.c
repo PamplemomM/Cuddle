@@ -71,8 +71,6 @@ static dataframe_t *dupbetween(dataframe_t *dataframe, int start, int end)
 
 dataframe_t *df_head(dataframe_t *dataframe, int nb_rows)
 {
-    dataframe_t *result;
-
     if (dataframe == NULL || nb_rows <= 0)
         return NULL;
     nb_rows = MIN(dataframe->nb_rows, nb_rows);
@@ -81,8 +79,6 @@ dataframe_t *df_head(dataframe_t *dataframe, int nb_rows)
 
 dataframe_t *df_tail(dataframe_t *dataframe, int nb_rows)
 {
-    dataframe_t *result;
-
     if (dataframe == NULL || nb_rows <= 0)
         return NULL;
     nb_rows = MIN(dataframe->nb_rows, nb_rows);

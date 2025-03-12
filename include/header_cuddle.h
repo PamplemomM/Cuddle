@@ -32,7 +32,7 @@
     #define ERROR 84
 
 
-// ------------ ARSENAL FUNCTIONS ------------
+// ------------ ARSENAL FUNCTIONS ------ ------
 
 // --- salade_de_free.c ---
 void *omnifree(void **thing, int dimension);

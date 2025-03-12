@@ -2,6 +2,8 @@
 
 ## **Description**
 
+![Panda](https://img.shields.io/badge/Panda%20Library-8A2BE2)
+
 Cuddle is the recreation of the popular Pandas Library.
 
 

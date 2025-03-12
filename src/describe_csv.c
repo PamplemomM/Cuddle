@@ -28,7 +28,7 @@ static double min_value(dataframe_t *dataframe, int i)
 {
     double result = 0.0;
     double value = 0.0;
-    double first = 0.0;
+    int first = 0;
     void *ptr = NULL;
 
     for (int i = 0; i < dataframe->nb_rows; i++) {
@@ -49,7 +49,7 @@ static double max_value(dataframe_t *dataframe, int i)
 {
     double result = 0.0;
     double value = 0.0;
-    double first = 0.0;
+    int first = 0;
     void *ptr = NULL;
 
     for (int i = 0; i < dataframe->nb_rows; i++) {
@@ -66,9 +66,9 @@ static double max_value(dataframe_t *dataframe, int i)
     return result;
 }
 
-static double root_mean_square(dataframe_t *dataframe, int i, int *count)
+static float root_mean_square(dataframe_t *dataframe, int i, int *count)
 {
-    double sum = 0.0;
+    float sum = 0.0;
     void *ptr = NULL;
     column_type_t type = dataframe->column_types[i];
 
@@ -83,13 +83,13 @@ static double root_mean_square(dataframe_t *dataframe, int i, int *count)
     return (*count > 0) ? (sum / *count) : 0.0;
 }
 
-static double standard_deviation(dataframe_t *dataframe, int i, double mean,
+static float standard_deviation(dataframe_t *dataframe, int i, double mean,
     int count)
 {
     void *ptr = NULL;
-    double sum_squares = 0.0;
-    double result = 0.0;
-    double diff = 0.0;
+    float sum_squares = 0.0;
+    float result = 0.0;
+    float diff = 0.0;
     column_type_t type = dataframe->column_types[i];
 
     for (int i = 0; i < dataframe->nb_rows; i++) {
@@ -100,31 +100,26 @@ static double standard_deviation(dataframe_t *dataframe, int i, double mean,
         diff = result - mean;
         sum_squares += diff * diff;
     }
-    return (count > 1) ? sqrt(sum_squares / count) : 0.0;
+    if (count <= 1)
+        return 0;
+    return sqrt(sum_squares / count);
 }
 
 static void describe_numerical_column(dataframe_t *dataframe, int i)
 {
-    char *col_name = dataframe->column_names[i];
     int count = 0;
     double mean = root_mean_square(dataframe, i, &count);
-    double std_dev = standard_deviation(dataframe, i, mean, count);
-    double min_val = min_value(dataframe, i);
-    double max_val = max_value(dataframe, i);
 
-    mini_printf("Column: %s\n", col_name);
-    mini_printf("Count: %d\n", count);
-    mini_printf("Mean: %.2f\n", mean);
-    mini_printf("Std: %.2f\n", std_dev);
-    mini_printf("Min: %.2f\n", min_val);
-    mini_printf("Max: %.2f\n", max_val);
-    mini_printf("\n");
+    printf("Column: %s\n", dataframe->column_names[i]);
+    printf("Count: %d\n", count);
+    printf("Mean: %.2f\n", mean);
+    printf("Std: %.2f\n", standard_deviation(dataframe, i, mean, count));
+    printf("Min: %.2f\n", min_value(dataframe, i));
+    printf("Max: %.2f\n", max_value(dataframe, i));
 }
 
 void df_describe(dataframe_t *dataframe)
 {
-    int size = 0;
-
     if (dataframe == NULL || dataframe->nb_columns <= 0 ||
         dataframe->nb_rows <= 0)
         return;
@@ -133,7 +128,6 @@ void df_describe(dataframe_t *dataframe)
             dataframe->column_types[i] == UINT ||
             dataframe->column_types[i] == FLOAT) {
             describe_numerical_column(dataframe, i);
-            size++;
         }
     }
 }

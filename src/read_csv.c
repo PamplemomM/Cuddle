@@ -53,7 +53,7 @@ static int set_column_names(dataframe_t *data, char **first)
     return SUCCESS;
 }
 
-void ***allcocate_void_tab(dataframe_t *data, char ***filedata)
+void ***allocate_void_tab(dataframe_t *data)
 {
     void ***new_data = malloc(sizeof(void **) * (data->nb_rows + 1));
 
@@ -61,10 +61,8 @@ void ***allcocate_void_tab(dataframe_t *data, char ***filedata)
         return NULL;
     for (int i = 0; i < data->nb_rows; i++) {
         new_data[i] = malloc(sizeof(void *) * (data->nb_columns + 1));
-        if (new_data[i] == NULL) {
-            salade_de_free("%2", new_data);
-            return NULL;
-        }
+        if (new_data[i] == NULL)
+            return salade_de_free("%2", new_data);
     }
     new_data[data->nb_rows] = NULL;
     return new_data;
@@ -98,9 +96,8 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
             return ERROR;
     }
     set_column_names(data, full_data[0]);
-    for (int i = 0; i < data->nb_rows; i++) {
+    for (int i = 0; i < data->nb_rows; i++)
         data->column_types[i] = detect_type(full_data[1][i]);
-    }
     return SUCCESS;
 }
 

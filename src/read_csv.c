@@ -94,7 +94,7 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
 
     if (lines == NULL)
         return ERROR;
-    data->nb_rows = count_rows(lines[0]) - 1;
+    data->nb_columns = count_columns(lines[0], separator);
     my_print_wa(lines);
     mini_printf("Rows = %d, column = %d", data->nb_rows, data->nb_columns);
     full_data = malloc(sizeof(char **) * (data->nb_rows + 1));
@@ -126,8 +126,7 @@ dataframe_t *df_read_csv(const char *filename, const char *separator)
         sep = my_strdup(",");
     else
         sep = my_strdup(separator);
-    data->nb_columns = count_columns(file, sep);
-    
+    data->nb_rows = count_rows(file) - 1;
     if (read_csv_next(data, file, sep) == ERROR) {
         free(sep);
         return NULL;

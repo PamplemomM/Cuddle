@@ -77,9 +77,9 @@ int set_void_tab(dataframe_t *data, char ***file)
     data->data = allocate_void_tab(data);
     if (data->data == NULL)
         return ERROR;
-    for (int i = 0; i < data->nb_rows; i++) {
+    for (int i = 1; i < data->nb_rows - 1; i++) {
         for (int j = 0; j < data->nb_columns; j++) {
-            data->data[i][j] = found_data_type(file[i + 1][j],
+            data->data[i - 1][j] = found_data_type(file[i][j],
                 data->column_types[j]);
         }
     }

@@ -50,8 +50,10 @@ char *read_file(int fd)
     char *new_result = NULL;
     int size = 256;
     char *line = read_line(fd, size);
+    int len = 0;
 
     while (line != NULL) {
+        len += my_strlen(line);
         new_result = dup_result(result, line, my_strlen(line));
         free(line);
         line = read_line(fd, size);
@@ -62,6 +64,7 @@ char *read_file(int fd)
         result = new_result;
     }
     free(line);
+    result[len] = '\0';
     return result;
 }
 

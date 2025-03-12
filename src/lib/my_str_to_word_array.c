@@ -45,12 +45,16 @@ static int count_words(char *str, char *delim)
     dup = my_strdup(str);
     if (dup == NULL)
         return 0;
+    mini_printf("%s\n", str);
     for (int value = 0; delim[value] != '\0'; value++)
         replace_me_those_spaces(dup, delim[value], delim[0]);
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] == delim[0])
-            count += looping(str, &i, delim[0]);
+    mini_printf("Good replace\n");
+    for (int i = 0; dup[i] != '\0'; i++) {
+        mini_printf("%c %d\n", dup[i], i);
+        if (dup[i] == delim[0])
+            count += looping(dup, &i, delim[0]);
     }
+    mini_printf("good looping\n");
     free(dup);
     return count;
 }
@@ -89,6 +93,7 @@ char **my_str_to_word_array(char *str, char *delim)
 {
     int j = 0;
     int size = count_words(str, delim);
+    mini_printf("Count words = good \n");
     char *dup = NULL;
     char **res = malloc(sizeof(char *) * (size + 1));
 

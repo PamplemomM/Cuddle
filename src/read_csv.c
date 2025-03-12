@@ -86,9 +86,11 @@ int set_void_tab(dataframe_t *data, char ***file)
 
 int read_csv_next(dataframe_t *data, char *file, char const *separator)
 {
+    mini_printf("BLUBLUBLUB\n");
     char **lines = my_str_to_word_array(file, "\n");
     char ***full_data;
 
+    mini_printf("HEre\n");
     if (lines == NULL)
         return ERROR;
     data->nb_columns = count_columns(lines[0], separator);
@@ -125,6 +127,7 @@ dataframe_t *df_read_csv(const char *filename, const char *separator)
     else
         sep = my_strdup(separator);
     data->nb_rows = count_rows(file) - 1;
+    file[my_strlen(file)] = '\0';
     if (read_csv_next(data, file, sep) == ERROR) {
         free(sep);
         return NULL;

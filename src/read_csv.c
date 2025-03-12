@@ -120,8 +120,10 @@ dataframe_t *df_read_csv(const char *filename, const char *separator)
         sep = my_strdup(",");
     else
         sep = my_strdup(separator);
+    mini_printf("%s\n", file);
     data->nb_columns = count_columns(file, sep);
     data->nb_rows = count_rows(file) - 1;
+    mini_printf("%s\n", file);
     if (read_csv_next(data, file, sep) == ERROR) {
         free(sep);
         return NULL;

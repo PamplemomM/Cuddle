@@ -14,6 +14,7 @@
     #include <stdio.h>
     #include <stdbool.h>
     #include <fcntl.h>
+    #include <math.h>
 
     #include "dataframe.h"
 

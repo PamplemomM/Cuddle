@@ -23,7 +23,7 @@ $(NAME)	:	$(OBJS)
 all		:	$(NAME)
 
 run		:
-			gcc -o cuddle -g3 $(SRCS) do_not_push.c
+			gcc -o cuddle -g3 $(SRCS) do_not_push.c -lm
 
 clean	:
 		rm -f $(OBJS)

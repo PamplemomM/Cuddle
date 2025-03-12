@@ -31,14 +31,18 @@
     #define SUCCESS 0
     #define ERROR 84
 
-// ------------ LIB FUNCTIONS ------------
 
-// --- detect_types.c ---
-column_type_t detect_type(char *str);
+// ------------ ARSENAL FUNCTIONS ------------
 
 // --- salade_de_free.c ---
 void *omnifree(void **thing, int dimension);
 void *salade_de_free(char const *format, ...);
+
+
+// ------------ LIB FUNCTIONS ------------
+
+// --- detect_types.c ---
+column_type_t detect_type(char *str);
 
 // --- my_libc_functions.c ---
 int my_getnbr(char const *str);

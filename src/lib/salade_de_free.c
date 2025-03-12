@@ -34,4 +34,3 @@ void *salade_de_free(char const *format, ...)
     va_end(arg);
     return NULL;
 }
- 

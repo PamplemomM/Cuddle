@@ -84,31 +84,40 @@ int set_void_tab(dataframe_t *data, char ***file)
     return SUCCESS;
 }
 
-int read_csv_next(dataframe_t *data, char *file, char const *separator)
+char ***get_full_data(dataframe_t *data, char *file, char const *separator)
 {
     char **lines = my_str_to_word_array(file, "\n");
     char ***full_data;
 
     if (lines == NULL)
-        return ERROR;
+        return NULL;
     data->nb_columns = count_columns(lines[0], separator);
     full_data = malloc(sizeof(char **) * (data->nb_rows + 1));
     if (full_data == NULL)
-        return ERROR;
+        return NULL;
     for (int i = 0; i < data->nb_rows; i++) {
         full_data[i] = my_str_to_word_array(lines[i], (char *)separator);
         if (full_data[i] == NULL)
-            return ERROR;
+            return NULL;
     }
+    free(lines);
+    return full_data;
+}
+
+int read_csv_next(dataframe_t *data, char *file, char const *separator)
+{
+    char ***full_data = get_full_data(data, file, separator);
+
+    if (full_data == NULL)
+        return ERROR;
     full_data[data->nb_rows] = NULL;
     if (full_data[0] != NULL)
         set_column_names(data, full_data[0]);
     data->column_types = malloc(sizeof(int) * data->nb_columns);
     if (data->column_types == NULL)
         return ERROR;
-    for (int i = 0; i < data->nb_columns; i++) {
+    for (int i = 0; i < data->nb_columns; i++)
         data->column_types[i] = detect_type(full_data[1][i]);
-    }
     set_void_tab(data, full_data);
     return SUCCESS;
 }

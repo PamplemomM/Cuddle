@@ -8,10 +8,13 @@
 
 static void my_write_line_csv(void **data, int len, int fd)
 {
+    char *temp = NULL;
+
     for (int i = 0; i < len; i++) {
         if (i != 0)
             write(fd, ",", 1);
-        write(fd, (char *)data[i], my_strlen((char *)data[i]));
+        temp = (char *)data[i];
+        write(fd, temp, my_strlen(temp));
     }
     write(fd, "\n", 1);
 }
@@ -21,7 +24,6 @@ NE REGARDER PAS DERRIERE VOUS !!
 Il sont ici, ils nous regardent a travers nos corps, ne vous retournez pas.
 Ils arrivent, bientot, faites attention.
 */
-
 int df_write_csv(dataframe_t *dataframe, char const *filename)
 {
     int fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 00664);

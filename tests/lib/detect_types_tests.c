@@ -68,3 +68,18 @@ Test(detect_type_undefined, full_covr, .init = cr_redirect_stdout)
 // ---- FOUND_TYPES FUNCTION ----
 //*******************************
 
+Test(found_data_type, full_covr, .init = cr_redirect_stdout)
+{
+    void *ptr = found_data_type("2", UINT);
+    ptr = found_data_type(NULL, UINT);
+    ptr = found_data_type("-2", INT);
+    ptr = found_data_type(NULL, INT);
+    ptr = found_data_type("4.86", FLOAT);
+    ptr = found_data_type(NULL, FLOAT);
+    ptr = found_data_type(NULL, STRING);
+    ptr = found_data_type("true", BOOL);
+    ptr = found_data_type(NULL, BOOL);
+    ptr = found_data_type("true", UNDEFINED);
+    ptr = found_data_type(NULL, UNDEFINED);
+}
+

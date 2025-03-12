@@ -62,7 +62,7 @@ void ***allcocate_void_tab(dataframe_t *data, char ***filedata)
     for (int i = 0; i < data->nb_rows; i++) {
         new_data[i] = malloc(sizeof(void *) * (data->nb_columns + 1));
         if (new_data[i] == NULL) {
-            salade_de_free("%av", new_data);
+            salade_de_free("%2", new_data);
             return NULL;
         }
     }

@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "header_cuddle.h": "c",
-        "*.x": "c"
-    }
-}

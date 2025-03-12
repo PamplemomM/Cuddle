@@ -11,25 +11,41 @@
 // **********************************
 // You can touch it if you want
 
-static column_type_t *my_column_types_dup(column_type_t *column_types, int len)
+static column_type_t *my_column_types_dup(dataframe_t *dataframe)
 {
     column_type_t *res;
+    int len = dataframe->nb_columns;
 
-    if (column_types == NULL)
+    if (dataframe->column_types == NULL)
         return NULL;
     res = malloc(sizeof(column_type_t) * (len + 1));
     if (res == NULL)
         return NULL;
     for (int i = 0; i < len; i++)
-        res[i] = column_types[i];
+        res[i] = dataframe->column_types[i];
     res[len] = -1;
     return res;
 }
 
-static void ***my_data_dupbetween(void)
+static void ***my_data_dupbetween(dataframe_t *dataframe, int start, int end)
 {
-    return NULL;
+    void ***data;
+    int len = start - end;
+
+    if (dataframe->data == NULL)
+        return NULL;
+    data = malloc(sizeof(void **) * (len + 1));
+    if (data == NULL)
+        return NULL;
+    for (int i = start; i < end; i++) {
+        data[i] = malloc(sizeof(void *) * (dataframe->nb_columns + 1));
+        if (data[i] == NULL)
+            return FREE("%2", data);
+    }
+    data[len] = NULL;
+    return data;
 }
+// The data duplication would be right before this 'for' loop ends
 
 static dataframe_t *dupbetween(dataframe_t *dataframe, int start, int end)
 {
@@ -43,11 +59,10 @@ static dataframe_t *dupbetween(dataframe_t *dataframe, int start, int end)
     result->column_names = my_array_dup(dataframe->column_names);
     if (result->column_names == NULL)
         return FREE("%1", result);
-    result->column_types = my_column_types_dup(dataframe->column_types,
-        dataframe->nb_columns);
+    result->column_types = my_column_types_dup(dataframe);
     if (result->column_types == NULL)
         return FREE("%2 %1", result->column_names, result);
-    result->data = my_data_dupbetween();
+    result->data = my_data_dupbetween(dataframe, start, end);
     if (result->data == NULL)
         return FREE("%1 %2 %1", result->column_types,
             result->column_names, result);

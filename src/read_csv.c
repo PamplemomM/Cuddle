@@ -17,8 +17,10 @@ static int count_columns(char *file, char const *separator)
     char *dup = my_strdup(file);
     char *value = my_strtok(dup, separator);
 
+    mini_printf("sep = [%s], dup = [%s]\n", separator, dup);
     while (value != NULL) {
         cpt++;
+        mini_printf("Value = %s\n", value);
         value = my_strtok(NULL, separator);
     }
     free(dup);

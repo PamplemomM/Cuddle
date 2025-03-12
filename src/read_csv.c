@@ -62,7 +62,7 @@ void ***allocate_void_tab(dataframe_t *data)
     for (int i = 0; i < data->nb_rows; i++) {
         new_data[i] = malloc(sizeof(void *) * (data->nb_columns + 1));
         if (new_data[i] == NULL)
-            return salade_de_free("%2", new_data);
+            return FREE("%2", new_data);
     }
     new_data[data->nb_rows] = NULL;
     return new_data;

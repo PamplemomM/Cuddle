@@ -64,3 +64,7 @@ Test(detect_type_undefined, full_covr, .init = cr_redirect_stdout)
     cr_assert_stdout_eq_str("1\n");
 }
 
+//*******************************
+// ---- FOUND_TYPES FUNCTION ----
+//*******************************
+

@@ -14,6 +14,7 @@
     #include <stdio.h>
     #include <stdbool.h>
     #include <fcntl.h>
+    #include <math.h>
 
     #include "dataframe.h"
 
@@ -32,7 +33,7 @@
     #define ERROR 84
 
 
-// ------------ ARSENAL FUNCTIONS ------------
+// ------------ ARSENAL FUNCTIONS ------ ------
 
 // --- salade_de_free.c ---
 void *omnifree(void **thing, int dimension);
@@ -40,9 +41,6 @@ void *salade_de_free(char const *format, ...);
 
 
 // ------------ LIB FUNCTIONS ------------
-
-// --- detect_types.c ---
-column_type_t detect_type(char *str);
 
 // --- my_libc_functions.c ---
 int my_getnbr(char const *str);
@@ -73,6 +71,9 @@ char *open_file(char const *filepath);
 
 
 // ------- CUDDLE FUNCTION HELPING -------
+
+// --- detect_types.c ---
+column_type_t detect_type(char *str);
 
 // --- my_isnumbool.c
 int my_isnum(char const *str);

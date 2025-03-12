@@ -116,9 +116,9 @@ dataframe_t *df_read_csv(const char *filename, const char *separator)
         return NULL;
     if (separator == NULL)
         separator = ",";
+    mini_printf("%s\n", file);
     data->nb_columns = count_columns(file, separator);
     data->nb_rows = count_rows(file) - 1;
-    mini_printf("%s\n", file);
     if (read_csv_next(data, file, separator) == ERROR)
         return NULL;
     return data;

@@ -52,7 +52,6 @@ char *read_file(int fd)
     char *line = read_line(fd, size);
 
     while (line != NULL) {
-        mini_printf("Read line vaut %s\n", line);
         new_result = dup_result(result, line, my_strlen(line));
         free(line);
         line = read_line(fd, size);

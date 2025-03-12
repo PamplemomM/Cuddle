@@ -43,6 +43,8 @@ static int count_words(char *str, char *delim)
     if (str == NULL || delim == NULL)
         return 0;
     dup = my_strdup(str);
+    if (dup == NULL)
+        return 0;
     for (int value = 0; delim[value] != '\0'; value++)
         replace_me_those_spaces(dup, delim[value], delim[0]);
     for (int i = 0; str[i] != '\0'; i++) {

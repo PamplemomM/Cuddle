@@ -17,10 +17,8 @@ static int count_columns(char *file, char const *separator)
     char *dup = my_strdup(file);
     char *value = my_strtok(dup, separator);
 
-    mini_printf("sep = [%s], dup = [%s]\n", separator, dup);
     while (value != NULL) {
         cpt++;
-        mini_printf("Value = %s\n", value);
         value = my_strtok(NULL, separator);
     }
     free(dup);
@@ -94,7 +92,6 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
     if (lines == NULL)
         return ERROR;
     data->nb_columns = count_columns(lines[0], separator);
-    mini_printf("Rows = %d, column = %d", data->nb_rows, data->nb_columns);
     full_data = malloc(sizeof(char **) * (data->nb_rows + 1));
     if (full_data == NULL)
         return ERROR;

@@ -2,7 +2,7 @@
 
 ## **Description**
 
-![Panda](https://img.shields.io/badge/Recreation%20of%20the%20PandaLibrary)
+![Panda](https://img.shields.io/badge/Recreation%20of%20the%20PandaLibrary-purple)
 
 
 Cuddle is the recreation of the popular Pandas Library.
@@ -23,4 +23,4 @@ gcc -o my_first_program main.c -L -lcuddle
 ```
 
 Project created as part of the G-AIA-200 module by PamplemomM and Pathie.
-![GAIA](https://img.shields.io/badge/G-AIA-blue)
+![Author](https://img.shields.io/badge/Recreation%20of%20the%20PandaLibrary?logoSize=purple&labelColor=orange)

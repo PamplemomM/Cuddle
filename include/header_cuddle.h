@@ -33,8 +33,8 @@
 // --- detect_types.c ---
 column_type_t detect_type(char *str);
 
-// --- my_free.c ---
-void *my_free(char const *format, ...);
+// --- salade_de_free.c ---
+void *salade_de_free(char const *format, ...);
 
 // --- my_libc_functions.c ---
 int my_getnbr(char const *str);

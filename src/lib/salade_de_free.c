@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2024
-** my_free.c
+** salade_de_freeree.c
 ** File description:
-** The file that contains the my_free function.
+** The file that contains the salade_de_free function.
 */
 #include "../../include/header_cuddle.h"
 #include <stdarg.h>
@@ -50,7 +50,7 @@ static int condition_flag(char const *s, int i, va_list arg)
     return i + 2;
 }
 
-void *my_free(char const *format, ...)
+void *salade_de_free(char const *format, ...)
 {
     va_list arg;
 

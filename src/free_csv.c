@@ -28,7 +28,7 @@ void df_free(dataframe_t *dataframe)
         return;
     }
     for (int i = 0; i < dataframe->nb_columns; i++) {
-        my_free("%av", dataframe->data[i]);
+        salade_de_free("%av", dataframe->data[i]);
     }
     free(dataframe->data);
     free(dataframe);

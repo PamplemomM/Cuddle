@@ -40,7 +40,7 @@ static int count_words(char *str, char *delim)
     int count = 1;
     char *dup = NULL;
 
-    if (str == NULL)
+    if (str == NULL || delim == NULL)
         return 0;
     dup = my_strdup(str);
     for (int value = 0; delim[value] != '\0'; value++)
@@ -90,7 +90,7 @@ char **my_str_to_word_array(char *str, char *delim)
     char *dup = NULL;
     char **res = malloc(sizeof(char *) * (size + 1));
 
-    if (res == NULL)
+    if (res == NULL || delim == NULL)
         return NULL;
     init_inside(NULL, NULL, &j, '\0');
     dup = my_strdup(str);

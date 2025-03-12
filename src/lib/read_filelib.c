@@ -51,12 +51,11 @@ char *read_file(int fd)
     int size = 256;
     char *line = read_line(fd, size);
 
-    mini_printf("Read line vaut %s\n", line);
     while (line != NULL) {
+        mini_printf("Read line vaut %s\n", line);
         new_result = dup_result(result, line, my_strlen(line));
         free(line);
         line = read_line(fd, size);
-        mini_printf("Read line vaut %s\n", line);
         if (new_result == NULL) {
             free(result);
             return NULL;

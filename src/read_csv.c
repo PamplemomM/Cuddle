@@ -90,6 +90,8 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
     if (lines == NULL)
         return ERROR;
     full_data = malloc(sizeof(char **) * (data->nb_rows + 1));
+    if (full_data == NULL)
+        return ERROR;
     for (int i = 0; i <= data->nb_rows; i++) {
         full_data[i] = my_str_to_word_array(lines[i], (char *)separator);
         if (full_data[i] == NULL)

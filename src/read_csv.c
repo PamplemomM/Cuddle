@@ -95,7 +95,8 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
         if (full_data[i] == NULL)
             return ERROR;
     }
-    set_column_names(data, full_data[0]);
+    if (full_data[0] != NULL)
+        set_column_names(data, full_data[0]);
     for (int i = 0; i < data->nb_rows; i++)
         data->column_types[i] = detect_type(full_data[1][i]);
     set_void_tab(data, full_data);

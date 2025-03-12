@@ -86,6 +86,7 @@ int set_void_tab(dataframe_t *data, char ***file)
 
 int read_csv_next(dataframe_t *data, char *file, char const *separator)
 {
+    mini_printf("%s\n", file);
     char **lines = my_str_to_word_array(file, "\n");
     char ***full_data;
 

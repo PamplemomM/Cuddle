@@ -26,6 +26,11 @@ static column_type_t *my_column_types_dup(column_type_t *column_types, int len)
     return res;
 }
 
+static void ***my_data_dupbetween(void)
+{
+    return NULL;
+}
+
 static dataframe_t *dupbetween(dataframe_t *dataframe, int start, int end)
 {
     dataframe_t *result;
@@ -36,26 +41,18 @@ static dataframe_t *dupbetween(dataframe_t *dataframe, int start, int end)
     result->nb_rows = start - end;
     result->nb_columns = dataframe->nb_columns;
     result->column_names = my_array_dup(dataframe->column_names);
-    if (result->column_names == NULL) {
-        free(result);
-        return NULL;
-    }
+    if (result->column_names == NULL)
+        return FREE("%1", result);
     result->column_types = my_column_types_dup(dataframe->column_types,
         dataframe->nb_columns);
-    if (result->column_types == NULL) {
-        free_word_array(result->column_names);
-        free(result);
-        return NULL;
-    }
+    if (result->column_types == NULL)
+        return FREE("%2 %1", result->column_names, result);
+    result->data = my_data_dupbetween();
+    if (result->data == NULL)
+        return FREE("%1 %2 %1", result->column_types,
+            result->column_names, result);
     return result;
 }
-// result->data = ???;
-// if (result->data == NULL) {
-//     free(result->column_types);
-//     free_word_array(result->column_names);
-//     free(result);
-//     return NULL;
-// }
 
 dataframe_t *df_head(dataframe_t *dataframe, int nb_rows)
 {

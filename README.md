@@ -23,4 +23,5 @@ gcc -o my_first_program main.c -L -lcuddle
 ```
 
 Project created as part of the G-AIA-200 module by PamplemomM and Pathie.
-![Author](https://img.shields.io/badge/Recreation%20of%20the%20PandaLibrary?logoSize=purple&labelColor=orange)
+![Author](https://img.shields.io/badge/Recreation%20of%20the%20PandaLibrary?labelColor=purple&color=orange)
+

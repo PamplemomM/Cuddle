@@ -86,11 +86,9 @@ int set_void_tab(dataframe_t *data, char ***file)
 
 int read_csv_next(dataframe_t *data, char *file, char const *separator)
 {
-    mini_printf("BLUBLUBLUB\n");
     char **lines = my_str_to_word_array(file, "\n");
     char ***full_data;
 
-    mini_printf("HEre\n");
     if (lines == NULL)
         return ERROR;
     data->nb_columns = count_columns(lines[0], separator);
@@ -108,8 +106,9 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
     data->column_types = malloc(sizeof(int) * data->nb_columns);
     if (data->column_types == NULL)
         return ERROR;
-    for (int i = 0; i < data->nb_rows; i++)
+    for (int i = 0; i < data->nb_columns; i++) {
         data->column_types[i] = detect_type(full_data[1][i]);
+    }
     set_void_tab(data, full_data);
     return SUCCESS;
 }

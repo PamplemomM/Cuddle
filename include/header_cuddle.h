@@ -25,7 +25,7 @@
     #define ABS(x) ((x) < 0 ? -(x) : (x))
 
     // salade_de_free function :
-    #define FREE(format, arg) salade_de_free(format, arg)
+    #define FREE(format, ...) salade_de_free(format, __VA_ARGS__)
 
     // defines :
     #define SUCCESS 0

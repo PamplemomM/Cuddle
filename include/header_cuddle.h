@@ -24,10 +24,10 @@
     #define MAX(a, b) ((a) > (b) ? (a) : (b))
     #define ABS(x) ((x) < 0 ? -(x) : (x))
 
-    // Salade_de_free function :
-    #define FREE(arg, format) salade_de_free(arg, format)
+    // salade_de_free function :
+    #define FREE(format, arg) salade_de_free(format, arg)
 
-    //defines :
+    // defines :
     #define SUCCESS 0
     #define ERROR 84
 
@@ -37,6 +37,7 @@
 column_type_t detect_type(char *str);
 
 // --- salade_de_free.c ---
+void *omnifree(void **thing, int dimension);
 void *salade_de_free(char const *format, ...);
 
 // --- my_libc_functions.c ---

@@ -48,11 +48,11 @@ static void *convert_to_uint(char const *value)
 
 static void *my_void_strdup(char const *value)
 {
-    char **result = malloc(sizeof(char *));
+    char *result = malloc(sizeof(char) * (my_strlen(value) + 1));
 
-    if (result == NULL || value == NULL)
+    if (result == NULL)
         return NULL;
-    *result = (char *)my_strcpy(*result, value);
+    my_strcpy(result, value);
     return result;
 }
 

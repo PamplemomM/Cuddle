@@ -24,6 +24,9 @@
     #define MAX(a, b) ((a) > (b) ? (a) : (b))
     #define ABS(x) ((x) < 0 ? -(x) : (x))
 
+    // Salade_de_free function :
+    #define FREE(arg, format) salade_de_free(arg, format)
+
     //defines :
     #define SUCCESS 0
     #define ERROR 84

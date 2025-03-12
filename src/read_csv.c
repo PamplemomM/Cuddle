@@ -34,6 +34,12 @@ static int count_rows(char *file)
     return cpt;
 }
 
+/*
+Est ce que ce texte sera inutile ?
+Je ne sais pas, mais ce qui est certain c'est qu'il a ete ecrit et c'est
+    quelque chose d'interessant de savoir ca, on mourra moins bete apres
+    avoir lu des comment des codes.
+*/
 static int set_column_names(dataframe_t *data, char **first)
 {
     data->column_names = malloc(sizeof(char *) * data->nb_columns);

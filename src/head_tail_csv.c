@@ -10,7 +10,6 @@
 // ---- FUNCTION IS NOT FINISHED ----
 // **********************************
 // You can touch it if you want
-// I'm Touching you in the night.
 
 static column_type_t *my_column_types_dup(column_type_t *column_types, int len)
 {

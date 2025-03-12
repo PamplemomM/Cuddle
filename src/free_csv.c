@@ -6,6 +6,11 @@
 */
 #include "../include/header_cuddle.h"
 
+// ---------------------------------------------------
+// ------ THE FUNCTION IN THIS FILE IS FINISHED ------
+// ---------------------------------------------------
+// Please, don't touch it
+
 void df_free(dataframe_t *dataframe)
 {
     if (dataframe == NULL)

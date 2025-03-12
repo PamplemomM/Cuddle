@@ -6,9 +6,9 @@
 */
 #include "../include/header_cuddle.h"
 
-// ****************************************************
-// ---- THE FUNCTION  IN THIS FILE IS NOT FINISHED ----
-// ****************************************************
+// ---------------------------------------------------
+// ------ THE FUNCTION IN THIS FILE IS FINISHED ------
+// ---------------------------------------------------
 // Please, don't touch it
 
 static int count_columns(char *file, char const *separator)

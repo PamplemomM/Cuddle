@@ -6,6 +6,11 @@
 */
 #include "../include/header_cuddle.h"
 
+// ---------------------------------------------------
+// ------ THE FUNCTION IN THIS FILE IS FINISHED ------
+// ---------------------------------------------------
+// Please, don't touch it
+
 dataframe_shape_t df_shape(dataframe_t *dataframe)
 {
     return (dataframe_shape_t){dataframe->nb_rows, dataframe->nb_columns};

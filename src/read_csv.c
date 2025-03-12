@@ -88,14 +88,12 @@ int set_void_tab(dataframe_t *data, char ***file)
 
 int read_csv_next(dataframe_t *data, char *file, char const *separator)
 {
-    mini_printf("%s\n", file);
     char **lines = my_str_to_word_array(file, "\n");
     char ***full_data;
 
     if (lines == NULL)
         return ERROR;
     data->nb_columns = count_columns(lines[0], separator);
-    my_print_wa(lines);
     mini_printf("Rows = %d, column = %d", data->nb_rows, data->nb_columns);
     full_data = malloc(sizeof(char **) * (data->nb_rows + 1));
     if (full_data == NULL)
@@ -108,6 +106,9 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
     full_data[data->nb_rows] = NULL;
     if (full_data[0] != NULL)
         set_column_names(data, full_data[0]);
+    data->column_types = malloc(sizeof(int) * data->nb_columns);
+    if (data->column_types == NULL)
+        return NULL;
     for (int i = 0; i < data->nb_rows; i++)
         data->column_types[i] = detect_type(full_data[1][i]);
     set_void_tab(data, full_data);

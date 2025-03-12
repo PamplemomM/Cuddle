@@ -24,7 +24,7 @@ Ils arrivent, bientot, faites attention.
 
 int df_write_csv(dataframe_t *dataframe, char const *filename)
 {
-    int fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 00444);
+    int fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 00664);
 
     if (fd == -1)
         return ERROR;

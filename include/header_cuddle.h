@@ -42,9 +42,6 @@ void *salade_de_free(char const *format, ...);
 
 // ------------ LIB FUNCTIONS ------------
 
-// --- detect_types.c ---
-column_type_t detect_type(char *str);
-
 // --- my_libc_functions.c ---
 int my_getnbr(char const *str);
 int mini_printf(const char *format, ...);
@@ -74,6 +71,9 @@ char *open_file(char const *filepath);
 
 
 // ------- CUDDLE FUNCTION HELPING -------
+
+// --- detect_types.c ---
+column_type_t detect_type(char *str);
 
 // --- my_isnumbool.c
 int my_isnum(char const *str);

@@ -74,7 +74,7 @@ static int init_inside(char **res, char *str, int *i, char delim)
     }
     res[j] = malloc(sizeof(char) * (word_len + 1));
     if (res[j] == NULL)
-        return ERROR;
+        return -1;
     while (str[*i] != '\0' && str[*i] != delim) {
         res[j][k] = str[*i];
         (*i)++;

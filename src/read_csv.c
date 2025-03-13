@@ -58,7 +58,7 @@ static int set_column_names(dataframe_t *data, char **first)
     return SUCCESS;
 }
 
-void ***allocate_void_tab(dataframe_t *data)
+static void ***allocate_void_tab(dataframe_t *data)
 {
     void ***new_data = malloc(sizeof(void **) * (data->nb_rows + 1));
 
@@ -74,7 +74,7 @@ void ***allocate_void_tab(dataframe_t *data)
     return new_data;
 }
 
-int set_void_tab(dataframe_t *data, char ***file)
+static int set_void_tab(dataframe_t *data, char ***file)
 {
     data->data = allocate_void_tab(data);
     if (data->data == NULL)
@@ -88,7 +88,7 @@ int set_void_tab(dataframe_t *data, char ***file)
     return SUCCESS;
 }
 
-char ***get_full_data(dataframe_t *data, char *file, char const *separator)
+static char ***get_full_data(dataframe_t *data, char *file, char const *separator)
 {
     char **lines = my_str_to_word_array(file, "\n");
     char *sep = my_strdup(separator);
@@ -110,7 +110,7 @@ char ***get_full_data(dataframe_t *data, char *file, char const *separator)
     return full_data;
 }
 
-int read_csv_next(dataframe_t *data, char *file, char const *separator)
+static int read_csv_next(dataframe_t *data, char *file, char const *separator)
 {
     char ***full_data = get_full_data(data, file, separator);
 

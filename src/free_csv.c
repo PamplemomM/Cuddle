@@ -13,6 +13,8 @@
 
 void df_free(dataframe_t *dataframe)
 {
+    if (dataframe == NULL)
+        return;
     FREE("%3 %1 %2 %1", dataframe->data, dataframe->column_types,
         dataframe->column_names, dataframe);
 }

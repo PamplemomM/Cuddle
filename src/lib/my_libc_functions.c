@@ -37,16 +37,6 @@ int my_getnbr(char const *str)
     return res * is_neg;
 }
 
-char *my_its(int nbr)
-{
-    char *result = malloc(sizeof(char) * 12);
-
-    if (result == NULL)
-        return NULL;
-    sprintf(result, "%d", nbr);
-    return result;
-}
-
 static void my_putchar(char c)
 {
     write(1, &c, 1);

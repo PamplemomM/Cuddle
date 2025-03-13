@@ -92,10 +92,12 @@ char **my_str_to_word_array(char *str, char *delim)
     char *dup = NULL;
     char **res = malloc(sizeof(char *) * (size + 1));
 
-    if (res == NULL || delim == NULL)
+    if (res == NULL)
         return NULL;
     init_inside(NULL, NULL, &j, '\0');
     dup = my_strdup(str);
+    if (dup == NULL)
+        return FREE("%2", res);
     for (int value = 0; delim[value] != '\0'; value++)
         replace_me_those_spaces(dup, delim[value], delim[0]);
     for (int i = 0; dup[i] != '\0'; i = condition(dup, i, delim[0])) {

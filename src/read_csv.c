@@ -11,7 +11,7 @@
 // ---------------------------------------------------
 // Please, don't touch it
 
-static int count_columns(char *file, char const *separator)
+static int count_columns(char *file, char *separator)
 {
     int cpt = 0;
     char *dup = my_strdup(file);
@@ -89,29 +89,28 @@ static int set_void_tab(dataframe_t *data, char ***file)
 }
 
 static char ***get_full_data(dataframe_t *data, char *file,
-    char const *separator)
+    char *sep)
 {
     char **lines = my_str_to_word_array(file, "\n");
-    char *sep = my_strdup(separator);
     char ***full_data;
 
     if (lines == NULL)
         return NULL;
-    data->nb_columns = count_columns(lines[0], separator);
+    data->nb_columns = count_columns(lines[0], sep);
     full_data = malloc(sizeof(char **) * (data->nb_rows + 2));
     if (full_data == NULL)
         return FREE("%2", lines);
     for (int i = 0; i < data->nb_rows + 1; i++) {
         full_data[i] = my_str_to_word_array(lines[i], sep);
         if (full_data[i] == NULL)
-            return FREE("%1 %2 %3", sep, lines, full_data);
+            return FREE("%2 %3", lines, full_data);
     }
-    FREE("%1 %2", sep, lines);
+    FREE("%2", lines);
     full_data[data->nb_rows + 1] = NULL;
     return full_data;
 }
 
-static int read_csv_next(dataframe_t *data, char *file, char const *separator)
+static int read_csv_next(dataframe_t *data, char *file, char *separator)
 {
     char ***full_data = get_full_data(data, file, separator);
 
@@ -131,6 +130,7 @@ static int read_csv_next(dataframe_t *data, char *file, char const *separator)
     for (int i = 0; i < data->nb_columns; i++)
         data->column_types[i] = detect_type(full_data[1][i]);
     set_void_tab(data, full_data);
+    FREE("%3", full_data);
     return SUCCESS;
 }
 

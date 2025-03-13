@@ -33,8 +33,6 @@ static int count_rows(char *file)
         if (file[i] == '\n')
             cpt++;
     }
-    if (file[my_strlen(file) - 1] != '\n')
-        cpt++;
     return cpt;
 }
 
@@ -79,7 +77,7 @@ int set_void_tab(dataframe_t *data, char ***file)
         return ERROR;
     for (int i = 0; i < data->nb_rows; i++) {
         for (int j = 0; j < data->nb_columns; j++) {
-            data->data[i - 1][j] = found_data_type(file[i][j],
+            data->data[i][j] = found_data_type(file[i + 1][j],
                 data->column_types[j]);
         }
     }
@@ -94,15 +92,16 @@ char ***get_full_data(dataframe_t *data, char *file, char const *separator)
     if (lines == NULL)
         return NULL;
     data->nb_columns = count_columns(lines[0], separator);
-    full_data = malloc(sizeof(char **) * (data->nb_rows + 1));
+    full_data = malloc(sizeof(char **) * (data->nb_rows + 2));
     if (full_data == NULL)
         return NULL;
-    for (int i = 0; i < data->nb_rows; i++) {
+    for (int i = 0; i < data->nb_rows + 1; i++) {
         full_data[i] = my_str_to_word_array(lines[i], (char *)separator);
         if (full_data[i] == NULL)
             return NULL;
     }
-    free(lines);
+    FREE("%2", lines);
+    full_data[data->nb_rows + 1] = NULL;
     return full_data;
 }
 
@@ -112,7 +111,6 @@ int read_csv_next(dataframe_t *data, char *file, char const *separator)
 
     if (full_data == NULL)
         return ERROR;
-    full_data[data->nb_rows] = NULL;
     if (full_data[0] != NULL)
         set_column_names(data, full_data[0]);
     data->column_types = malloc(sizeof(int) * data->nb_columns);

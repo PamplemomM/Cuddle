@@ -18,7 +18,6 @@ void *omnifree(void **thing, int dimension)
             omnifree((void **)thing[i], dimension - 1);
     }
     free(thing);
-    thing = NULL;
     return NULL;
 }
 

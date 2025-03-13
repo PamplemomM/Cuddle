@@ -88,7 +88,7 @@ static int my_void_strdup(void *value, int fd)
     return SUCCESS;
 }
 
-int write_data_type(void **data, column_type_t *types, int i, int fd)
+static int write_data_type(void **data, column_type_t *types, int i, int fd)
 {
     int (*array[])(void *, int fd) = {write_to_bool, write_to_int,
         write_to_uint, write_to_float, my_void_strdup, NULL};
@@ -97,7 +97,7 @@ int write_data_type(void **data, column_type_t *types, int i, int fd)
         return array[types[i]](data[i], fd);
 }
 
-void my_write_line_csv(void **data, column_type_t *types,
+static void my_write_line_csv(void **data, column_type_t *types,
     int len, int fd)
 {
     char *temp = NULL;

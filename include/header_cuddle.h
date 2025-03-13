@@ -32,7 +32,7 @@
     #define SUCCESS 0
     #define ERROR 84
 
-
+    // Custom define :
     #define PRINT(x) _Generic((x), int : print_int, (char *) : print_string)(x)
 
 // ------------ ARSENAL FUNCTIONS ------ ------

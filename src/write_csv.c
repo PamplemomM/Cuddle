@@ -10,12 +10,12 @@ static int write_to_int(void *value, int fd)
 {
     char *result = NULL;
 
-    if (result == NULL || value == NULL)
-        return NULL;
-    result = my_its((int)value);
+    if (value == NULL)
+        return ERROR;
+    result = my_its(((int *)value)[0]);
     write(fd, result, my_strlen(result));
     free(result);
-    return result;
+    return SUCCESS;
 }
 
 static int write_to_float(void *value, int fd)
@@ -24,7 +24,7 @@ static int write_to_float(void *value, int fd)
 
     if (value == NULL)
         return ERROR;
-    sprintf(result, "%f", (float *)value);
+    sprintf(result, "%f", ((float *)value)[0]);
     write(fd, result, my_strlen(result));
     free(result);
     return SUCCESS;
@@ -50,7 +50,7 @@ static int write_to_uint(void *value, int fd)
 
     if (value == NULL)
         return ERROR;
-    sprintf(result, "%ud", (unsigned int)value);
+    sprintf(result, "%ud", ((unsigned int *)value)[0]);
     write(fd, result, my_strlen(result));
     free(result);
     return SUCCESS;

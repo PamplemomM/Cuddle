@@ -53,7 +53,7 @@ char *read_file(int fd)
     int len = 0;
 
     while (line != NULL) {
-        len += my_strlen(line);
+        len += my_strlen(line) + 1;
         new_result = dup_result(result, line, my_strlen(line));
         free(line);
         line = read_line(fd, size);

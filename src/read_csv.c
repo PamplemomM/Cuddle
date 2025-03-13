@@ -94,11 +94,11 @@ char ***get_full_data(dataframe_t *data, char *file, char const *separator)
     data->nb_columns = count_columns(lines[0], separator);
     full_data = malloc(sizeof(char **) * (data->nb_rows + 2));
     if (full_data == NULL)
-        return NULL;
+        return FREE("%2", lines);
     for (int i = 0; i < data->nb_rows + 1; i++) {
         full_data[i] = my_str_to_word_array(lines[i], (char *)separator);
         if (full_data[i] == NULL)
-            return NULL;
+            return FREE("%2 %3", lines, full_data);
     }
     FREE("%2", lines);
     full_data[data->nb_rows + 1] = NULL;
@@ -136,10 +136,8 @@ dataframe_t *df_read_csv(const char *filename, const char *separator)
         sep = my_strdup(separator);
     data->nb_rows = count_rows(file) - 1;
     file[my_strlen(file)] = '\0';
-    if (read_csv_next(data, file, sep) == ERROR) {
-        free(sep);
-        return NULL;
-    }
+    if (read_csv_next(data, file, sep) == ERROR)
+        return FREE("%1", sep);
     free(sep);
     return data;
 }

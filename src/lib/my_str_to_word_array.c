@@ -101,7 +101,7 @@ char **my_str_to_word_array(char *str, char *delim)
     init_inside(NULL, NULL, &j, '\0');
     dup = my_strdup(str);
     if (dup == NULL)
-        return FREE("%2", res);
+        return FREE("%1", res);
     for (int value = 0; delim[value] != '\0'; value++)
         replace_me_those_spaces(dup, delim[value], delim[0]);
     for (int i = 0; dup[i] != '\0'; i = condition(dup, i, delim[0])) {

@@ -20,5 +20,5 @@ dataframe_t *df_to_type(dataframe_t *dataframe, const char *column,
 {
     if (dataframe == NULL)
         return NULL;
-    return dataframe;
+    return NULL;
 }

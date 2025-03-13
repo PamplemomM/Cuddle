@@ -86,4 +86,10 @@ int my_istrue(char const *str);
 void *found_data_type(char *value, column_type_t type);
 
 
+// ------- CUDDLE DATAFRAME FUNCTIONS -------
+
+// --- read_csv.c ---
+void ***allocate_void_tab(dataframe_t *data);
+
+
 #endif /* CUDDLE_H */

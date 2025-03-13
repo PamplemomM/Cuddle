@@ -58,7 +58,7 @@ static int set_column_names(dataframe_t *data, char **first)
     return SUCCESS;
 }
 
-static void ***allocate_void_tab(dataframe_t *data)
+void ***allocate_void_tab(dataframe_t *data)
 {
     void ***new_data = malloc(sizeof(void **) * (data->nb_rows + 1));
 

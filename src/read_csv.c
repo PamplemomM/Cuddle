@@ -88,7 +88,8 @@ static int set_void_tab(dataframe_t *data, char ***file)
     return SUCCESS;
 }
 
-static char ***get_full_data(dataframe_t *data, char *file, char const *separator)
+static char ***get_full_data(dataframe_t *data, char *file,
+    char const *separator)
 {
     char **lines = my_str_to_word_array(file, "\n");
     char *sep = my_strdup(separator);

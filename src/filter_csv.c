@@ -22,23 +22,53 @@ int find_column(dataframe_t *dataframe, const char *column_name)
     return -1;
 }
 
+int add_row(dataframe_t *result, dataframe_t *data, int row)
+{
+    void **new_row;
+    void ***new_data;
+
+    new_row = malloc(sizeof(void *) * (result->nb_columns + 1));
+    if (new_row == NULL)
+        return ERROR;
+    for (int i = 0; i < result->nb_columns; i++)
+        new_row[i] = data->data[row][i];
+    new_row[result->nb_columns] = NULL;
+    new_data = malloc(sizeof(void **) * (result->nb_rows + 2));
+    if (new_data == NULL) {
+        free(new_row);
+        return ERROR;
+    }
+    for (int i = 0; i < result->nb_rows; i++)
+        new_data[i] = result->data[i];
+    new_data[result->nb_rows] = new_row;
+    new_data[result->nb_rows + 1] = NULL;
+    result->data = new_data;
+    result->nb_rows++;
+    return SUCCESS;
+}
+
 dataframe_t *df_filter(dataframe_t *dataframe, const char *column,
     bool(*filter_func)(void *value))
 {
     dataframe_t *result = malloc(sizeof(dataframe_t));
-    int col;
+    int colomn;
     int row;
 
     if (result == NULL || dataframe == NULL || column == NULL)
         return NULL;
-    col = find_column(dataframe, column);
-    if (col == -1)
-        return NULL;
-    result->data = allocate_void_tab(dataframe);
-    if (result->data == NULL)
-        return FREE("%1", result);
-    result->column_types = my_array_dup(dataframe->column_types);
-    if (result->data == NULL)
-        return FREE("%2 %1", result->data, result);
+    result->nb_rows = dataframe->nb_rows;
+    result->nb_columns = dataframe->nb_columns;
+    result->column_names = my_array_dup(dataframe->column_names);
+    if (result->column_names == NULL)
+        return FREE("%2 %1", result->column_names, result);
+    colomn = find_column(dataframe, column);
+    if (colomn == -1)
+        return FREE("%2 %1", result->column_names, result);
+    for (row = 0; row < dataframe->nb_rows; row++) {
+        if (filter_func(dataframe->data[row][colomn]) &&
+            add_row(result, dataframe, row) == ERROR) {
+            return FREE("%2 %3%1", result->column_names, result->data, result);
+        }
+    }
     return result;
 }

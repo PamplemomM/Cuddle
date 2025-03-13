@@ -8,11 +8,21 @@
 
 static int write_to_int(void *value, int fd)
 {
-    char *result = NULL;
+    int tmp = 0;
+    int cnt = 0;
+    char *result;
 
     if (value == NULL)
         return ERROR;
-    result = my_its(((int *)value)[0]);
+    tmp = *(int *)value;
+    do {
+        tmp /= 10;
+        cnt++;
+    } while (tmp != 0);
+    result = malloc(sizeof(char) * (cnt + 1 + (*(int *)value < 0)));
+    if (result == NULL)
+        return ERROR;
+    sprintf(result, "%d", *(int *)value);
     write(fd, result, my_strlen(result));
     free(result);
     return SUCCESS;
@@ -46,11 +56,21 @@ static int write_to_bool(void *value, int fd)
 
 static int write_to_uint(void *value, int fd)
 {
-    char *result = NULL;
+    unsigned int tmp = 0;
+    int cnt = 0;
+    char *result;
 
     if (value == NULL)
         return ERROR;
-    sprintf(result, "%ud", ((unsigned int *)value)[0]);
+    tmp = *(unsigned int *)value;
+    do {
+        tmp /= 10;
+        cnt++;
+    } while (tmp != 0);
+    result = malloc(sizeof(char) * (cnt + 1));
+    if (result == NULL)
+        return ERROR;
+    sprintf(result, "%u", *(unsigned int *)value);
     write(fd, result, my_strlen(result));
     free(result);
     return SUCCESS;
@@ -68,7 +88,7 @@ static int my_void_strdup(void *value, int fd)
     return SUCCESS;
 }
 
-static int write_data_type(void **data, column_type_t *types, int i, int fd)
+int write_data_type(void **data, column_type_t *types, int i, int fd)
 {
     int (*array[])(void *, int fd) = {write_to_bool, write_to_int,
         write_to_uint, write_to_float, my_void_strdup, NULL};
@@ -77,7 +97,7 @@ static int write_data_type(void **data, column_type_t *types, int i, int fd)
         return array[types[i]](data[i], fd);
 }
 
-static void my_write_line_csv(void **data, column_type_t *types,
+void my_write_line_csv(void **data, column_type_t *types,
     int len, int fd)
 {
     char *temp = NULL;

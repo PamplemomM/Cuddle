@@ -30,8 +30,12 @@ static int found_len(char *str, int i, char delim)
 
 static int looping(char *str, int *i, char delim)
 {
-    while (str[*i] == delim)
+    while (str[*i] == delim) {
+        if (str[*i + 1] == '\0') {
+            break;
+        }
         (*i)++;
+    }
     return 1;
 }
 

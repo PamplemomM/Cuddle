@@ -91,6 +91,7 @@ int set_void_tab(dataframe_t *data, char ***file)
 char ***get_full_data(dataframe_t *data, char *file, char const *separator)
 {
     char **lines = my_str_to_word_array(file, "\n");
+    char *sep = my_strdup(separator);
     char ***full_data;
 
     if (lines == NULL)
@@ -100,11 +101,11 @@ char ***get_full_data(dataframe_t *data, char *file, char const *separator)
     if (full_data == NULL)
         return FREE("%2", lines);
     for (int i = 0; i < data->nb_rows + 1; i++) {
-        full_data[i] = my_str_to_word_array(lines[i], (char *)separator);
+        full_data[i] = my_str_to_word_array(lines[i], sep);
         if (full_data[i] == NULL)
-            return FREE("%2 %3", lines, full_data);
+            return FREE("%1 %2 %3", sep, lines, full_data);
     }
-    FREE("%2", lines);
+    FREE("%1 %2", sep, lines);
     full_data[data->nb_rows + 1] = NULL;
     return full_data;
 }

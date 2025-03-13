@@ -109,15 +109,6 @@ char **my_str_to_word_array(char *str, char *delim)
     return res;
 }
 
-void free_word_array(char **wa)
-{
-    if (wa == NULL)
-        return;
-    for (int i = 0; wa[i] != NULL; i++)
-        free(wa[i]);
-    free(wa);
-}
-
 int my_print_wa(char **wa)
 {
     for (int i = 0; wa[i] != NULL; i++) {
@@ -142,10 +133,8 @@ char **my_array_dup(char **wa)
         return NULL;
     for (int i = 0; wa[i] != NULL; i++) {
         res[i] = my_strdup(wa[i]);
-        if (res[i] == NULL) {
-            free_word_array(res);
-            return NULL;
-        }
+        if (res[i] == NULL)
+            return FREE("%2", res);
     }
     res[len] = NULL;
     return res;

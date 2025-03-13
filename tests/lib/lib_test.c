@@ -30,17 +30,6 @@ Test(my_print_wa, full_covr, .init = cr_redirect_stdout)
     cr_assert_stdout_eq_str("unit_tests\ncoucou\n");
 }
 
-Test(my_free_wa, full_covr, .init = cr_redirect_stdout)
-{
-    char *dup = my_strdup("Tom, really good, mate");
-    char **array = my_str_to_word_array(dup, ", ");
-
-    my_print_wa(array);
-    cr_assert_stdout_eq_str("Tom\nreally\ngood\nmate\n");
-    free_word_array(array);
-    free_word_array(NULL);
-}
-
 Test(my_array_dup, full_covr, .init = cr_redirect_stdout)
 {
     char *str = my_strdup("hello  \t  comment \\t \t\t ca va");

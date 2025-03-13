@@ -56,7 +56,6 @@ int my_strncmp(char const *s1, char const *s2, int n);
 
 // --- my_str_to_word_array ---
 char **my_str_to_word_array(char *str, char *delim);
-void free_word_array(char **wa);
 int my_print_wa(char **wa);
 char **my_array_dup(char **wa);
 

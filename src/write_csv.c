@@ -8,11 +8,21 @@
 
 static int write_to_int(void *value, int fd)
 {
-    char *result = NULL;
+    int tmp = 0;
+    int cnt = 0;
+    char *result;
 
     if (value == NULL)
         return ERROR;
-    result = my_its(((int *)value)[0]);
+    tmp = *(int *)value;
+    do {
+        tmp /= 10;
+        cnt++;
+    } while (tmp != 0);
+    result = malloc(sizeof(char) * (cnt + 1 + (*(int *)value < 0)));
+    if (result == NULL)
+        return ERROR;
+    sprintf(result, "%d", *(int *)value);
     write(fd, result, my_strlen(result));
     free(result);
     return SUCCESS;
@@ -46,11 +56,21 @@ static int write_to_bool(void *value, int fd)
 
 static int write_to_uint(void *value, int fd)
 {
-    char *result = NULL;
+    unsigned int tmp = 0;
+    int cnt = 0;
+    char *result;
 
     if (value == NULL)
         return ERROR;
-    sprintf(result, "%ud", ((unsigned int *)value)[0]);
+    tmp = *(unsigned int *)value;
+    do {
+        tmp /= 10;
+        cnt++;
+    } while (tmp != 0);
+    result = malloc(sizeof(char) * (cnt + 1));
+    if (result == NULL)
+        return ERROR;
+    sprintf(result, "%u", *(unsigned int *)value);
     write(fd, result, my_strlen(result));
     free(result);
     return SUCCESS;

@@ -11,12 +11,13 @@ bool filter_func(void *value)
     return *(int *)value > 30;
 }
 
-int find_column(dataframe_t *dataframe, const char *column_name)
+int find_column(dataframe_t *result, dataframe_t *dataframe,
+    const char *column_name)
 {
-    int i = 0;
-
-    for (i = 0; i < dataframe->nb_columns; i++) {
-        if (strcmp(dataframe->column_names[i], column_name) == 0)
+    result->nb_rows = dataframe->nb_rows;
+    result->nb_columns = dataframe->nb_columns;
+    for (int i = 0; i < dataframe->nb_columns; i++) {
+        if (my_strcmp(dataframe->column_names[i], column_name) == 0)
             return i;
     }
     return -1;
@@ -34,10 +35,8 @@ int add_row(dataframe_t *result, dataframe_t *data, int row)
         new_row[i] = data->data[row][i];
     new_row[result->nb_columns] = NULL;
     new_data = malloc(sizeof(void **) * (result->nb_rows + 2));
-    if (new_data == NULL) {
-        free(new_row);
+    if (new_data == NULL)
         return ERROR;
-    }
     for (int i = 0; i < result->nb_rows; i++)
         new_data[i] = result->data[i];
     new_data[result->nb_rows] = new_row;
@@ -56,19 +55,16 @@ dataframe_t *df_filter(dataframe_t *dataframe, const char *column,
 
     if (result == NULL || dataframe == NULL || column == NULL)
         return NULL;
-    result->nb_rows = dataframe->nb_rows;
-    result->nb_columns = dataframe->nb_columns;
     result->column_names = my_array_dup(dataframe->column_names);
     if (result->column_names == NULL)
-        return FREE("%2 %1", result->column_names, result);
-    colomn = find_column(dataframe, column);
+        return FREE("%1", result);
+    colomn = find_column(result, dataframe, column);
     if (colomn == -1)
         return FREE("%2 %1", result->column_names, result);
     for (row = 0; row < dataframe->nb_rows; row++) {
         if (filter_func(dataframe->data[row][colomn]) &&
-            add_row(result, dataframe, row) == ERROR) {
+            add_row(result, dataframe, row) == ERROR)
             return FREE("%2 %3%1", result->column_names, result->data, result);
-        }
     }
     return result;
 }

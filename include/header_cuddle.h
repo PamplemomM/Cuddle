@@ -46,7 +46,6 @@ void *salade_de_free(char const *format, ...);
 
 // --- my_libc_functions.c ---
 int my_getnbr(char const *str);
-char *my_its(int nbr);
 int mini_printf(const char *format, ...);
 char *my_strlowercase(char *str);
 

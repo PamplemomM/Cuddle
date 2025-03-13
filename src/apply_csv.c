@@ -17,5 +17,7 @@ static void *apply_func(void *value)
 dataframe_t *df_apply(dataframe_t *dataframe, const char *column,
     void *(*apply_func)(void *value))
 {
-    return NULL;
+    if (dataframe == NULL)
+        return NULL;
+    return dataframe;
 }

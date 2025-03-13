@@ -8,15 +8,21 @@
 
 void *df_get_value(dataframe_t *dataframe, int row, const char *column)
 {
+    if (dataframe == NULL)
+        return NULL;
     return NULL;
 }
 
 void **df_get_values(dataframe_t *dataframe, const char *column)
 {
+    if (dataframe == NULL)
+        return NULL;
     return NULL;
 }
 
 void **df_get_unique_values(dataframe_t *dataframe, const char *column)
 {
+    if (dataframe == NULL)
+        return NULL;
     return NULL;
 }

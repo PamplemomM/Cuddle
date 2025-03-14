@@ -24,12 +24,12 @@ column_type_t find_type(char ***data, int i, int j)
 
 column_type_t detect_type(char ***data, int i, int nb_rows)
 {
-    column_type_t result = NULL;
+    column_type_t result;
     column_type_t actual;
 
-    for (int j = 1; j < nb_rows; j++) {
+    for (int j = 1; j < nb_rows + 1; j++) {
         actual = find_type(data, i, j);
-        if (result == NULL)
+        if (j == 1)
             result = actual;
         if (actual == UNDEFINED)
             return UNDEFINED;

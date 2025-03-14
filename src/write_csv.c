@@ -83,6 +83,8 @@ static int my_void_strdup(void *value, int fd)
     if (value == NULL)
         return ERROR;
     result = my_strdup((char *)value);
+    if (result == NULL)
+        return ERROR;
     write(fd, result, my_strlen(result));
     free(result);
     return SUCCESS;
@@ -105,7 +107,8 @@ static void my_write_line_csv(void **data, column_type_t *types,
     for (int i = 0; i < len; i++) {
         if (i != 0)
             write(fd, ",", 1);
-        write_data_type(data, types, i, fd);
+        if (write_data_type(data, types, i, fd) == ERROR)
+            return;
     }
     write(fd, "\n", 1);
 }

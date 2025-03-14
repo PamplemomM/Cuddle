@@ -74,7 +74,7 @@ char *open_file(char const *filepath);
 // ------- CUDDLE FUNCTION HELPING -------
 
 // --- detect_types.c ---
-column_type_t detect_type(char *str);
+column_type_t detect_type(char ***data, int i, int nb_rows);
 
 // --- my_isnumbool.c
 int my_isnum(char const *str);

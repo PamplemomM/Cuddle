@@ -128,7 +128,7 @@ static int read_csv_next(dataframe_t *data, char *file, char *separator)
         return ERROR;
     }
     for (int i = 0; i < data->nb_columns; i++)
-        data->column_types[i] = detect_type(full_data[1][i]);
+        data->column_types[i] = detect_type(full_data, i, data->nb_rows);
     set_void_tab(data, full_data);
     FREE("%3", full_data);
     return SUCCESS;

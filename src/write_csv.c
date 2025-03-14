@@ -114,9 +114,9 @@ static void my_write_line_csv(void **data, column_type_t *types,
 }
 
 /*
-NE REGARDER PAS DERRIERE VOUS !!
-Il sont ici, ils nous regardent a travers nos corps, ne vous retournez pas.
-Ils arrivent, bientot, faites attention.
+NE REGARDEZ PAS DERRIÈRE VOUS !!
+Ils sont ici, ils nous regardent à travers nos corps, ne vous retournez pas.
+Ils arrivent, bientôt, faites attention.
 */
 int df_write_csv(dataframe_t *dataframe, char const *filename)
 {

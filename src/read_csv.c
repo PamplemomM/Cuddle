@@ -13,10 +13,13 @@
 
 static int count_columns(char *file, char *separator)
 {
-    int cpt = 0;
     char *dup = my_strdup(file);
-    char *value = my_strtok(dup, separator);
+    char *value;
+    int cpt = 0;
 
+    if (dup == NULL)
+        return -1;
+    value = my_strtok(dup, separator);
     while (value != NULL) {
         cpt++;
         value = my_strtok(NULL, separator);
@@ -77,14 +80,17 @@ void ***allocate_void_tab(dataframe_t *data)
 static int set_void_tab(dataframe_t *data, char ***file)
 {
     data->data = allocate_void_tab(data);
-    if (data->data == NULL)
+    if (data->data == NULL) {
+        FREE("%1 %2 %3", data->column_types, data->column_names, file);
         return ERROR;
+    }
     for (int i = 0; i < data->nb_rows; i++) {
         for (int j = 0; j < data->nb_columns; j++) {
             data->data[i][j] = found_data_type(file[i + 1][j],
                 data->column_types[j]);
         }
     }
+    FREE("%3", file);
     return SUCCESS;
 }
 
@@ -97,6 +103,8 @@ static char ***get_full_data(dataframe_t *data, char *file,
     if (lines == NULL)
         return NULL;
     data->nb_columns = count_columns(lines[0], sep);
+    if (data->nb_columns == -1)
+        return FREE("%2", lines);
     full_data = malloc(sizeof(char **) * (data->nb_rows + 2));
     if (full_data == NULL)
         return FREE("%2", lines);
@@ -124,14 +132,12 @@ static int read_csv_next(dataframe_t *data, char *file, char *separator)
     }
     data->column_types = malloc(sizeof(int) * data->nb_columns);
     if (data->column_types == NULL) {
-        FREE("%3", full_data);
+        FREE("%2 %3", data->column_names, full_data);
         return ERROR;
     }
     for (int i = 0; i < data->nb_columns; i++)
         data->column_types[i] = detect_type(full_data, i, data->nb_rows);
-    set_void_tab(data, full_data);
-    FREE("%3", full_data);
-    return SUCCESS;
+    return set_void_tab(data, full_data);
 }
 
 dataframe_t *df_read_csv(const char *filename, const char *separator)

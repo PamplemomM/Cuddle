@@ -6,11 +6,6 @@
 */
 #include "../include/header_cuddle.h"
 
-bool filter_func(void *value)
-{
-    return *(int *)value > 30;
-}
-
 int find_column(dataframe_t *result, dataframe_t *dataframe,
     const char *column_name)
 {
@@ -23,7 +18,7 @@ int find_column(dataframe_t *result, dataframe_t *dataframe,
     return -1;
 }
 
-int add_row(dataframe_t *result, dataframe_t *data, int row)
+int add_row(dataframe_t *result, dataframe_t *data, int row, int column)
 {
     void **new_row;
     void ***new_data;
@@ -34,13 +29,13 @@ int add_row(dataframe_t *result, dataframe_t *data, int row)
     for (int i = 0; i < result->nb_columns; i++)
         new_row[i] = data->data[row][i];
     new_row[result->nb_columns] = NULL;
-    new_data = malloc(sizeof(void **) * (result->nb_rows + 2));
+    new_data = malloc(sizeof(void **) * (result->nb_rows + 1));
     if (new_data == NULL)
         return ERROR;
     for (int i = 0; i < result->nb_rows; i++)
-        new_data[i] = result->data[i];
-    new_data[result->nb_rows] = new_row;
-    new_data[result->nb_rows + 1] = NULL;
+        new_data[i] = data->data[i];
+    new_data[row] = new_row;
+    new_data[result->nb_rows] = NULL;
     result->data = new_data;
     result->nb_rows++;
     return SUCCESS;
@@ -53,7 +48,8 @@ dataframe_t *df_filter(dataframe_t *dataframe, const char *column,
     int colomn;
     int row;
 
-    if (result == NULL || dataframe == NULL || column == NULL)
+    if (result == NULL || dataframe == NULL || column == NULL ||
+        filter_func == NULL)
         return NULL;
     result->column_names = my_array_dup(dataframe->column_names);
     if (result->column_names == NULL)
@@ -63,7 +59,7 @@ dataframe_t *df_filter(dataframe_t *dataframe, const char *column,
         return FREE("%2 %1", result->column_names, result);
     for (row = 0; row < dataframe->nb_rows; row++) {
         if (filter_func(dataframe->data[row][colomn]) &&
-            add_row(result, dataframe, row) == ERROR)
+            add_row(result, dataframe, row, colomn) == ERROR)
             return FREE("%2 %3%1", result->column_names, result->data, result);
     }
     return result;

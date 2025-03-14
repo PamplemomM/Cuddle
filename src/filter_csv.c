@@ -41,6 +41,17 @@ int add_row(dataframe_t *result, dataframe_t *data, int row, int column)
     return SUCCESS;
 }
 
+static dataframe_t *dup_types(dataframe_t *dataframe, dataframe_t *result)
+{
+    result->column_types = malloc(sizeof(int *) * (dataframe->nb_columns));
+    if (result->column_types == NULL)
+        return FREE("%2 %3%1", result->column_names, result->data, result);
+    for (int i = 0; i < dataframe->nb_columns; i++) {
+        result->column_types[i] = dataframe->column_types[i];
+    }
+    return result;
+}
+
 dataframe_t *df_filter(dataframe_t *dataframe, const char *column,
     bool(*filter_func)(void *value))
 {
@@ -62,5 +73,5 @@ dataframe_t *df_filter(dataframe_t *dataframe, const char *column,
             add_row(result, dataframe, row, colomn) == ERROR)
             return FREE("%2 %3%1", result->column_names, result->data, result);
     }
-    return result;
+    return dup_types(dataframe, result);
 }

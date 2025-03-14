@@ -20,10 +20,8 @@ char *read_line(int fd, int size)
             break;
         i++;
     }
-    if (res <= 0 && i == 0) {
-        free(buffer);
-        return NULL;
-    }
+    if (res <= 0 && i == 0)
+        return FREE("%1", buffer);
     buffer[i] = '\0';
     return buffer;
 }
@@ -52,15 +50,15 @@ char *read_file(int fd)
     char *line = read_line(fd, size);
     int len = 0;
 
+    if (line == NULL)
+        return NULL;
     while (line != NULL) {
         len += my_strlen(line) + 1;
         new_result = dup_result(result, line, my_strlen(line));
         free(line);
         line = read_line(fd, size);
-        if (new_result == NULL) {
-            free(result);
-            return NULL;
-        }
+        if (new_result == NULL)
+            return FREE("%1 %1", new_result, line);
         result = new_result;
     }
     free(line);

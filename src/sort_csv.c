@@ -7,7 +7,7 @@
 #include "../include/header_cuddle.h"
 
 int sort_dataframe(dataframe_t *dataframe, const char *column,
-    bool(*sort_func)(void *value1, void *value2)
+    bool(*sort_func)(void *value1, void *value2))
 {
     return SUCCESS;
 }

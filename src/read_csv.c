@@ -130,13 +130,14 @@ static int read_csv_next(dataframe_t *data, char *file, char *separator)
             return ERROR;
         }
     }
-    data->column_types = malloc(sizeof(int) * data->nb_columns);
+    data->column_types = malloc(sizeof(int) * (data->nb_columns + 1));
     if (data->column_types == NULL) {
         FREE("%2 %3", data->column_names, full_data);
         return ERROR;
     }
     for (int i = 0; i < data->nb_columns; i++)
         data->column_types[i] = detect_type(full_data, i, data->nb_rows);
+    data->column_types[data->nb_columns] = -1;
     return set_void_tab(data, full_data);
 }
 

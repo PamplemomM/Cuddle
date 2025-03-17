@@ -92,7 +92,7 @@ void *found_data_type(char *value, column_type_t type);
 void ***allocate_void_tab(dataframe_t *data);
 
 // --- void_dups_csv.c ---
-int my_void_dup(void *dest, void *src, column_type_t type);
+int my_void_dup(void *value, column_type_t type);
 void **my_data_duprow(dataframe_t *dataframe, int row);
 
 

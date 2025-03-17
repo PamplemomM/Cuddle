@@ -6,38 +6,62 @@
 */
 #include "../include/header_cuddle.h"
 
-static int my_void_bool_dup(void *dest, void *src)
+static void *my_void_bool_dup(void *value)
 {
-    return ERROR;
+    bool *result = malloc(sizeof(bool));
+
+    if (result == NULL)
+        return NULL;
+    result = *value;
+    return result;
 }
 
-static int my_void_int_dup(void *dest, void *src)
+static void *my_void_int_dup(void *value)
 {
-    return ERROR;
+    int *result = malloc(sizeof(int));
+
+    if (result == NULL)
+        return NULL;
+    result = *value;
+    return result;
 }
 
-static int my_void_uint_dup(void *dest, void *src)
+static void *my_void_uint_dup(void *value)
 {
-    return ERROR;
+    unsigned int *result = malloc(sizeof(unsigned int));
+
+    if (result == NULL)
+        return NULL;
+    result = *value;
+    return result;
 }
 
-static int my_void_float_dup(void *dest, void *src)
+static void *my_void_float_dup(void *value)
 {
-    return ERROR;
+    float *result = malloc(sizeof(float));
+
+    if (result == NULL)
+        return NULL;
+    result = *value;
+    return result;
 }
 
-static int my_void_str_dup(void *dest, void *src)
+static void *my_void_str_dup(void *value)
 {
-    return ERROR;
+    char *result = malloc(sizeof(char) * (my_strlen((char *)value) + 1));
+
+    if (result == NULL)
+        return NULL;
+    my_strcpy(result, value);
+    return result;
 }
 
-int my_void_dup(void *dest, void *src, column_type_t type)
+void *my_void_dup(void *value, column_type_t type)
 {
-    int (*func[])(void *dest, void *src) =
-        {my_void_bool_dup, my_void_int_dup, my_void_uint_dup,
-        my_void_float_dup, my_void_str_dup};
+    void *(*func[])(void *value) = {my_void_bool_dup, my_void_int_dup,
+        my_void_uint_dup, my_void_float_dup, my_void_str_dup};
 
-    return func[type](dest, src);
+    return func[type](value);
 }
 
 void **my_data_duprow(dataframe_t *dataframe, int row)
@@ -47,8 +71,9 @@ void **my_data_duprow(dataframe_t *dataframe, int row)
     if (data == NULL)
         return NULL;
     for (int i = 0; i < dataframe->nb_columns; i++) {
-        if (my_void_dup(data[i], dataframe->data[row][i],
-            dataframe->column_types[i]) == ERROR)
+        data[i] = my_void_dup(dataframe->data[row][i],
+            dataframe->column_types[i]);
+        if (data[i] == NULL)
             return FREE("%2", data);
     }
     data[dataframe->nb_columns] = NULL;

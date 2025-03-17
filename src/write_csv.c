@@ -76,7 +76,7 @@ static int write_to_uint(void *value, int fd)
     return SUCCESS;
 }
 
-static int my_void_strdup(void *value, int fd)
+static int write_to_str(void *value, int fd)
 {
     char *result = NULL;
 
@@ -93,7 +93,7 @@ static int my_void_strdup(void *value, int fd)
 static int write_data_type(void **data, column_type_t *types, int i, int fd)
 {
     int (*array[])(void *, int fd) = {write_to_bool, write_to_int,
-        write_to_uint, write_to_float, my_void_strdup, NULL};
+        write_to_uint, write_to_float, write_to_str, NULL};
 
     if (types[i] >= BOOL && types[i] <= STRING)
         return array[types[i]](data[i], fd);

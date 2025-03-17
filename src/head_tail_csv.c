@@ -7,9 +7,9 @@
 #include "../include/header_cuddle.h"
 
 // **********************************
-// ---- FUNCTION IS NOT FINISHED ----
+// ---- FUNCTION IS FINISHED ----
 // **********************************
-// You can touch it if you want
+// I'll touch you if you touch it
 
 static column_type_t *my_column_types_dup(dataframe_t *dataframe)
 {

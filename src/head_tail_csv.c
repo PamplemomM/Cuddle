@@ -38,14 +38,13 @@ static void ***my_data_dupbetween(dataframe_t *dataframe, int start, int end)
     if (data == NULL)
         return NULL;
     for (int i = start; i < end; i++) {
-        data[i] = malloc(sizeof(void *) * (dataframe->nb_columns + 1));
+        data[i] = my_data_duprow(dataframe, i);
         if (data[i] == NULL)
-            return FREE("%2", data);
+            return FREE("%3", data);
     }
     data[len] = NULL;
     return data;
 }
-// The data duplication would be right before this 'for' loop ends
 
 static dataframe_t *dupbetween(dataframe_t *dataframe, int start, int end)
 {

@@ -12,7 +12,7 @@ static void *my_void_bool_dup(void *value)
 
     if (result == NULL)
         return NULL;
-    result = *value;
+    result = (bool *)value;
     return result;
 }
 
@@ -22,7 +22,7 @@ static void *my_void_int_dup(void *value)
 
     if (result == NULL)
         return NULL;
-    result = *value;
+    result = (int *)value;
     return result;
 }
 
@@ -32,7 +32,7 @@ static void *my_void_uint_dup(void *value)
 
     if (result == NULL)
         return NULL;
-    result = *value;
+    result = (unsigned int *)value;
     return result;
 }
 
@@ -42,7 +42,7 @@ static void *my_void_float_dup(void *value)
 
     if (result == NULL)
         return NULL;
-    result = *value;
+    result = (float *)value;
     return result;
 }
 

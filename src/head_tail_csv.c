@@ -30,7 +30,7 @@ static column_type_t *my_column_types_dup(dataframe_t *dataframe)
 static void ***my_data_dupbetween(dataframe_t *dataframe, int start, int end)
 {
     void ***data;
-    int len = start - end;
+    int len = end - start;
 
     if (dataframe->data == NULL)
         return NULL;
@@ -53,7 +53,7 @@ static dataframe_t *dupbetween(dataframe_t *dataframe, int start, int end)
     result = malloc(sizeof(dataframe_t));
     if (result == NULL)
         return NULL;
-    result->nb_rows = start - end;
+    result->nb_rows = end - start;
     result->nb_columns = dataframe->nb_columns;
     result->column_names = my_array_dup(dataframe->column_names);
     if (result->column_names == NULL)

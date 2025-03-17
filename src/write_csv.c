@@ -97,13 +97,12 @@ static int write_data_type(void **data, column_type_t *types, int i, int fd)
 
     if (types[i] >= BOOL && types[i] <= STRING)
         return array[types[i]](data[i], fd);
+    return ERROR;
 }
 
 static void my_write_line_csv(void **data, column_type_t *types,
     int len, int fd)
 {
-    char *temp = NULL;
-
     for (int i = 0; i < len; i++) {
         if (i != 0)
             write(fd, ",", 1);

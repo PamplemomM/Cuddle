@@ -76,7 +76,7 @@ char *open_file(char const *filepath);
 // --- detect_types.c ---
 column_type_t detect_type(char ***data, int i, int nb_rows);
 
-// --- my_isnumbool.c
+// --- my_isnumbool.c ---
 int my_isnum(char const *str);
 int my_isfloat(char const *str);
 int my_isbool(char const *str);
@@ -90,6 +90,10 @@ void *found_data_type(char *value, column_type_t type);
 
 // --- read_csv.c ---
 void ***allocate_void_tab(dataframe_t *data);
+
+// --- void_dups_csv.c ---
+int my_void_dup(void *dest, void *src, column_type_t type);
+void **my_data_duprow(dataframe_t *dataframe, int row);
 
 
 #endif /* CUDDLE_H */

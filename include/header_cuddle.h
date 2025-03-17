@@ -73,6 +73,10 @@ char *open_file(char const *filepath);
 
 // ------- CUDDLE FUNCTION HELPING -------
 
+// --- found_column.c ---
+int find_column(dataframe_t *result, dataframe_t *dataframe,
+    const char *column_name);
+
 // --- detect_types.c ---
 column_type_t detect_type(char ***data, int i, int nb_rows);
 

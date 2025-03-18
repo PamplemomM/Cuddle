@@ -27,6 +27,8 @@ column_type_t detect_type(char ***data, int i, int nb_rows)
     column_type_t result;
     column_type_t actual;
 
+    if (data == NULL)
+        return UNDEFINED;
     for (int j = 1; j < nb_rows + 1; j++) {
         actual = find_type(data, i, j);
         if (j == 1)

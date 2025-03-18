@@ -9,10 +9,6 @@
 #include "criterion/redirect.h"
 #include "../../include/header_cuddle.h"
 
-//********************************
-// ---- found_data_typeS FUNCTION ----
-//********************************
-
 //*******************************
 // ---- FOUND_TYPES FUNCTION ----
 //*******************************

@@ -1,0 +1,169 @@
+        -:    0:Source:tests/cuddle_help/find_column.c
+        -:    0:Graph:./unit_tests-find_column.gcno
+        -:    0:Data:./unit_tests-find_column.gcda
+        -:    0:Runs:0
+        -:    1:/*
+        -:    2:** EPITECH PROJECT, 2023
+        -:    3:** find_column.c
+        -:    4:** File description:
+        -:    5:** test each functions of the find_column function.
+        -:    6:*/
+        -:    7:
+        -:    8:#include "criterion/criterion.h"
+        -:    9:#include "criterion/redirect.h"
+        -:   10:#include "../../include/header_cuddle.h"
+        -:   11:
+        -:   12://*******************************
+        -:   13:// ---- FIND_COLUMN FUNCTION ----
+        -:   14://*******************************
+        -:   15:
+    #####:   16:Test(find_column, full_covr, .init = cr_redirect_stdout)
+        -:   17:{
+    #####:   18:    dataframe_t *dataframe = malloc(sizeof(dataframe_t) * 1);
+    #####:   19:    int value = 0;
+        -:   20:
+    #####:   21:    if (dataframe == NULL)
+    #####:   22:        return;
+    #####:   23:    dataframe->nb_columns = 2;
+    #####:   24:    dataframe->column_names = malloc(sizeof(char *) * 3);
+    #####:   25:    if (dataframe->column_names == NULL)
+    #####:   26:        return;
+    #####:   27:    dataframe->column_names[0] = my_strdup("name");
+    #####:   28:    dataframe->column_names[1] = my_strdup("age");
+    #####:   29:    dataframe->column_names[2] = NULL;
+    #####:   30:    value = find_column(dataframe, "age");
+    #####:   31:    mini_printf("%d\n", value);
+    #####:   32:    cr_assert_stdout_eq_str("1\n");
+        -:   33:}
+------------------
+find_column_full_covr_impl:
+function find_column_full_covr_impl called 0 returned 0% blocks executed 0%
+    #####:   16:Test(find_column, full_covr, .init = cr_redirect_stdout)
+        -:   17:{
+    #####:   18:    dataframe_t *dataframe = malloc(sizeof(dataframe_t) * 1);
+    #####:   19:    int value = 0;
+        -:   20:
+    #####:   21:    if (dataframe == NULL)
+    %%%%%:   21-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   22:        return;
+    %%%%%:   22-block  0
+    #####:   23:    dataframe->nb_columns = 2;
+    #####:   24:    dataframe->column_names = malloc(sizeof(char *) * 3);
+    #####:   25:    if (dataframe->column_names == NULL)
+    %%%%%:   25-block  0
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   26:        return;
+    %%%%%:   26-block  0
+    #####:   27:    dataframe->column_names[0] = my_strdup("name");
+    %%%%%:   27-block  0
+call    0 never executed
+    #####:   28:    dataframe->column_names[1] = my_strdup("age");
+call    0 never executed
+    #####:   29:    dataframe->column_names[2] = NULL;
+    #####:   30:    value = find_column(dataframe, "age");
+call    0 never executed
+    #####:   31:    mini_printf("%d\n", value);
+call    0 never executed
+    #####:   32:    cr_assert_stdout_eq_str("1\n");
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%:   32-block  0
+branch  3 never executed (fallthrough)
+branch  4 never executed
+    %%%%%:   32-block  1
+call    5 never executed
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed
+    %%%%%:   32-block  2
+branch  9 never executed (fallthrough)
+branch 10 never executed
+    %%%%%:   32-block  3
+call   11 never executed
+    %%%%%:   32-block  4
+call   12 never executed
+    %%%%%:   32-block  5
+call   13 never executed
+call   14 never executed
+    %%%%%:   32-block  6
+branch 15 never executed (fallthrough)
+branch 16 never executed
+    %%%%%:   32-block  7
+call   17 never executed
+    %%%%%:   32-block  8
+call   18 never executed
+        -:   33:}
+------------------
+find_column_full_covr_jmp:
+function find_column_full_covr_jmp called 0 returned 0% blocks executed 0%
+    #####:   16:Test(find_column, full_covr, .init = cr_redirect_stdout)
+    %%%%%:   16-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+------------------
+        -:   34:
+    #####:   35:Test(find_column_error, full_covr, .init = cr_redirect_stdout)
+        -:   36:{
+    #####:   37:    int value = 0;
+        -:   38:
+    #####:   39:    value = find_column(NULL, NULL);
+    #####:   40:    mini_printf("%d\n", value);
+    #####:   41:    cr_assert_stdout_eq_str("-1\n");
+    #####:   42:}
+------------------
+find_column_error_full_covr_impl:
+function find_column_error_full_covr_impl called 0 returned 0% blocks executed 0%
+    #####:   35:Test(find_column_error, full_covr, .init = cr_redirect_stdout)
+        -:   36:{
+    #####:   37:    int value = 0;
+        -:   38:
+    #####:   39:    value = find_column(NULL, NULL);
+    %%%%%:   39-block  0
+call    0 never executed
+    #####:   40:    mini_printf("%d\n", value);
+call    0 never executed
+    #####:   41:    cr_assert_stdout_eq_str("-1\n");
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    %%%%%:   41-block  0
+branch  3 never executed (fallthrough)
+branch  4 never executed
+    %%%%%:   41-block  1
+call    5 never executed
+call    6 never executed
+branch  7 never executed (fallthrough)
+branch  8 never executed
+    %%%%%:   41-block  2
+branch  9 never executed (fallthrough)
+branch 10 never executed
+    %%%%%:   41-block  3
+call   11 never executed
+    %%%%%:   41-block  4
+call   12 never executed
+    %%%%%:   41-block  5
+call   13 never executed
+call   14 never executed
+    %%%%%:   41-block  6
+branch 15 never executed (fallthrough)
+branch 16 never executed
+    %%%%%:   41-block  7
+call   17 never executed
+    %%%%%:   41-block  8
+call   18 never executed
+    #####:   42:}
+------------------
+find_column_error_full_covr_jmp:
+function find_column_error_full_covr_jmp called 0 returned 0% blocks executed 0%
+    #####:   35:Test(find_column_error, full_covr, .init = cr_redirect_stdout)
+    %%%%%:   35-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+------------------
+        -:   43:

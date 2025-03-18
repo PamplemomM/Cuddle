@@ -6,19 +6,22 @@
 */
 #include "../include/header_cuddle.h"
 
-static void *apply_func(void *value)
-{
-    char *str = (char *)value;
-
-    if (str[my_strlen(str) - 1] == 'e')
-        str[my_strlen(str) - 1] = '\0';
-    return str;
-}
-
 dataframe_t *df_to_type(dataframe_t *dataframe, const char *column,
     column_type_t downcast)
 {
-    if (dataframe == NULL)
+    dataframe_t *result = NULL;
+    int value = find_column(dataframe, column);
+
+    if (value == -1 || dataframe == NULL || column == NULL)
         return NULL;
-    return NULL;
+    result = df_duplicate(dataframe);
+    if (result == NULL)
+        return NULL;
+    FREE("%3", result->data);
+    result->column_types[value] = downcast;
+    if (dup_data(dataframe, result) == ERROR) {
+        df_free(result);
+        return NULL;
+    }
+    return result;
 }

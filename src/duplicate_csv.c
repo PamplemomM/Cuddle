@@ -6,7 +6,7 @@
 */
 #include "../include/header_cuddle.h"
 
-static int dup_data(dataframe_t *dataframe, dataframe_t *result)
+int dup_data(dataframe_t *dataframe, dataframe_t *result)
 {
     result->data = malloc(sizeof(void **) * (dataframe->nb_rows + 1));
     if (result->data == NULL) {

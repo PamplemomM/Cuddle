@@ -21,7 +21,7 @@ dataframe_t *df_apply(dataframe_t *dataframe, const char *column,
     for (int i = 0; i < dataframe->nb_rows; i++) {
         tmp = result->data[i][val];
         result->data[i][val] = apply_func(tmp);
-        free(tmp);
+        my_free(tmp);
         if (result->data[i][val] == NULL)
             return FREE("%3 %2 %1 %1", result->data, result->column_names,
                 result->column_types, result);

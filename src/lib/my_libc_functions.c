@@ -37,6 +37,13 @@ int my_getnbr(char const *str)
     return res * is_neg;
 }
 
+void *my_free(void *arg)
+{
+    if (arg != NULL)
+        free(arg);
+    return NULL;
+}
+
 static void my_putchar(char c)
 {
     write(1, &c, 1);

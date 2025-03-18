@@ -51,6 +51,7 @@ void *salade_de_free(char const *format, ...);
 
 // --- my_libc_functions.c ---
 int my_getnbr(char const *str);
+void *my_free(void *arg);
 int mini_printf(const char *format, ...);
 char *my_strlowercase(char *str);
 
@@ -95,6 +96,9 @@ void *found_data_type(char *value, column_type_t type);
 
 
 // ------- CUDDLE DATAFRAME FUNCTIONS -------
+
+// --- duplicate_csv.c ---
+int dup_data(dataframe_t *dataframe, dataframe_t *result);
 
 // --- read_csv.c ---
 void ***allocate_void_tab(dataframe_t *data);

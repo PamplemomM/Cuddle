@@ -39,7 +39,7 @@ void **df_get_values(dataframe_t *dataframe, const char *column)
 
 void **df_get_unique_values(dataframe_t *dataframe, const char *column)
 {
-    if (dataframe == NULL)
+    if (dataframe == NULL || column == NULL)
         return NULL;
     return NULL;
 }

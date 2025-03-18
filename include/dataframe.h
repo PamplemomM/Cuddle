@@ -86,5 +86,10 @@ void **df_get_unique_values(dataframe_t *dataframe, const char *column);
 // --- free_csv.c ---
 void df_free(dataframe_t *dataframe);
 
+// ------------- BONUS -------------
+
+// --- duplicate_csv.c ---
+dataframe_t *df_duplicate(dataframe_t *dataframe);
+
 
 #endif /* DATAFRAME_H */

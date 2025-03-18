@@ -133,6 +133,8 @@ int df_write_csv(dataframe_t *dataframe, char const *filename)
             my_strlen(dataframe->column_names[i]));
     }
     write(fd, "\n", 1);
+    if (dataframe->data == NULL)
+        return ERROR;
     for (int j = 0; j < dataframe->nb_rows; j++)
         my_write_line_csv(dataframe->data[j], dataframe->column_types,
             dataframe->nb_columns, fd);

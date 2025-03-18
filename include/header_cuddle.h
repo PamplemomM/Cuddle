@@ -18,7 +18,7 @@
 
     #include "dataframe.h"
 
-    // maths :
+    // math stuffs :
     #define SQ(a) ((a) * (a))
     #define PI 3.141592653589793238462
     #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -28,15 +28,19 @@
     // salade_de_free function :
     #define FREE(format, ...) salade_de_free(format, __VA_ARGS__)
 
-    // defines :
+    // returning values :
     #define SUCCESS 0
     #define ERROR 84
 
-    // Custom define :
+    // custom define :
     #define PRINT(x) _Generic((x), int : print_int, (char *) : print_string)(x)
 
+    // files :
+    #define DATA "csv/data.csv"
+    #define NEW_DATA "csv/result.csv"
 
-// ------------ ARSENAL FUNCTIONS ------ ------
+
+// ------------ ARSENAL FUNCTIONS ------------
 
 // --- salade_de_free.c ---
 void *omnifree(void **thing, int dimension);
@@ -97,7 +101,6 @@ void ***allocate_void_tab(dataframe_t *data);
 
 // --- void_dups_csv.c ---
 void *my_void_dup(void *value, column_type_t type);
-void **my_data_duprow(dataframe_t *dataframe, int row);
 
 
 #endif /* CUDDLE_H */

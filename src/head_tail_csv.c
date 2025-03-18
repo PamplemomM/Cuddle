@@ -38,7 +38,7 @@ static void ***my_data_dupbetween(dataframe_t *dataframe, int start, int end)
     if (data == NULL)
         return NULL;
     for (int i = start; i < end; i++) {
-        data[i - start] = my_data_duprow(dataframe, i);
+        data[i - start] = df_duprow(dataframe, i);
         if (data[i - start] == NULL)
             return FREE("%3", data);
     }

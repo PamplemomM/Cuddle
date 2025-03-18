@@ -91,5 +91,8 @@ void df_free(dataframe_t *dataframe);
 // --- duplicate_csv.c ---
 dataframe_t *df_duplicate(dataframe_t *dataframe);
 
+// --- void_dups_csv.c ---
+void **df_duprow(dataframe_t *dataframe, int row);
+
 
 #endif /* DATAFRAME_H */

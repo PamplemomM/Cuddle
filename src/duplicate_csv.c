@@ -14,7 +14,7 @@ static int dup_data(dataframe_t *dataframe, dataframe_t *result)
         return ERROR;
     }
     for (int i = 0; i < dataframe->nb_rows; i++) {
-        result->data[i] = my_data_duprow(dataframe, i);
+        result->data[i] = df_duprow(dataframe, i);
         if (result->data[i] == NULL) {
             FREE("%3 %2 %1 %1", result->data, result->column_names,
                 result->column_types, result);

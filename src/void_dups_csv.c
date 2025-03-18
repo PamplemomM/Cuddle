@@ -64,7 +64,7 @@ void *my_void_dup(void *value, column_type_t type)
     return func[type](value);
 }
 
-void **my_data_duprow(dataframe_t *dataframe, int row)
+void **df_duprow(dataframe_t *dataframe, int row)
 {
     void **data = malloc(sizeof(void *) * (dataframe->nb_columns + 1));
 

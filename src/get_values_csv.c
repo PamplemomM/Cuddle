@@ -8,9 +8,14 @@
 
 void *df_get_value(dataframe_t *dataframe, int row, const char *column)
 {
+    int position = 0;
+
     if (dataframe == NULL)
         return NULL;
-    return NULL;
+    position = find_column(dataframe, column);
+    if (position == -1)
+        return NULL;
+    return dataframe->data[row][position];
 }
 
 void **df_get_values(dataframe_t *dataframe, const char *column)

@@ -10,7 +10,7 @@ dataframe_t *df_apply(dataframe_t *dataframe, const char *column,
     void *(*apply_func)(void *value))
 {
     dataframe_t *result;
-    int val = find_column(dataframe, column);;
+    int val = find_column(dataframe, column);
     void *tmp = NULL;
 
     if (val == -1 || dataframe == NULL || column == NULL || apply_func == NULL)

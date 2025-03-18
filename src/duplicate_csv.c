@@ -10,7 +10,7 @@ static int dup_data(dataframe_t *dataframe, dataframe_t *result)
 {
     result->data = malloc(sizeof(void **) * (dataframe->nb_rows + 1));
     if (result->data == NULL) {
-        FREE("%2 %1 %1", result->column_names,result->column_types, result);
+        FREE("%2 %1 %1", result->column_names, result->column_types, result);
         return ERROR;
     }
     for (int i = 0; i < dataframe->nb_rows; i++) {
@@ -38,7 +38,8 @@ dataframe_t *df_duplicate(dataframe_t *dataframe)
     result->column_names = my_array_dup(dataframe->column_names);
     if (result->column_names == NULL)
         return FREE("%1", result);
-    result->column_types = malloc(sizeof(column_type_t) * (result->nb_columns + 1));
+    result->column_types = malloc(sizeof(column_type_t) *
+        (result->nb_columns + 1));
     if (result->column_types == NULL)
         return FREE("%2 %1", result->column_names, result);
     for (int i = 0; i < dataframe->nb_columns; i++) {

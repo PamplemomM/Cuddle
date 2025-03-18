@@ -6,18 +6,14 @@
 */
 #include "../include/header_cuddle.h"
 
-static void *apply_func(void *value)
-{
-    int *new_value = malloc(sizeof(int));
-
-    *new_value = *(int *)value * 2;
-    return new_value;
-}
-
 dataframe_t *df_apply(dataframe_t *dataframe, const char *column,
     void *(*apply_func)(void *value))
 {
+    dataframe_t *result;
     if (dataframe == NULL || column == NULL || apply_func == NULL)
         return NULL;
-    return dataframe;
+    result = df_duplicate(dataframe);
+    if (result == NULL)
+        return NULL;
+    return result;
 }

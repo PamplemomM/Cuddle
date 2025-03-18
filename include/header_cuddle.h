@@ -35,6 +35,7 @@
     // Custom define :
     #define PRINT(x) _Generic((x), int : print_int, (char *) : print_string)(x)
 
+
 // ------------ ARSENAL FUNCTIONS ------ ------
 
 // --- salade_de_free.c ---

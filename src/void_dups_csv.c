@@ -58,7 +58,7 @@ static void *my_void_str_dup(void *value)
 
 void *my_void_dup(void *value, column_type_t type)
 {
-    void *(*func[])(void *value) = {my_void_bool_dup, my_void_int_dup,
+    static void *(*func[])(void *value) = {my_void_bool_dup, my_void_int_dup,
         my_void_uint_dup, my_void_float_dup, my_void_str_dup};
 
     return func[type](value);

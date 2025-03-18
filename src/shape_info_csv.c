@@ -18,7 +18,7 @@ dataframe_shape_t df_shape(dataframe_t *dataframe)
 
 void df_info(dataframe_t *dataframe)
 {
-    char *str[7] = {"bool", "int", "uint", "float", "string",
+    static char *str[7] = {"bool", "int", "uint", "float", "string",
         "undefined", NULL};
 
     mini_printf("%d columns:\n", dataframe->nb_columns);

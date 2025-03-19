@@ -121,7 +121,7 @@ int df_write_csv(dataframe_t *dataframe, char const *filename)
 {
     int fd;
 
-    if (dataframe == NULL || dataframe->data)
+    if (dataframe == NULL || dataframe->data == NULL)
         return ERROR;
     fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 00664);
     if (fd == -1)

@@ -6,9 +6,19 @@
 */
 #include "../include/header_cuddle.h"
 
-int sort_dataframe(dataframe_t *dataframe, const char *column,
+int sort_dataframe(dataframe_t *new, int val,
     bool(*sort_func)(void *value1, void *value2))
 {
+    void *tmp;
+
+    for (int i = 0; i < new->nb_rows - 1; i++) {
+        if (sort_func(new->data[i][val], new->data[i + 1][val])) {
+            tmp = new->data[i][val];
+            new->data[i][val] = new->data[i + 1][val];
+            new->data[i + 1][val] = tmp;
+            sort_dataframe(new, val, sort_func);
+        }
+    }
     return SUCCESS;
 }
 
@@ -16,16 +26,13 @@ dataframe_t *df_sort(dataframe_t *dataframe, const char *column,
     bool(*sort_func)(void *value1, void *value2))
 {
     dataframe_t *new;
+    int val = find_column(dataframe, column);
 
-    if (dataframe == NULL || sort_func == NULL || column == NULL)
+    if (val == -1 || dataframe == NULL || sort_func == NULL || column == NULL)
         return NULL;
-    new = malloc(sizeof(dataframe_t));
+    new = df_duplicate(dataframe);
     if (new == NULL)
         return NULL;
-    new->column_names = my_array_dup(dataframe->column_names);
-    if (new->column_names == NULL)
-        return FREE("%1", new);
-    new->nb_columns = dataframe->nb_columns;
-    new->nb_rows = dataframe->nb_rows;
-    return dataframe;
+    sort_dataframe(new, val, sort_func);
+    return new;
 }

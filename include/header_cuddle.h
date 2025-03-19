@@ -38,6 +38,7 @@
     // files :
     #define DATA "csv/data.csv"
     #define NEW_DATA "csv/result.csv"
+    #define MONEY "csv/money.csv"
 
 
 // ------------ ARSENAL FUNCTIONS ------------

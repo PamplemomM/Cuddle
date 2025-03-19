@@ -5,7 +5,7 @@
 Cuddle is the recreation of the popular Pandas Library.
 
 
-## **🛠️ Usage 🛠️**
+## 🛠️ **Usage** 🛠️
   
 To Compile the Library, type in a bash terminal :
 ```bash

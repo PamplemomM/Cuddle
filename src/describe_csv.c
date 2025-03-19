@@ -35,7 +35,7 @@ static double min_value(dataframe_t *dataframe, int i)
         ptr = dataframe->data[i][i];
         if (ptr == NULL)
             continue;
-            value = get_in_num(ptr, dataframe->column_types[i]);
+        value = get_in_num(ptr, dataframe->column_types[i]);
         if (first == 0)
             result = value;
         first = 1;
@@ -56,7 +56,7 @@ static double max_value(dataframe_t *dataframe, int i)
         ptr = dataframe->data[i][i];
         if (ptr == NULL)
             continue;
-            value = get_in_num(ptr, dataframe->column_types[i]);
+        value = get_in_num(ptr, dataframe->column_types[i]);
         if (first == 0)
             result = value;
         first = 1;

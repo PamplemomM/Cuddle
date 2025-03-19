@@ -15,7 +15,7 @@ SRCTEST	+=	$(shell find tests/ -type f -name '*.c')
 
 OBJS	=	$(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Wshadow
+CFLAGS = -Wall
 
 $(NAME)	:	$(OBJS)
 			ar rc $(NAME) $(OBJS)
@@ -26,6 +26,7 @@ run		:
 			gcc -o cuddle -g3 $(SRCS) do_not_push.c -lm
 
 clean	:
+		rm unit_tests*
 		rm -f $(OBJS)
 
 fclean	:	clean

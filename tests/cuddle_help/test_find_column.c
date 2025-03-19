@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2023
-** find_column.c
+** test_find_column.c
 ** File description:
 ** test each functions of the find_column function.
 */
@@ -40,4 +40,3 @@ Test(find_column_error, full_covr, .init = cr_redirect_stdout)
     mini_printf("%d\n", value);
     cr_assert_stdout_eq_str("-1\n");
 }
-

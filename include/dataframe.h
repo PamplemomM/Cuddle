@@ -30,10 +30,9 @@ typedef enum {
 typedef struct dataframe_s {
     int nb_rows;
     int nb_columns;
-    char **column_names; // names of all the columns (names, age, city...)
+    char **column_names;
     column_type_t *column_types;
-    void ***data; // Tom, this is a 2d tab of pointers void *,
-                    //it is used to stock different values
+    void ***data;
 } dataframe_t;
 
 typedef struct dataframe_shape_s {

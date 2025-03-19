@@ -8,6 +8,8 @@
 #ifndef DATAFRAME_H
     #define DATAFRAME_H
 
+    #include "header_cuddle.h"
+
 // ------------ DATAFRAME STRUCT ------------
 
 typedef enum {

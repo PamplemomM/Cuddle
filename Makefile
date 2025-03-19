@@ -26,7 +26,6 @@ run		:
 			gcc -o cuddle -g3 $(SRCS) do_not_push.c -lm
 
 clean	:
-		rm unit_tests*
 		rm -f $(OBJS)
 
 fclean	:	clean

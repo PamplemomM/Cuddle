@@ -21,18 +21,18 @@ void *df_get_value(dataframe_t *dataframe, int row, const char *column)
 void **df_get_values(dataframe_t *dataframe, const char *column)
 {
     int position = 0;
-    void **new = malloc(sizeof(void *) * (dataframe->nb_rows + 1));
+    void **new;
 
+    if (dataframe == NULL || column == NULL)
+        return NULL;
+    new = malloc(sizeof(void *) * (dataframe->nb_rows + 1));
     if (new == NULL)
         return NULL;
-    if (dataframe == NULL || column == NULL)
-        return FREE("%1", new);
     position = find_column(dataframe, column);
     if (position == -1)
-        return NULL;
-    for (int i = 0; i < dataframe->nb_rows; i++) {
+        return FREE("%1", new);
+    for (int i = 0; i < dataframe->nb_rows; i++)
         new[i] = dataframe->data[i][position];
-    }
     new[dataframe->nb_rows] = NULL;
     return new;
 }

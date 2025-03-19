@@ -16,7 +16,6 @@ static int dup_data_condition(dataframe_t *result, dataframe_t *dataframe, int i
         return ERROR;
     }
     (*j)++;
-    result->data[*j] = NULL;
     return SUCCESS;
 }
 
@@ -37,12 +36,14 @@ dataframe_t *df_filter(dataframe_t *dataframe, const char *column,
     for (int i = 0; i < dataframe->nb_rows; i++)
         FREE("%2", result->data[i]);
     for (int i = 0; i < dataframe->nb_rows; i++) {
-        mini_printf("sending to %d from data[%d][%d] and val = %d\n", *(int *)dataframe->data[i][1], i, 1, val);
-        if (filter_func(dataframe->data[i][1]))
+        mini_printf("sending to %d from data[%d][%d] and val = %d, j = %d\n", *(int *)dataframe->data[i][val], i, val, val, j);
+        if (filter_func(dataframe->data[i][val]))
             error_check = dup_data_condition(result, dataframe, i, &j);
         if (error_check == ERROR)
             return FREE("%3 %2 %1 %1", result->data, result->column_names,
                 result->column_types, result);
     }
+    result->data[j] = NULL;
+    result->nb_rows = j;
     return result;
 }

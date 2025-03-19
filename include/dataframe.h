@@ -8,7 +8,13 @@
 #ifndef DATAFRAME_H
     #define DATAFRAME_H
 
-    #include "header_cuddle.h"
+    #include <stddef.h>
+    #include <stdlib.h>
+    #include <unistd.h>
+    #include <stdio.h>
+    #include <stdbool.h>
+    #include <fcntl.h>
+    #include <math.h>
 
 // ------------ DATAFRAME STRUCT ------------
 

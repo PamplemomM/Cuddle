@@ -8,13 +8,6 @@
 #ifndef CUDDLE_H
     #define CUDDLE_H
 
-    #include <stddef.h>
-    #include <stdlib.h>
-    #include <unistd.h>
-    #include <stdio.h>
-    #include <stdbool.h>
-    #include <fcntl.h>
-    #include <math.h>
 
     #include "dataframe.h"
 

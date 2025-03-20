@@ -20,7 +20,8 @@ dataframe_t *df_apply(dataframe_t *dataframe, const char *column,
         return NULL;
     for (int i = 0; i < dataframe->nb_rows; i++) {
         tmp = result->data[i][val];
-        result->data[i][val] = my_void_dup(apply_func(tmp), val);
+        result->data[i][val] = my_void_dup(apply_func(tmp),
+            dataframe->column_types[val]);
         my_free(tmp);
         if (result->data[i][val] == NULL)
             return FREE("%3 %2 %1 %1", result->data, result->column_names,

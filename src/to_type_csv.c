@@ -7,13 +7,13 @@
 #include "../include/header_cuddle.h"
 #include <string.h>
 
-int is_string(dataframe_t *dataframe, int i, int value,
+static int is_string(dataframe_t *dataframe, int i, int value,
     column_type_t new)
 {
     column_type_t old = dataframe->column_types[value];
     char *data = NULL;
 
-    if (old == STRING)
+    if (old != STRING)
         return 1;
     if (new == UNDEFINED || new == STRING)
         return SUCCESS;
@@ -30,13 +30,13 @@ int is_string(dataframe_t *dataframe, int i, int value,
     return 1;
 }
 
-int is_int(dataframe_t *dataframe, int i, int value,
+static int is_int(dataframe_t *dataframe, int i, int value,
     column_type_t new)
 {
     column_type_t old = dataframe->column_types[value];
     int *data = NULL;
 
-    if (old == INT || new == UNDEFINED || new == STRING)
+    if (old != INT || new == UNDEFINED || new == STRING)
         return SUCCESS;
     data = (int *)dataframe->data[i][value];
     if (new == BOOL) {
@@ -55,12 +55,66 @@ int is_int(dataframe_t *dataframe, int i, int value,
     return 1;
 }
 
-int found_and_convert(dataframe_t *dataframe, int i, int value,
-    column_type_t downcast)
+static int is_float(dataframe_t *dataframe, int i, int value,
+    column_type_t new)
 {
-    if (is_string(dataframe, i, value, downcast) == 0)
+    column_type_t old = dataframe->column_types[value];
+    float *data = NULL;
+
+    if (old != FLOAT || new == UNDEFINED || new == STRING)
         return SUCCESS;
-    if (is_int(dataframe, i, value, downcast) == 0)
+    data = (float *)dataframe->data[i][value];
+    if (new == BOOL) {
+        dataframe->data[i][value] = (data == 0) ? (bool *)false : (bool *)true;
+        return SUCCESS;
+    }
+    if (new == UINT) {
+        if (data < 0)
+            return -1;
+        dataframe->data[i][value] = (unsigned int *)data;
+        return SUCCESS;
+    }
+    if (new == INT) {
+        dataframe->data[i][value] = (int *)data;
+        return SUCCESS;
+    }
+    return 1;
+}
+
+static int is_uint(dataframe_t *dataframe, int i, int value,
+    column_type_t new)
+{
+    column_type_t old = dataframe->column_types[value];
+    unsigned int *data = NULL;
+
+    if (old != UINT || new == UNDEFINED || new == STRING)
+        return SUCCESS;
+    data = (unsigned int *)dataframe->data[i][value];
+    if (new == BOOL) {
+        dataframe->data[i][value] = (data == 0) ? (bool *)false : (bool *)true;
+        return SUCCESS;
+    }
+    if (new == INT) {
+        dataframe->data[i][value] = (int *)data;
+        return SUCCESS;
+    }
+    if (new == FLOAT) {
+        dataframe->data[i][value] = (float *)data;
+        return SUCCESS;
+    }
+    return 1;
+}
+
+int found_and_convert(dataframe_t *dataframe, int i, int value,
+    column_type_t new)
+{
+    if (new == STRING && is_string(dataframe, i, value, new) == 0)
+        return SUCCESS;
+    if (new == INT && is_int(dataframe, i, value, new) == 0)
+        return SUCCESS;
+    if (new == FLOAT && is_float(dataframe, i, value, new) == 0)
+        return SUCCESS;
+    if (new == UINT && is_uint(dataframe, i, value, new) == 0)
         return SUCCESS;
     return SUCCESS;
 }

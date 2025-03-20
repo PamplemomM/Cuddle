@@ -58,23 +58,22 @@ static int is_int(dataframe_t *dataframe, int i, int value,
 static int is_float(dataframe_t *dataframe, int i, int value,
     column_type_t new)
 {
-    column_type_t old = dataframe->column_types[value];
     float *data = NULL;
 
-    if (old != FLOAT || new == UNDEFINED || new == STRING)
+    if (new == UNDEFINED || new == STRING)
         return SUCCESS;
     data = (float *)dataframe->data[i][value];
-    if (new == BOOL) {
+    switch (new)
+    {
+    case BOOL:
         dataframe->data[i][value] = (data == 0) ? (bool *)false : (bool *)true;
         return SUCCESS;
-    }
-    if (new == UINT) {
+    case UINT:
         if (data < 0)
             return -1;
         dataframe->data[i][value] = (unsigned int *)data;
         return SUCCESS;
-    }
-    if (new == INT) {
+    case INT:
         dataframe->data[i][value] = (int *)data;
         return SUCCESS;
     }

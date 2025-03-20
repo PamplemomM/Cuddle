@@ -80,8 +80,8 @@ static float get_mean(dataframe_t *dataframe, int i, int *count)
     return (sum > 0) ? (sum / *count) : 0.0;
 }
 
-static float standard_deviation(dataframe_t *dataframe, int i, double mean,
-    int count)
+static float standard_deviation(dataframe_t *dataframe, int i,
+    double mean, int count)
 {
     void *ptr = NULL;
     float sum_squares = 0.0;

@@ -31,11 +31,11 @@ static double min_value(dataframe_t *dataframe, int i)
     int first = 0;
     void *ptr = NULL;
 
-    for (int i = 0; i < dataframe->nb_rows; i++) {
-        ptr = dataframe->data[i][i];
+    for (int j = 0; i < dataframe->nb_rows; i++) {
+        ptr = dataframe->data[i][j];
         if (ptr == NULL)
             continue;
-        value = get_in_num(ptr, dataframe->column_types[i]);
+        value = get_in_num(ptr, dataframe->column_types[j]);
         if (first == 0)
             result = value;
         first = 1;
@@ -52,11 +52,11 @@ static double max_value(dataframe_t *dataframe, int i)
     int first = 0;
     void *ptr = NULL;
 
-    for (int i = 0; i < dataframe->nb_rows; i++) {
-        ptr = dataframe->data[i][i];
+    for (int j = 0; i < dataframe->nb_rows; i++) {
+        ptr = dataframe->data[i][j];
         if (ptr == NULL)
             continue;
-        value = get_in_num(ptr, dataframe->column_types[i]);
+        value = get_in_num(ptr, dataframe->column_types[j]);
         if (first == 0)
             result = value;
         first = 1;
@@ -73,8 +73,8 @@ static float root_mean_square(dataframe_t *dataframe, int i, int *count)
     column_type_t type = dataframe->column_types[i];
 
     *count = 0;
-    for (int i = 0; i < dataframe->nb_rows; i++) {
-        ptr = dataframe->data[i][i];
+    for (int j = 0; i < dataframe->nb_rows; i++) {
+        ptr = dataframe->data[i][j];
         if (ptr == NULL)
             continue;
         sum += get_in_num(ptr, type);
@@ -92,8 +92,8 @@ static float standard_deviation(dataframe_t *dataframe, int i, double mean,
     float diff = 0.0;
     column_type_t type = dataframe->column_types[i];
 
-    for (int i = 0; i < dataframe->nb_rows; i++) {
-        ptr = dataframe->data[i][i];
+    for (int j = 0; i < dataframe->nb_rows; i++) {
+        ptr = dataframe->data[i][j];
         if (ptr == NULL)
             continue;
         result = get_in_num(ptr, type);
@@ -107,7 +107,7 @@ static float standard_deviation(dataframe_t *dataframe, int i, double mean,
 
 static void describe_numerical_column(dataframe_t *dataframe, int i)
 {
-    int count = 0;
+    int count = 1;
     double mean = root_mean_square(dataframe, i, &count);
 
     printf("Column: %s\n", dataframe->column_names[i]);

@@ -15,9 +15,9 @@ int is_string(dataframe_t *dataframe, int i, int value,
 
     if (old == STRING)
         return 1;
-    data = (char *)dataframe->data[i][value];
     if (new == UNDEFINED || new == STRING)
         return SUCCESS;
+    data = (char *)dataframe->data[i][value];
     if (new == BOOL && my_isbool(data) == 1)
         return SUCCESS;
     if ((new == INT || new == UINT) && my_isnum(data) == 1) {
@@ -30,10 +30,39 @@ int is_string(dataframe_t *dataframe, int i, int value,
     return 1;
 }
 
+int is_int(dataframe_t *dataframe, int i, int value,
+    column_type_t new)
+{
+    column_type_t old = dataframe->column_types[value];
+    int *data = NULL;
+
+    if (old == INT)
+        return 1;
+    if (new == UNDEFINED || new == STRING)
+        return SUCCESS;
+    data = (int *)dataframe->data[i][value];
+    if (new == BOOL) {
+        dataframe->data[i][value] = (data == 0) ? (bool *)false : (bool *)true;
+        return SUCCESS;
+    }
+    if (new == UINT) {
+        if (data < 0)
+            return -1;
+        return SUCCESS;
+    }
+    if (new == FLOAT) {
+        dataframe->data[i][value] = (float *)data;
+        return SUCCESS;
+    }
+    return 1;
+}
+
 int found_and_convert(dataframe_t *dataframe, int i, int value,
     column_type_t downcast)
 {
-    if (is_string(dataframe, i, value, downcast) == 1)
+    if (is_string(dataframe, i, value, downcast) == 0)
+        return SUCCESS;
+    if (is_int(dataframe, i, value, downcast) == 0)
         return SUCCESS;
     return SUCCESS;
 }

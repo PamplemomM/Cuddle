@@ -115,7 +115,7 @@ static int is_bool(dataframe_t *dataframe, int i, int value,
         return SUCCESS;
     data = (bool *)dataframe->data[i][value];
     if (new == UINT || new == INT) {
-        dataframe->data[i][value] = (data == false) ? 0 : 1;
+        dataframe->data[i][value] = (data == false) ? (int *)0 : (int *)1;
         return SUCCESS;
     }
     if (new == FLOAT) {

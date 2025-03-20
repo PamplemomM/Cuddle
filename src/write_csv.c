@@ -100,13 +100,12 @@ static int write_data_type(void **data, column_type_t *types, int i, int fd)
     return ERROR;
 }
 
-static void my_write_line_csv(void **data, column_type_t *types,
-    int len, int fd)
+static void my_write_line_csv(void **data, dataframe_t *dataframe, int fd)
 {
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < dataframe->nb_columns; i++) {
         if (i != 0)
-            write(fd, ",", 1);
-        if (write_data_type(data, types, i, fd) == ERROR)
+            write(fd, dataframe->separator, 1);
+        if (write_data_type(data, dataframe->column_types, i, fd) == ERROR)
             return;
     }
     write(fd, "\n", 1);
@@ -128,14 +127,13 @@ int df_write_csv(dataframe_t *dataframe, char const *filename)
         return ERROR;
     for (int i = 0; i < dataframe->nb_columns; i++) {
         if (i != 0)
-            write(fd, ",", 1);
+            write(fd, dataframe->separator, 1);
         write(fd, dataframe->column_names[i],
             my_strlen(dataframe->column_names[i]));
     }
     write(fd, "\n", 1);
     for (int j = 0; j < dataframe->nb_rows; j++)
-        my_write_line_csv(dataframe->data[j], dataframe->column_types,
-            dataframe->nb_columns, fd);
+        my_write_line_csv(dataframe->data[j], dataframe, fd);
     close(fd);
     return SUCCESS;
 }

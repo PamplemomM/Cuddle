@@ -33,6 +33,7 @@ typedef struct dataframe_s {
     char **column_names;
     column_type_t *column_types;
     void ***data;
+    char *separator;
 } dataframe_t;
 
 typedef struct dataframe_shape_s {

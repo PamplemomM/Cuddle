@@ -10,7 +10,8 @@ int dup_data(dataframe_t *dataframe, dataframe_t *result)
 {
     result->data = malloc(sizeof(void **) * (dataframe->nb_rows + 1));
     if (result->data == NULL) {
-        FREE("%2 %1 %1", result->column_names, result->column_types, result);
+        FREE("%2 %1 %1", result->separator, result->column_names,
+            result->column_types, result);
         return ERROR;
     }
     for (int i = 0; i < dataframe->nb_rows; i++) {
@@ -27,24 +28,23 @@ int dup_data(dataframe_t *dataframe, dataframe_t *result)
 
 dataframe_t *df_duplicate(dataframe_t *dataframe)
 {
-    dataframe_t *result = malloc(sizeof(dataframe_t) * 1);
+    dataframe_t *res = malloc(sizeof(dataframe_t) * 1);
 
-    if (result == NULL)
+    if (res == NULL)
         return NULL;
     if (dataframe == NULL)
-        return FREE("%1", result);
-    result->nb_columns = dataframe->nb_columns;
-    result->nb_rows = dataframe->nb_rows;
-    result->column_names = my_array_dup(dataframe->column_names);
-    if (result->column_names == NULL)
-        return FREE("%1", result);
-    result->column_types = malloc(sizeof(column_type_t) *
-        (result->nb_columns + 1));
-    if (result->column_types == NULL)
-        return FREE("%2 %1", result->column_names, result);
-    for (int i = 0; i < dataframe->nb_columns; i++) {
-        result->column_types[i] = dataframe->column_types[i];
-    }
-    dup_data(dataframe, result);
-    return result;
+        return FREE("%1", res);
+    res->nb_columns = dataframe->nb_columns;
+    res->nb_rows = dataframe->nb_rows;
+    res->separator = my_strdup(dataframe->separator);
+    res->column_names = my_array_dup(dataframe->column_names);
+    if (res->separator == NULL || res->column_names == NULL)
+        return FREE("%1 %2 %1", res->separator, res->column_names, res);
+    res->column_types = malloc(sizeof(column_type_t) * (res->nb_columns + 1));
+    if (res->column_types == NULL)
+        return FREE("%1 %2 %1", res->separator, res->column_names, res);
+    for (int i = 0; i < dataframe->nb_columns; i++)
+        res->column_types[i] = dataframe->column_types[i];
+    dup_data(dataframe, res);
+    return res;
 }

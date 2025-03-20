@@ -27,12 +27,11 @@ static double min_value(dataframe_t *dataframe, int i)
     int first = 0;
     void *ptr = NULL;
 
-    for (int j = 0; i < dataframe->nb_rows; i++) {
-        ptr = dataframe->data[i][j];
+    for (int j = 0; j < dataframe->nb_rows; j++) {
+        ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
-        value = get_in_num(ptr, dataframe->column_types[j]);
-        mini_printf("Actual value %d for %d\n", dataframe->column_types[j], *(int *)ptr);
+        value = get_in_num(ptr, dataframe->column_types[i]);
         if (first == 0)
             result = value;
         first = 1;
@@ -49,11 +48,11 @@ static double max_value(dataframe_t *dataframe, int i)
     int first = 0;
     void *ptr = NULL;
 
-    for (int j = 0; i < dataframe->nb_rows; i++) {
-        ptr = dataframe->data[i][j];
+    for (int j = 0; j < dataframe->nb_rows; j++) {
+        ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
-        value = get_in_num(ptr, dataframe->column_types[j]);
+        value = get_in_num(ptr, dataframe->column_types[i]);
         if (first == 0)
             result = value;
         first = 1;
@@ -63,21 +62,22 @@ static double max_value(dataframe_t *dataframe, int i)
     return result;
 }
 
-static float root_mean_square(dataframe_t *dataframe, int i, int *count)
+static float get_mean(dataframe_t *dataframe, int i, int *count)
 {
     float sum = 0.0;
     void *ptr = NULL;
+    static int res = 0;
     column_type_t type = dataframe->column_types[i];
 
     *count = 0;
-    for (int j = 0; i < dataframe->nb_rows; i++) {
-        ptr = dataframe->data[i][j];
+    for (int j = 0; j < dataframe->nb_rows; j++) {
+        ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
         sum += get_in_num(ptr, type);
         (*count)++;
     }
-    return (*count > 0) ? (sum / *count) : 0.0;
+    return (sum > 0) ? (sum / *count) : 0.0;
 }
 
 static float standard_deviation(dataframe_t *dataframe, int i, double mean,
@@ -89,8 +89,8 @@ static float standard_deviation(dataframe_t *dataframe, int i, double mean,
     float diff = 0.0;
     column_type_t type = dataframe->column_types[i];
 
-    for (int j = 0; i < dataframe->nb_rows; i++) {
-        ptr = dataframe->data[i][j];
+    for (int j = 0; j < dataframe->nb_rows; j++) {
+        ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
         result = get_in_num(ptr, type);
@@ -105,7 +105,7 @@ static float standard_deviation(dataframe_t *dataframe, int i, double mean,
 static void describe_numerical_column(dataframe_t *dataframe, int i)
 {
     int count = 1;
-    double mean = root_mean_square(dataframe, i, &count);
+    double mean = get_mean(dataframe, i, &count);
 
     printf("Column: %s\n", dataframe->column_names[i]);
     printf("Count: %d\n", count);
@@ -121,7 +121,8 @@ void df_describe(dataframe_t *dataframe)
         dataframe->nb_rows <= 0)
         return;
     for (int i = 0; i < dataframe->nb_columns; i++) {
-        if (dataframe->column_types[i] == INT) {
+        if (dataframe->column_types[i] == INT ||
+            dataframe->column_types[i] == UINT) {
             describe_numerical_column(dataframe, i);
         }
     }

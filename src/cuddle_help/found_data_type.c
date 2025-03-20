@@ -61,6 +61,8 @@ void *found_data_type(char *value, column_type_t type)
     static void *(*array[])(char const *) = {convert_to_bool, convert_to_int,
         convert_to_uint, convert_to_float, convert_to_str, NULL};
 
+    if (value == NULL)
+        return NULL;
     if (type >= BOOL && type <= STRING)
         return array[type](value);
     if (value == NULL)

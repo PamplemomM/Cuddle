@@ -27,6 +27,7 @@
 
     // custom define :
     #define PRINT(x) _Generic((x), int : print_int, (char *) : print_string)(x)
+    #define SIZE 64
 
     // files :
     #define DATA "csv/data.csv"

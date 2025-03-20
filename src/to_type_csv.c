@@ -63,8 +63,7 @@ static int is_float(dataframe_t *dataframe, int i, int value,
     if (new == UNDEFINED || new == STRING)
         return SUCCESS;
     data = (float *)dataframe->data[i][value];
-    switch (new)
-    {
+    switch (new) {
     case BOOL:
         dataframe->data[i][value] = (data == 0) ? (bool *)false : (bool *)true;
         return SUCCESS;

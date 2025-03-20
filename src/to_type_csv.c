@@ -105,9 +105,31 @@ static int is_uint(dataframe_t *dataframe, int i, int value,
     return 1;
 }
 
+static int is_bool(dataframe_t *dataframe, int i, int value,
+    column_type_t new)
+{
+    column_type_t old = dataframe->column_types[value];
+    bool *data = NULL;
+
+    if (old != BOOL || new == UNDEFINED || new == STRING)
+        return SUCCESS;
+    data = (bool *)dataframe->data[i][value];
+    if (new == UINT || new == INT) {
+        dataframe->data[i][value] = (data == false) ? 0 : 1;
+        return SUCCESS;
+    }
+    if (new == FLOAT) {
+        dataframe->data[i][value] = (data == false) ? (float *)0 : (float *)1;
+        return SUCCESS;
+    }
+    return 1;
+}
+
 int found_and_convert(dataframe_t *dataframe, int i, int value,
     column_type_t new)
 {
+    if (new == UNDEFINED)
+        return SUCCESS;
     if (new == STRING && is_string(dataframe, i, value, new) == 0)
         return SUCCESS;
     if (new == INT && is_int(dataframe, i, value, new) == 0)
@@ -116,7 +138,9 @@ int found_and_convert(dataframe_t *dataframe, int i, int value,
         return SUCCESS;
     if (new == UINT && is_uint(dataframe, i, value, new) == 0)
         return SUCCESS;
-    return SUCCESS;
+    if (new == BOOL && is_uint(dataframe, i, value, new) == 0)
+        return SUCCESS;
+    return ERROR;
 }
 
 dataframe_t *df_to_type(dataframe_t *dataframe, const char *column,
@@ -133,7 +157,7 @@ dataframe_t *df_to_type(dataframe_t *dataframe, const char *column,
         return NULL;
     for (int i = 0; i < dataframe->nb_rows; i++) {
         returning = found_and_convert(dataframe, i, value, downcast);
-        if (returning == -1) {
+        if (returning == ERROR) {
             df_free(result);
             return NULL;
         }

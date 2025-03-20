@@ -11,23 +11,19 @@
 // **********************************
 // You can touch it if you want
 
-static double get_in_num(void *ptr, column_type_t type)
+static int get_in_num(void *ptr, column_type_t type)
 {
     if (ptr == NULL)
         return SUCCESS;
     if (type == INT)
-        return (double)(*(int *)ptr);
-    if (type == UINT)
-        return (double)(*(unsigned int *)ptr);
-    if (type == FLOAT)
-        return (*(double *)ptr);
-    return SUCCESS;
+        return *(int *)ptr;
+    return 1;
 }
 
 static double min_value(dataframe_t *dataframe, int i)
 {
     double result = 0.0;
-    double value = 0.0;
+    int value = 0;
     int first = 0;
     void *ptr = NULL;
 
@@ -36,6 +32,7 @@ static double min_value(dataframe_t *dataframe, int i)
         if (ptr == NULL)
             continue;
         value = get_in_num(ptr, dataframe->column_types[j]);
+        mini_printf("Actual value %d for %d\n", dataframe->column_types[j], *(int *)ptr);
         if (first == 0)
             result = value;
         first = 1;
@@ -48,7 +45,7 @@ static double min_value(dataframe_t *dataframe, int i)
 static double max_value(dataframe_t *dataframe, int i)
 {
     double result = 0.0;
-    double value = 0.0;
+    int value = 0;
     int first = 0;
     void *ptr = NULL;
 
@@ -124,9 +121,7 @@ void df_describe(dataframe_t *dataframe)
         dataframe->nb_rows <= 0)
         return;
     for (int i = 0; i < dataframe->nb_columns; i++) {
-        if (dataframe->column_types[i] == INT ||
-            dataframe->column_types[i] == UINT ||
-            dataframe->column_types[i] == FLOAT) {
+        if (dataframe->column_types[i] == INT) {
             describe_numerical_column(dataframe, i);
         }
     }

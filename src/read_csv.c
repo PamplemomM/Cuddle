@@ -145,7 +145,6 @@ dataframe_t *df_read_csv(const char *filename, const char *separator)
 {
     dataframe_t *data = malloc(sizeof(dataframe_t) * 1);
     char *file;
-    char *sep = NULL;
 
     if (data == NULL)
         return NULL;
@@ -153,14 +152,14 @@ dataframe_t *df_read_csv(const char *filename, const char *separator)
     if (file == NULL)
         return FREE("%1", data);
     if (separator == NULL)
-        sep = my_strdup(",");
+        data->separator = my_strdup(",");
     else
-        sep = my_strdup(separator);
-    if (sep == NULL)
+        data->separator = my_strdup(separator);
+    if (data->separator == NULL)
         return FREE("%1 %1", data, file);
     data->nb_rows = count_rows(file) - 1;
-    if (read_csv_next(data, file, sep) == ERROR)
-        return FREE("%1 %1 %1", data, file, sep);
-    FREE("%1 %1", file, sep);
+    if (read_csv_next(data, file, data->separator) == ERROR)
+        return FREE("%1 %1 %1", data->separator, data, file);
+    FREE("%1", file);
     return data;
 }

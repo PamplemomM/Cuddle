@@ -48,24 +48,24 @@ static void ***my_data_dupbetween(dataframe_t *dataframe, int start, int end)
 
 static dataframe_t *dupbetween(dataframe_t *dataframe, int start, int end)
 {
-    dataframe_t *result;
+    dataframe_t *res;
 
-    result = malloc(sizeof(dataframe_t));
-    if (result == NULL)
+    res = malloc(sizeof(dataframe_t));
+    if (res == NULL)
         return NULL;
-    result->nb_rows = end - start;
-    result->nb_columns = dataframe->nb_columns;
-    result->column_names = my_array_dup(dataframe->column_names);
-    if (result->column_names == NULL)
-        return FREE("%1", result);
-    result->column_types = my_column_types_dup(dataframe);
-    if (result->column_types == NULL)
-        return FREE("%2 %1", result->column_names, result);
-    result->data = my_data_dupbetween(dataframe, start, end);
-    if (result->data == NULL)
-        return FREE("%1 %2 %1", result->column_types,
-            result->column_names, result);
-    return result;
+    res->nb_rows = end - start;
+    res->nb_columns = dataframe->nb_columns;
+    res->separator = my_strdup(dataframe->separator);
+    res->column_names = my_array_dup(dataframe->column_names);
+    if (res->separator == NULL || res->column_names == NULL)
+        return FREE("%1 %2 %1", res->separator, res->column_names, res);
+    res->column_types = my_column_types_dup(dataframe);
+    if (res->column_types == NULL)
+        return FREE("%2 %1", res->column_names, res);
+    res->data = my_data_dupbetween(dataframe, start, end);
+    if (res->data == NULL)
+        return FREE("%1 %2 %1", res->column_types, res->column_names, res);
+    return res;
 }
 
 dataframe_t *df_head(dataframe_t *dataframe, int nb_rows)

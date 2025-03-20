@@ -36,9 +36,7 @@ int is_int(dataframe_t *dataframe, int i, int value,
     column_type_t old = dataframe->column_types[value];
     int *data = NULL;
 
-    if (old == INT)
-        return 1;
-    if (new == UNDEFINED || new == STRING)
+    if (old == INT || new == UNDEFINED || new == STRING)
         return SUCCESS;
     data = (int *)dataframe->data[i][value];
     if (new == BOOL) {

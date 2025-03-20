@@ -9,13 +9,13 @@
 int sort_dataframe(dataframe_t *new, int val,
     bool(*sort_func)(void *value1, void *value2))
 {
-    void *tmp;
+    void **tmp;
 
     for (int i = 0; i < new->nb_rows - 1; i++) {
         if (sort_func(new->data[i][val], new->data[i + 1][val])) {
-            tmp = new->data[i][val];
-            new->data[i][val] = new->data[i + 1][val];
-            new->data[i + 1][val] = tmp;
+            tmp = new->data[i];
+            new->data[i] = new->data[i + 1];
+            new->data[i + 1] = tmp;
             sort_dataframe(new, val, sort_func);
         }
     }

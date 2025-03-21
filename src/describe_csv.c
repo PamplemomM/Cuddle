@@ -11,20 +11,26 @@
 // **********************************
 // You can touch it if you want
 
-static int get_in_num(void *ptr, column_type_t type)
+static float get_in_num(void *ptr, column_type_t type)
 {
+    float result = 0;
+
     if (ptr == NULL)
         return SUCCESS;
     if (type == INT)
-        return *(int *)ptr;
-    return 1;
+        result = *(int *)ptr;
+    if (type == UINT)
+        result = *(unsigned int *)ptr;
+    if (type == FLOAT)
+        result =  *(float *)ptr;
+    return (float)result;
 }
 
 static double min_value(dataframe_t *dataframe, int i)
 {
     double result = 0.0;
-    int value = 0;
-    int first = 0;
+    float value = 0.0;
+    float first = 0.0;
     void *ptr = NULL;
     column_type_t type = dataframe->column_types[i];
 
@@ -32,7 +38,7 @@ static double min_value(dataframe_t *dataframe, int i)
         ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
-        value = (type == INT) ? *(int *)ptr : *(unsigned int *)ptr;
+        value = get_in_num(ptr, type);
         if (first == 0)
             result = value;
         first = 1;
@@ -45,8 +51,8 @@ static double min_value(dataframe_t *dataframe, int i)
 static double max_value(dataframe_t *dataframe, int i)
 {
     double result = 0.0;
-    int value = 0;
-    int first = 0;
+    float value = 0.0;
+    float first = 0.0;
     void *ptr = NULL;
     column_type_t type = dataframe->column_types[i];
 
@@ -54,7 +60,7 @@ static double max_value(dataframe_t *dataframe, int i)
         ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
-        value = (type == INT) ? *(int *)ptr : *(unsigned int *)ptr;
+        value = get_in_num(ptr, type);
         if (first == 0)
             result = value;
         first = 1;
@@ -76,7 +82,7 @@ static float get_mean(dataframe_t *dataframe, int i, int *count)
         ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
-        sum += (type == INT) ? *(int *)ptr : *(unsigned int *)ptr;
+        sum += get_in_num(ptr, type);
         (*count)++;
     }
     return (sum > 0) ? (sum / *count) : 0.0;
@@ -95,7 +101,7 @@ static float standard_deviation(dataframe_t *dataframe, int i,
         ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
-        result = (type == INT) ? *(int *)ptr : *(unsigned int *)ptr;
+        result = get_in_num(ptr, type);
         diff = result - mean;
         sum_squares += diff * diff;
     }
@@ -124,7 +130,8 @@ void df_describe(dataframe_t *dataframe)
         return;
     for (int i = 0; i < dataframe->nb_columns; i++) {
         if (dataframe->column_types[i] == INT ||
-            dataframe->column_types[i] == UINT) {
+            dataframe->column_types[i] == UINT ||
+            dataframe->column_types[i] == FLOAT) {
             describe_numerical_column(dataframe, i);
         }
     }

@@ -26,12 +26,13 @@ static double min_value(dataframe_t *dataframe, int i)
     int value = 0;
     int first = 0;
     void *ptr = NULL;
+    column_type_t type = dataframe->column_types[i];
 
     for (int j = 0; j < dataframe->nb_rows; j++) {
         ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
-        value = get_in_num(ptr, dataframe->column_types[i]);
+        value = (type == INT) ? *(int *)ptr : *(unsigned int *)ptr;
         if (first == 0)
             result = value;
         first = 1;
@@ -47,12 +48,13 @@ static double max_value(dataframe_t *dataframe, int i)
     int value = 0;
     int first = 0;
     void *ptr = NULL;
+    column_type_t type = dataframe->column_types[i];
 
     for (int j = 0; j < dataframe->nb_rows; j++) {
         ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
-        value = get_in_num(ptr, dataframe->column_types[i]);
+        value = (type == INT) ? *(int *)ptr : *(unsigned int *)ptr;
         if (first == 0)
             result = value;
         first = 1;
@@ -74,7 +76,7 @@ static float get_mean(dataframe_t *dataframe, int i, int *count)
         ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
-        sum += get_in_num(ptr, type);
+        sum += (type == INT) ? *(int *)ptr : *(unsigned int *)ptr;
         (*count)++;
     }
     return (sum > 0) ? (sum / *count) : 0.0;
@@ -93,7 +95,7 @@ static float standard_deviation(dataframe_t *dataframe, int i,
         ptr = dataframe->data[j][i];
         if (ptr == NULL)
             continue;
-        result = get_in_num(ptr, type);
+        result = (type == INT) ? *(int *)ptr : *(unsigned int *)ptr;
         diff = result - mean;
         sum_squares += diff * diff;
     }

@@ -22,7 +22,7 @@ static float get_in_num(void *ptr, column_type_t type)
     if (type == UINT)
         result = *(unsigned int *)ptr;
     if (type == FLOAT)
-        result =  *(float *)ptr;
+        result = *(float *)ptr;
     return (float)result;
 }
 

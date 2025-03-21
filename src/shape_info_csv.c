@@ -12,14 +12,13 @@
 // ---                                           ---
 dataframe_shape_t df_shape(dataframe_t *dataframe)
 {
-    static int cpt = 0;
+    dataframe_shape_t result = {0, 0};
 
-    cpt++;
-    if (cpt == 1)
-        return (dataframe_shape_t){4, 3};
-    if (cpt == 2)
-        return (dataframe_shape_t){11, 3};
-    return (dataframe_shape_t){dataframe->nb_rows, dataframe->nb_columns};
+    if (dataframe == NULL)
+        return result;
+    result.nb_rows = dataframe->nb_rows;
+    result.nb_columns = dataframe->nb_columns;
+    return result;
 }
 
 void df_info(dataframe_t *dataframe)

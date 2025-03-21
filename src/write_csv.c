@@ -30,11 +30,19 @@ static int write_to_int(void *value, int fd)
 
 static int write_to_float(void *value, int fd)
 {
+    int tmp = 0;
+    int cnt = 0;
     char *result = NULL;
 
     if (value == NULL)
         return ERROR;
-    sprintf(result, "%f", ((float *)value)[0]);
+    tmp = *(int *)value;
+    do {
+        tmp /= 10;
+        cnt++;
+    } while (tmp != 0);
+    result = malloc(sizeof(char) * (cnt + 3 + 1 + (*(int *)value < 0)));
+    sprintf(result, "%.2f", ((float *)value)[0]);
     write(fd, result, my_strlen(result));
     free(result);
     return SUCCESS;

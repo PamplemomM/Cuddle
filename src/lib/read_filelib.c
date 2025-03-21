@@ -26,19 +26,26 @@ char *read_line(int fd, int size)
     return buffer;
 }
 
-char *dup_result(char *result, char *line, int len)
+static size_t get_total_size(int add)
 {
     static size_t total_size = 0;
-    char *temp = realloc(result, total_size + len + 2);
+
+    total_size += add;
+    return total_size;
+}
+
+char *dup_result(char *result, char *line, int len)
+{
+    char *temp = realloc(result, get_total_size(0) + len + 2);
 
     if (temp == NULL)
         return NULL;
     result = temp;
-    my_strcpy(result + total_size, line);
-    total_size += len;
-    result[total_size] = '\n';
-    result[total_size + 1] = '\0';
-    total_size++;
+    my_strcpy(result + get_total_size(0), line);
+    get_total_size(len);
+    result[get_total_size(0)] = '\n';
+    result[get_total_size(0) + 1] = '\0';
+    get_total_size(1);
     return result;
 }
 
@@ -75,5 +82,6 @@ char *open_file(char const *filepath)
         return NULL;
     result = read_file(fd);
     close(fd);
+    get_total_size(-get_total_size(0));
     return result;
 }

@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** filter_csv.c
 ** File description:
-** The file for filtering the csv datas.
+** Filtering a dataframe.
 */
+
 #include "../include/header_cuddle.h"
 
 static int dup_data_condition(dataframe_t *result, dataframe_t *dataframe,

@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** salade_de_free.c
 ** File description:
 ** Free anything.

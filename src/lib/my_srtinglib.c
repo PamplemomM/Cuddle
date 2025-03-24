@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** my_stringlib.c
 ** File description:
 ** The string.h functions.
 */
+
 #include "../../include/header_cuddle.h"
 
 int my_strlen(char const *str)

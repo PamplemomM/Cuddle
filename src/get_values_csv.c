@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** get_values.c
 ** File description:
-** The file for getting values of the csv datas.
+** Retrieving specific values from a dataframe.
 */
+
 #include "../include/header_cuddle.h"
 
 void *df_get_value(dataframe_t *dataframe, int row, const char *column)

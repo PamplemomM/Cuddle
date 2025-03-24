@@ -1,15 +1,11 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** describe_csv.c
 ** File description:
-** The file describing the csv datas.
+** The file for describing the dataframe.
 */
-#include "../include/header_cuddle.h"
 
-// **********************************
-// ---- FUNCTION IS NOT FINISHED ----
-// **********************************
-// You can touch it if you want
+#include "../include/header_cuddle.h"
 
 static float get_in_num(void *ptr, column_type_t type)
 {
@@ -74,7 +70,6 @@ static float get_mean(dataframe_t *dataframe, int i, int *count)
 {
     float sum = 0.0;
     void *ptr = NULL;
-    static int res = 0;
     column_type_t type = dataframe->column_types[i];
 
     *count = 0;

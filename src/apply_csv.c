@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** apple_csv.c
 ** File description:
-** The file for apply the csv file.
+** Applying a function to a specific column within a dataframe.
 */
+
 #include "../include/header_cuddle.h"
 
 dataframe_t *df_apply(dataframe_t *dataframe, const char *column,

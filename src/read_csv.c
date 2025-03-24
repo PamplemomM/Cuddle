@@ -1,15 +1,11 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** read_csv.c
 ** File description:
-** The file for reading the csv function.
+** Reading a csv file and storing its data inside of a dataframe.
 */
-#include "../include/header_cuddle.h"
 
-// ---------------------------------------------------
-// ------ THE FUNCTION IN THIS FILE IS FINISHED ------
-// ---------------------------------------------------
-// Please, don't touch it
+#include "../include/header_cuddle.h"
 
 static int count_columns(char *file, char *separator)
 {
@@ -39,12 +35,6 @@ static int count_rows(char *file)
     return cpt;
 }
 
-/*
-Est ce que ce texte sera inutile ?
-Je ne sais pas, mais ce qui est certain c'est qu'il a ete ecrit et c'est
-    quelque chose d'interessant de savoir ca, on mourra moins bete apres
-    avoir lu des comment des codes.
-*/
 static int set_column_names(dataframe_t *data, char **first)
 {
     data->column_names = malloc(sizeof(char *) * (data->nb_columns + 1));

@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
-** detect_type.c
+** EPITECH PROJECT, 2025
+** found_data_type.c
 ** File description:
-** The file for detecting the type of the datas.
+** Converting data to the right type.
 */
+
 #include "../../include/header_cuddle.h"
 
 static void *convert_to_bool(char const *value)

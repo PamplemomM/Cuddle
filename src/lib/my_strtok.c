@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** my_strtok.c
 ** File description:
 ** The file for my_strtok function.
 */
+
 #include "../../include/header_cuddle.h"
 
 static int is_delimiter(char c, char const *delim)

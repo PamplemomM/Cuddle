@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** my_str_to_word_array.c
 ** File description:
 ** The file for the function my_str_to_word_array.c.
 */
+
 #include "../../include/header_cuddle.h"
 
 static int replace_me_those_spaces(char *str, char bad, char good)

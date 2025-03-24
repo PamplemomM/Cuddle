@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** to_type_csv.c
 ** File description:
-** The file for the to_type csv datas.
+** Converting data types.
 */
+
 #include "../include/header_cuddle.h"
 #include <string.h>
 
@@ -60,7 +61,7 @@ static int is_float(dataframe_t *dataframe, int i, int value,
 {
     float *data = NULL;
 
-    if (new == UNDEFINED || new == STRING)
+    if (new == UNDEFINED || new == FLOAT || new == STRING)
         return SUCCESS;
     data = (float *)dataframe->data[i][value];
     switch (new) {
@@ -72,7 +73,7 @@ static int is_float(dataframe_t *dataframe, int i, int value,
             return -1;
         dataframe->data[i][value] = (unsigned int *)data;
         return SUCCESS;
-    case INT:
+    default:
         dataframe->data[i][value] = (int *)data;
         return SUCCESS;
     }
@@ -136,7 +137,7 @@ int found_and_convert(dataframe_t *dataframe, int i, int value,
         return SUCCESS;
     if (new == UINT && is_uint(dataframe, i, value, new) == 0)
         return SUCCESS;
-    if (new == BOOL && is_uint(dataframe, i, value, new) == 0)
+    if (new == BOOL && is_bool(dataframe, i, value, new) == 0)
         return SUCCESS;
     return ERROR;
 }

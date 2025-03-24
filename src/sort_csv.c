@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** sort_csv.c
 ** File description:
-** The file for sorting the csv datas.
+** Data sorting.
 */
+
 #include "../include/header_cuddle.h"
 
 int sort_dataframe(dataframe_t *new, int val,

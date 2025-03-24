@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** write_csv.c
 ** File description:
-** The file for writing the csv function.
+** Writing a dataframe's data back into a csv file.
 */
+
 #include "../include/header_cuddle.h"
 
 static int write_to_int(void *value, int fd)
@@ -119,11 +120,6 @@ static void my_write_line_csv(void **data, dataframe_t *dataframe, int fd)
     write(fd, "\n", 1);
 }
 
-/*
-NE REGARDEZ PAS DERRIÈRE VOUS !!
-Ils sont ici, ils nous regardent à travers nos corps, ne vous retournez pas.
-Ils arrivent, bientôt, faites attention.
-*/
 int df_write_csv(dataframe_t *dataframe, char const *filename)
 {
     int fd;

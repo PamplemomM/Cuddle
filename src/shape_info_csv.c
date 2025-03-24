@@ -1,15 +1,12 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** shape_info_csv.c
 ** File description:
-** The file for shaping the csv datas.
+** Shape and info functions.
 */
+
 #include "../include/header_cuddle.h"
 
-// -------------------------------------------------
-// --- THE FUNCTION IN THIS FILE IS NOT FINISHED ---
-// -------------------------------------------------
-// ---                                           ---
 dataframe_shape_t df_shape(dataframe_t *dataframe)
 {
     dataframe_shape_t result = {0, 0};

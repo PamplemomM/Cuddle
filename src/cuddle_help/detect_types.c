@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** detect_type.c
 ** File description:
-** The file for detecting the type of the datas.
+** Detecting a data column's type.
 */
+
 #include "../../include/header_cuddle.h"
 
 column_type_t find_type(char ***data, int i, int j)

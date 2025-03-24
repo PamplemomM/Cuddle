@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** void_dups_csv.c
 ** File description:
-** The file for duplicating void pointers.
+** Duplicating void pointers.
 */
+
 #include "../include/header_cuddle.h"
 
 static void *my_void_bool_dup(void *value)

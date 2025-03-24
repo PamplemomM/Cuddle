@@ -1,15 +1,11 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** head_tail_csv.c
 ** File description:
-** The file for reading the head and tail of csv file.
+** Retrieving the head and tail of a dataframe.
 */
-#include "../include/header_cuddle.h"
 
-// **********************************
-// ---- FUNCTION IS FINISHED ----
-// **********************************
-// I'll touch you if you touch it
+#include "../include/header_cuddle.h"
 
 static column_type_t *my_column_types_dup(dataframe_t *dataframe)
 {

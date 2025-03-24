@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** my_libc_functions.c
 ** File description:
 ** The C functions.
 */
+
 #include "../../include/header_cuddle.h"
 #include <stdarg.h>
 

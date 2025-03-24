@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** find_column.c
 ** File description:
-** Function that find the column.tells if a char is a num
+** Finding a column's index by name.
 */
+
 #include "../../include/header_cuddle.h"
 
 int find_column(dataframe_t *dataframe, const char *column_name)

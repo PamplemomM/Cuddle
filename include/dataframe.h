@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2025
 ** dataframe.h
 ** File description:
-** The header for the datagrames.
+** The header for the dataframes.
 */
 
 #ifndef DATAFRAME_H

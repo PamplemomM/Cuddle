@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
-** my_is_numbull.c
+** EPITECH PROJECT, 2025
+** my_is_numbool.c
 ** File description:
-** Function that tells if a char is a num.
+** I don't understand this one
 */
+
 #include "../../include/header_cuddle.h"
 
 int my_isnum(char const *str)

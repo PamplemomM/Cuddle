@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
-** agregation.c
+** EPITECH PROJECT, 2025
+** aggregation.c
 ** File description:
-** The file for the aggregation of the csv file.
+** Aggregate data.
 */
+
 #include "../include/header_cuddle.h"
 
 dataframe_t *df_groupby(dataframe_t *dataframe, const char *aggregate_by,

@@ -8,7 +8,6 @@
 #ifndef CUDDLE_H
     #define CUDDLE_H
 
-
     #include "dataframe.h"
 
     // math stuffs :
@@ -25,7 +24,7 @@
     #define SUCCESS 0
     #define ERROR 84
 
-    // custom define :
+    // custom defines :
     #define PRINT(x) _Generic((x), int : print_int, (char *) : print_string)(x)
     #define SIZE 64
 

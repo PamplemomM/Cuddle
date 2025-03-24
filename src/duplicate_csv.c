@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** duplicate_csv.c
 ** File description:
-** The file for duplicate the csv file.
+** Duplicating a dataframe.
 */
+
 #include "../include/header_cuddle.h"
 
 int dup_data(dataframe_t *dataframe, dataframe_t *result)

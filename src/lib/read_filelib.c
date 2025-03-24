@@ -1,9 +1,10 @@
 /*
-** EPITECH PROJECT, 2024
+** EPITECH PROJECT, 2025
 ** read_file_lib.c
 ** File description:
-** The file for reading a line.
+** The file for reading a file.
 */
+
 #include "../../include/header_cuddle.h"
 
 char *read_line(int fd, int size)
